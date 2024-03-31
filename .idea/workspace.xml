@@ -4,23 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controladores/LoginController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/tfg_apb/tfg_apb_cliente/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Imagenes/iconoAplicacionTFG.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Vistas/Login.fxml" afterDir="false" />
+    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="Creado el cambio entre pestañas del login y registro.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +42,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true"
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Adri/Documents/ProyectoFinGradoAPB/TFG_APB_Servidor"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -83,9 +69,29 @@
       <option name="presentableId" value="Default" />
       <updated>1711818577944</updated>
     </task>
+    <task id="LOCAL-00001" summary="Creacion de Proyecto para el Cliente">
+      <option name="closed" value="true" />
+      <created>1711892885702</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1711892885702</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Creado el cambio entre pestañas del login y registro.">
+      <option name="closed" value="true" />
+      <created>1711909888779</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1711909888779</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Creacion de Proyecto para el Cliente" />
+    <MESSAGE value="Creado el cambio entre pestañas del login y registro." />
+    <option name="LAST_COMMIT_MESSAGE" value="Creado el cambio entre pestañas del login y registro." />
   </component>
 </project>

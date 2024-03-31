@@ -6,6 +6,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import org.tfg_apb.tfg_apb_cliente.Main;
+
+import java.io.IOException;
 
 public class LoginController {
 
@@ -28,7 +31,11 @@ public class LoginController {
 
     @FXML
     void registrarseHyperLink(ActionEvent event) {
-
+        try {
+            Main.setRaiz("Registro");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

@@ -6,6 +6,7 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -23,29 +24,32 @@
                   <Font size="26.0" />
                </font>
             </Label>
-            <Button fx:id="btnInicioSesion" layoutX="434.0" layoutY="301.0" mnemonicParsing="false" onAction="#iniciarSesion" prefHeight="25.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="Registrarse">
+            <Button fx:id="btnRegistro" layoutX="434.0" layoutY="301.0" mnemonicParsing="false" onAction="#iniciarSesion" prefHeight="25.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="Registrarse">
                <font>
                   <Font size="13.0" />
                </font>
             </Button>
             <Label layoutX="434.0" layoutY="351.0" prefHeight="17.0" prefWidth="100.0" text="¿Tiene cuenta?" />
-            <Hyperlink fx:id="hyperLink" layoutX="524.0" layoutY="348.0" onAction="#registrarseHyperLink" prefHeight="23.0" prefWidth="100.0" text="Inicie sesión aquí" />
+            <Hyperlink fx:id="hyperLink" layoutX="524.0" layoutY="348.0" onAction="#inicioSesionHyperLink" prefHeight="23.0" prefWidth="100.0" text="Inicie sesión aquí" />
             <ImageView fitHeight="153.0" fitWidth="162.0" layoutX="26.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Imagenes/iconoAplicacionTFG.png" />
                </image>
             </ImageView>
-            <TextField fx:id="lblCorreoElectronico1" layoutX="437.0" layoutY="96.0" prefHeight="25.0" prefWidth="182.0" promptText="Nombre*" />
-            <TextField fx:id="lblCorreoElectronico11" layoutX="438.0" layoutY="128.0" prefHeight="25.0" prefWidth="182.0" promptText="Primer Apellido" />
-            <TextField fx:id="lblCorreoElectronico111" layoutX="437.0" layoutY="162.0" prefHeight="25.0" prefWidth="182.0" promptText="Segundo Apellido" />
+            <TextField fx:id="lblNombre" layoutX="437.0" layoutY="96.0" prefHeight="25.0" prefWidth="182.0" promptText="Nombre*" />
+            <TextField fx:id="lblPrimerApellido" layoutX="438.0" layoutY="128.0" prefHeight="25.0" prefWidth="182.0" promptText="Primer Apellido" />
+            <TextField fx:id="lblSegundoApellido" layoutX="437.0" layoutY="162.0" prefHeight="25.0" prefWidth="182.0" promptText="Segundo Apellido" />
             <Pane layoutX="90.0" layoutY="259.0" prefHeight="112.0" prefWidth="217.0">
                <children>
-                  <RadioButton layoutX="8.0" layoutY="44.0" mnemonicParsing="false" text="Ofertante" />
-                  <RadioButton layoutX="8.0" layoutY="81.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="95.0" text="Consumidor" />
+                  <RadioButton fx:id="rBOfertante" layoutX="8.0" layoutY="44.0" mnemonicParsing="false" onAction="#comprobarUsuario" text="Ofertante">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="tipoUsuario" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="rbConsumidor" layoutX="8.0" layoutY="81.0" mnemonicParsing="false" onAction="#comprobarUsuario" prefHeight="17.0" prefWidth="95.0" text="Consumidor" toggleGroup="$tipoUsuario" />
                   <Label layoutX="8.0" layoutY="6.0" text="¿Cómo quiere usar la aplicacion?" />
                </children>
             </Pane>
-            <PasswordField fx:id="lblContrasenia1" layoutX="438.0" layoutY="265.0" prefHeight="25.0" prefWidth="182.0" promptText="Nombre empresa" visible="false" />
+            <TextField fx:id="lblNombreEmpresa" disable="true" layoutX="438.0" layoutY="266.0" prefHeight="25.0" prefWidth="182.0" promptText="Nombre empresa" />
          </children>
       </Pane>
    </children>
