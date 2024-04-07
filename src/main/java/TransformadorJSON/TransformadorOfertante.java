@@ -1,5 +1,14 @@
 package TransformadorJSON;
 
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+
+import Modelos.OfertanteModel;
+import org.json.*;
+
 public class TransformadorOfertante {
 
     private String nombre;
@@ -8,31 +17,132 @@ public class TransformadorOfertante {
     private String contrasenia;
     private String nombreEmpresa;
     private String email_ofertante;
-    private boolean is_administrador;
+    private String urlAConectarse = "http://localhost:8080/ofertante";
 
     private String esqueletoOfertante = "{\n" +
-            "    \"nombreOfertante\": " + nombre + ",\n" +
-            "    \"primerApellidoOfertante\": " + primerApellido + ",\n" +
-            "    \"segundoApellidoOfertante\": " + segundoApellido + ",\n" +
-            "    \"contrasenia\": " + contrasenia + ",\n" +
-            "    \"nombreEmpresa\": " + nombreEmpresa + ",\n" +
-            "    \"email_ofertante\": " + email_ofertante + ",\n" +
-            "    \"is_administrador\": " + false + "\n" +
+            "    \"nombreOfertante\": " + "\"" + nombre + "\"" + ",\n" +
+            "    \"primerApellidoOfertante\": " + "\"" + primerApellido + "\"" + ",\n" +
+            "    \"segundoApellidoOfertante\": " + "\"" + segundoApellido + "\"" + ",\n" +
+            "    \"contrasenia\": " + "\"" + contrasenia + "\"" + ",\n" +
+            "    \"nombreEmpresa\": " + "\"" + nombreEmpresa + "\"" + ",\n" +
+            "    \"email_ofertante\": " + "\"" + email_ofertante + "\"" + ",\n" +
+            "    \"is_administrador\": " + "\"" + false + "\"" + "\n" +
             "}";
 
-    public TransformadorOfertante(String nombre, String primerApellido, String segundoApellido, String contrasenia, String nombreEmpresa, String email_ofertante, boolean is_administrador) {
+    public TransformadorOfertante(String nombre, String primerApellido, String segundoApellido, String contrasenia, String nombreEmpresa, String email_ofertante) {
         this.nombre = nombre;
         this.primerApellido = primerApellido;
         this.segundoApellido = segundoApellido;
         this.contrasenia = contrasenia;
         this.nombreEmpresa = nombreEmpresa;
         this.email_ofertante = email_ofertante;
-        this.is_administrador = is_administrador;
     }
 
-    public void enviarInformacion() {
-        //TODO
+    public TransformadorOfertante() {
+
     }
 
+    public void enviarInformacionPost() {
+        HttpURLConnection conexion = null;
 
+        try {
+            // Abrir conexión
+            conexion = (HttpURLConnection) new URL(this.urlAConectarse).openConnection();
+
+            // Configurar la conexión para una solicitud POST
+            conexion.setRequestMethod("POST");
+            conexion.setRequestProperty("Content-Type", "application/json");
+            conexion.setDoOutput(true);
+
+            // Escribir los datos en el cuerpo de la solicitud
+            try (OutputStream escritor = conexion.getOutputStream()) {
+                byte[] datosPost = esqueletoOfertante.getBytes(StandardCharsets.UTF_16);
+                escritor.write(datosPost, 0, datosPost.length);
+
+            }
+
+            // Leer la respuesta de la API
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(conexion.getInputStream(), StandardCharsets.UTF_16))) {
+                StringBuilder response = new StringBuilder();
+                String responseLine;
+                while ((responseLine = br.readLine()) != null) {
+                    response.append(responseLine.trim());
+                }
+                System.out.println("Respuesta de la API: " + response.toString());
+            }
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                // Cerrar la conexión
+                if (conexion != null) {
+                    conexion.disconnect();
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public ArrayList<OfertanteModel> recibirInformacionGet() {
+        ArrayList<OfertanteModel> listaOfertantes = new ArrayList<>();
+        try {
+            HttpURLConnection connection = (HttpURLConnection) new URL(this.urlAConectarse).openConnection();
+            connection.setRequestMethod("GET");
+
+            // Leer la respuesta de la API
+            StringBuilder respuesta = new StringBuilder();
+
+            try (BufferedReader entrada = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                String lineaLeer;
+                while ((lineaLeer = entrada.readLine()) != null) {
+                    respuesta.append(lineaLeer);
+                }
+
+            }
+
+            listaOfertantes = sacarInformacionLista(respuesta.toString());
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return listaOfertantes;
+    }
+
+    public void recibirUsuario() {
+
+    }
+
+    public ArrayList<OfertanteModel> sacarInformacionLista(String datos) {
+        ArrayList<OfertanteModel> listaOfertantes = new ArrayList<>();
+
+        //Marcamos que el id, va a ser "id_ofertante"
+        JSONArray arrayJSON = new JSONArray(datos);
+
+        //Recorremos el array
+        for (int i = 0; i < arrayJSON.length(); i++) {
+            //Lo convertimos en un objeto individual para capturar sus valores
+            JSONObject datosJSON = arrayJSON.getJSONObject(i);
+
+            int id_ofertante = datosJSON.getInt("id_ofertante");
+            String nombreOfertante = datosJSON.getString("nombreOfertante");
+            String primerApellidoOfertante = datosJSON.getString("primerApellidoOfertante");
+            String segundoApellidoOfertante = datosJSON.getString("segundoApellidoOfertante");
+            String contrasenia = datosJSON.getString("contrasenia");
+
+            String nombreEmpresa = String.valueOf(datosJSON.get("nombreEmpresa"));
+
+
+            String email_ofertante = datosJSON.getString("email_ofertante");
+            boolean is_administrador = datosJSON.getBoolean("is_administrador");
+
+            OfertanteModel ofertante = new OfertanteModel(id_ofertante, nombreOfertante, primerApellidoOfertante, segundoApellidoOfertante, contrasenia, nombreEmpresa, email_ofertante, is_administrador);
+
+            listaOfertantes.add(ofertante);
+        }
+
+        return listaOfertantes;
+    }
 }
