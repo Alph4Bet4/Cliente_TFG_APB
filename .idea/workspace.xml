@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="Creado el cambio entre pestañas del login y registro.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/TransformadorOfertante.java" afterDir="false" />
+    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="Empezado el transformador para el ofertante.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Modelos/OfertanteModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/TransformadorOfertante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/TransformadorOfertante.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,13 +104,22 @@
       <option name="project" value="LOCAL" />
       <updated>1711911889752</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Empezado el transformador para el ofertante.">
+      <option name="closed" value="true" />
+      <created>1711912413164</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1711912413164</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Creacion de Proyecto para el Cliente" />
     <MESSAGE value="Creado el cambio entre pestañas del login y registro." />
-    <option name="LAST_COMMIT_MESSAGE" value="Creado el cambio entre pestañas del login y registro." />
+    <MESSAGE value="Empezado el transformador para el ofertante." />
+    <option name="LAST_COMMIT_MESSAGE" value="Empezado el transformador para el ofertante." />
   </component>
 </project>

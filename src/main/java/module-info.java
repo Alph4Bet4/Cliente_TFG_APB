@@ -10,6 +10,7 @@ module org.tfg_apb.tfg_apb_cliente {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires org.json;
 
     opens org.tfg_apb.tfg_apb_cliente to javafx.fxml;
     exports org.tfg_apb.tfg_apb_cliente;
