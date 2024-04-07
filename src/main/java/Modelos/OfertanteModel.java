@@ -9,9 +9,9 @@ public class OfertanteModel {
     private String contrasenia;
     private String nombreEmpresa;
     private String email_ofertante;
-    private String is_administrador;
+    private boolean is_administrador;
 
-    public OfertanteModel(int id_ofertante, String nombreOfertante, String primerApellidoOfertante, String segundoApellidoOfertante, String contrasenia, String nombreEmpresa, String email_ofertante, String is_administrador) {
+    public OfertanteModel(int id_ofertante, String nombreOfertante, String primerApellidoOfertante, String segundoApellidoOfertante, String contrasenia, String nombreEmpresa, String email_ofertante, boolean is_administrador) {
         this.id_ofertante = id_ofertante;
         this.nombreOfertante = nombreOfertante;
         this.primerApellidoOfertante = primerApellidoOfertante;
@@ -78,11 +78,25 @@ public class OfertanteModel {
         this.email_ofertante = email_ofertante;
     }
 
-    public String getIs_administrador() {
+    public boolean isIs_administrador() {
         return is_administrador;
     }
 
-    public void setIs_administrador(String is_administrador) {
+    public void setIs_administrador(boolean is_administrador) {
         this.is_administrador = is_administrador;
+    }
+
+    @Override
+    public String toString() {
+        return "OfertanteModel{" +
+                "id_ofertante=" + id_ofertante +
+                ", nombreOfertante='" + nombreOfertante + '\'' +
+                ", primerApellidoOfertante='" + primerApellidoOfertante + '\'' +
+                ", segundoApellidoOfertante='" + segundoApellidoOfertante + '\'' +
+                ", contrasenia='" + contrasenia + '\'' +
+                ", nombreEmpresa='" + nombreEmpresa + '\'' +
+                ", email_ofertante='" + email_ofertante + '\'' +
+                ", is_administrador=" + is_administrador +
+                '}';
     }
 }
