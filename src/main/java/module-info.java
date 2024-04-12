@@ -11,6 +11,7 @@ module org.tfg_apb.tfg_apb_cliente {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires org.json;
+    requires java.sql;
 
     opens org.tfg_apb.tfg_apb_cliente to javafx.fxml;
     exports org.tfg_apb.tfg_apb_cliente;

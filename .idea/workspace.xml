@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="Empezado el transformador para el ofertante.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Modelos/OfertanteModel.java" afterDir="false" />
+    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="Creado el esqueleto para el Consumidor.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Modelos/ActividadModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Actividad/TransformadorActividad.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/TransformadorOfertante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/TransformadorOfertante.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/RegistrarseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/RegistrarseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Consumidor/TransformadorConsumidor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Consumidor/TransformadorConsumidor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/TransformadorOfertante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Ofertante/TransformadorOfertante.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -19,6 +22,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -54,7 +58,8 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Adri/Documents/ProyectoFinGradoAPB/TFG_APB_Servidor&quot;
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Adri/Documents/ProyectoFinGradoAPB/TFG_APB_Servidor&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -112,14 +117,78 @@
       <option name="project" value="LOCAL" />
       <updated>1711912413164</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Añadido una dependencia para JSON.">
+      <option name="closed" value="true" />
+      <created>1712516565474</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1712516565474</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Creado el modelo de ofertante.">
+      <option name="closed" value="true" />
+      <created>1712516589512</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1712516589512</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Creado el modelo de ofertante.">
+      <option name="closed" value="true" />
+      <created>1712516602011</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1712516602011</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Arreglado el modelo de ofertante.">
+      <option name="closed" value="true" />
+      <created>1712518730122</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1712518730122</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Añadidas nuevas funcionalidades al transformador ofertante.">
+      <option name="closed" value="true" />
+      <created>1712518766904</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1712518766904</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Creado el esqueleto para el Consumidor.">
+      <option name="closed" value="true" />
+      <created>1712944962843</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1712944962843</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Creacion de Proyecto para el Cliente" />
     <MESSAGE value="Creado el cambio entre pestañas del login y registro." />
     <MESSAGE value="Empezado el transformador para el ofertante." />
-    <option name="LAST_COMMIT_MESSAGE" value="Empezado el transformador para el ofertante." />
+    <MESSAGE value="Añadido una dependencia para JSON." />
+    <MESSAGE value="Creado el modelo de ofertante." />
+    <MESSAGE value="Arreglado el modelo de ofertante." />
+    <MESSAGE value="Añadidas nuevas funcionalidades al transformador ofertante." />
+    <MESSAGE value="Creado el esqueleto para el Consumidor." />
+    <option name="LAST_COMMIT_MESSAGE" value="Creado el esqueleto para el Consumidor." />
   </component>
 </project>
