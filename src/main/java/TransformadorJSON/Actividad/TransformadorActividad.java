@@ -121,10 +121,35 @@ public class TransformadorActividad {
     }
 
     /**
-     * Metodo que busca una sola actividad y lo recibe
+     * Metodo que busca una sola actividad por el id y lo recibe
+     *
+     * @return
      */
-    public void recibirActividad() {
-        //TODO
+    public ActividadModel recibirActividadPorId(int id) {
+        ActividadModel actividad = null;
+
+        try {
+            HttpURLConnection connection = (HttpURLConnection) new URL(this.urlAConectarse+ "/" + id).openConnection();
+            connection.setRequestMethod("GET");
+
+            // Leer la respuesta de la API
+            StringBuilder respuesta = new StringBuilder();
+
+            try (BufferedReader entrada = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                String lineaLeer;
+                while ((lineaLeer = entrada.readLine()) != null) {
+                    respuesta.append(lineaLeer);
+                }
+
+            }
+
+            actividad = sacarInformacionIndividual(respuesta.toString());
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return actividad;
     }
 
     public ArrayList<ActividadModel> recibirInformacionGet() {
@@ -200,5 +225,44 @@ public class TransformadorActividad {
         }
 
         return listaActividades;
+    }
+
+    public ActividadModel sacarInformacionIndividual(String datos) {
+        ActividadModel actividad = null;
+
+        //Convertimos a un objeto de JSON
+        JSONObject datosJSON = new JSONObject(datos);
+
+        int id_actividad = datosJSON.getInt("id_actividad");
+        String tipoActividad = datosJSON.getString("tipoActividad");
+        String descripcionActividad = datosJSON.getString("descripcionActividad");
+        String direccion = datosJSON.getString("tipoActividad");
+        Date fecha = Date.valueOf(datosJSON.getString("fecha"));
+        Time hora_inicio = Time.valueOf(datosJSON.getString("hora_inicio"));
+        Time hora_fin = Time.valueOf(datosJSON.getString("hora_fin"));
+        int cantidad_max_personas = datosJSON.getInt("cantidad_max_personas");
+        int cantidad_actual_personas = datosJSON.getInt("cantidad_actual_personas");
+        OfertanteModel Creador_ofertante = null;
+
+        //Convertimos al ofertante en un objeto individual para capturar sus valores
+        JSONObject datosOfertanteJSON = datosJSON.getJSONObject("creador_ofertante");
+
+        //Si esta no esta vacio recogemos los datos
+        if (datosOfertanteJSON.isEmpty() == false) {
+            int id_ofertante = datosOfertanteJSON.getInt("id_ofertante");
+            String nombreOfertante = datosOfertanteJSON.getString("nombreOfertante");
+            String primerApellidoOfertante = datosOfertanteJSON.getString("primerApellidoOfertante");
+            String segundoApellidoOfertante = datosOfertanteJSON.getString("segundoApellidoOfertante");
+            String contrasenia = datosOfertanteJSON.getString("contrasenia");
+            String nombreEmpresa = String.valueOf(datosOfertanteJSON.get("nombreEmpresa"));
+            String email_ofertante = datosOfertanteJSON.getString("email_ofertante");
+            boolean is_administrador = datosOfertanteJSON.getBoolean("is_administrador");
+
+            Creador_ofertante = new OfertanteModel(id_ofertante, nombreOfertante, primerApellidoOfertante, segundoApellidoOfertante, contrasenia, nombreEmpresa, email_ofertante, is_administrador);
+        }
+
+        actividad = new ActividadModel(id_actividad, tipoActividad, descripcionActividad, direccion, fecha, hora_inicio, hora_fin, cantidad_max_personas, cantidad_actual_personas, Creador_ofertante);
+
+        return actividad;
     }
 }
