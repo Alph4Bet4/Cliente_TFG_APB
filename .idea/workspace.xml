@@ -4,15 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="Creado el esqueleto para el Consumidor.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Modelos/ActividadModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Actividad/TransformadorActividad.java" afterDir="false" />
+    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="Eliminado esqueleto en constructor.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Modelos/ParticipacionModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Participacion/TransformadorParticipacion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/RegistrarseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/RegistrarseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Actividad/TransformadorActividad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Actividad/TransformadorActividad.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Consumidor/TransformadorConsumidor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Consumidor/TransformadorConsumidor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Recursos/TransformadorRecursos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Recursos/TransformadorRecursos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/TransformadorOfertante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Ofertante/TransformadorOfertante.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +52,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Application.Aplicacion.executor&quot;: &quot;Run&quot;,
     &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
@@ -68,6 +70,15 @@
       <recent name="C:\Users\Adri\Documents\ProyectoFinGradoAPB\TFG_APB_Cliente\src\main\resources\org\tfg_apb\tfg_apb_cliente" />
       <recent name="C:\Users\Adri\Documents\ProyectoFinGradoAPB\TFG_APB_Cliente\src\main\resources\Imagenes" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Aplicacion" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="org.tfg_apb.tfg_apb_cliente.Main" />
+      <module name="TFG_APB_Cliente" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -165,7 +176,39 @@
       <option name="project" value="LOCAL" />
       <updated>1712944962843</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Creado el esqueleto para las Actividades.">
+      <option name="closed" value="true" />
+      <created>1712948506391</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1712948506391</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Creado el esqueleto para los Recursos.">
+      <option name="closed" value="true" />
+      <created>1713116195618</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1713116195618</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Creado el get por id en las actividades.">
+      <option name="closed" value="true" />
+      <created>1713116219318</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1713116219318</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Eliminado esqueleto en constructor.">
+      <option name="closed" value="true" />
+      <created>1713349880361</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1713349880361</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -189,6 +232,10 @@
     <MESSAGE value="Arreglado el modelo de ofertante." />
     <MESSAGE value="Añadidas nuevas funcionalidades al transformador ofertante." />
     <MESSAGE value="Creado el esqueleto para el Consumidor." />
-    <option name="LAST_COMMIT_MESSAGE" value="Creado el esqueleto para el Consumidor." />
+    <MESSAGE value="Creado el esqueleto para las Actividades." />
+    <MESSAGE value="Creado el esqueleto para los Recursos." />
+    <MESSAGE value="Creado el get por id en las actividades." />
+    <MESSAGE value="Eliminado esqueleto en constructor." />
+    <option name="LAST_COMMIT_MESSAGE" value="Eliminado esqueleto en constructor." />
   </component>
 </project>

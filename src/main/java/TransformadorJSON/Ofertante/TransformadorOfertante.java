@@ -1,4 +1,4 @@
-package TransformadorJSON;
+package TransformadorJSON.Ofertante;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -17,9 +17,9 @@ public class TransformadorOfertante {
     private String contrasenia;
     private String nombreEmpresa;
     private String email_ofertante;
-    private String urlAConectarse = "http://localhost:8080/ofertante";
+    private final String urlAConectarse = "http://localhost:8080/ofertante";
 
-    private String esqueletoOfertante = "{\n" +
+    private final String esqueletoOfertante = "{\n" +
             "    \"nombreOfertante\": " + "\"" + nombre + "\"" + ",\n" +
             "    \"primerApellidoOfertante\": " + "\"" + primerApellido + "\"" + ",\n" +
             "    \"segundoApellidoOfertante\": " + "\"" + segundoApellido + "\"" + ",\n" +
@@ -39,7 +39,6 @@ public class TransformadorOfertante {
     }
 
     public TransformadorOfertante() {
-
     }
 
     public void enviarInformacionPost() {
@@ -111,14 +110,40 @@ public class TransformadorOfertante {
         return listaOfertantes;
     }
 
-    public void recibirUsuario() {
+    /**
+     * Metodo que busca solo un ofertante y lo recibe
+     */
+    public OfertanteModel recibirOfertantePorId(int id) {
+        OfertanteModel ofertante = null;
 
+        try {
+            HttpURLConnection connection = (HttpURLConnection) new URL(this.urlAConectarse + "/" + id).openConnection();
+            connection.setRequestMethod("GET");
+
+            // Leer la respuesta de la API
+            StringBuilder respuesta = new StringBuilder();
+
+            try (BufferedReader entrada = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                String lineaLeer;
+                while ((lineaLeer = entrada.readLine()) != null) {
+                    respuesta.append(lineaLeer);
+                }
+
+            }
+
+            ofertante = sacarInformacionIndividual(respuesta.toString());
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return ofertante;
     }
 
     public ArrayList<OfertanteModel> sacarInformacionLista(String datos) {
         ArrayList<OfertanteModel> listaOfertantes = new ArrayList<>();
 
-        //Marcamos que el id, va a ser "id_ofertante"
+        //Convertimos a un array de JSON
         JSONArray arrayJSON = new JSONArray(datos);
 
         //Recorremos el array
@@ -131,10 +156,7 @@ public class TransformadorOfertante {
             String primerApellidoOfertante = datosJSON.getString("primerApellidoOfertante");
             String segundoApellidoOfertante = datosJSON.getString("segundoApellidoOfertante");
             String contrasenia = datosJSON.getString("contrasenia");
-
             String nombreEmpresa = String.valueOf(datosJSON.get("nombreEmpresa"));
-
-
             String email_ofertante = datosJSON.getString("email_ofertante");
             boolean is_administrador = datosJSON.getBoolean("is_administrador");
 
@@ -144,5 +166,24 @@ public class TransformadorOfertante {
         }
 
         return listaOfertantes;
+    }
+
+    private OfertanteModel sacarInformacionIndividual(String datos) {
+        OfertanteModel ofertante = null;
+
+        JSONObject datosJSON = new JSONObject(datos);
+
+        int id_ofertante = datosJSON.getInt("id_ofertante");
+        String nombreOfertante = datosJSON.getString("nombreOfertante");
+        String primerApellidoOfertante = datosJSON.getString("primerApellidoOfertante");
+        String segundoApellidoOfertante = datosJSON.getString("segundoApellidoOfertante");
+        String contrasenia = datosJSON.getString("contrasenia");
+        String nombreEmpresa = String.valueOf(datosJSON.get("nombreEmpresa"));
+        String email_ofertante = datosJSON.getString("email_ofertante");
+        boolean is_administrador = datosJSON.getBoolean("is_administrador");
+
+        ofertante = new OfertanteModel(id_ofertante, nombreOfertante, primerApellidoOfertante, segundoApellidoOfertante, contrasenia, nombreEmpresa, email_ofertante, is_administrador);
+
+        return ofertante;
     }
 }

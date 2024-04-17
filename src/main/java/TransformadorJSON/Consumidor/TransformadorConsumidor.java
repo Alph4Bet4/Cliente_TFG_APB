@@ -100,10 +100,33 @@ public class TransformadorConsumidor {
     }
 
     /**
-     * Metodo que busca solo un usuario y lo recibe
+     * Metodo que busca solo un consumidor por el id y lo recibe
      */
-    public void recibirUsuario() {
+    public ConsumidorModel recibirConsumidorPorId(int id) {
+        ConsumidorModel consumidor = null;
 
+        try {
+            HttpURLConnection connection = (HttpURLConnection) new URL(this.urlAConectarse + "/" + id).openConnection();
+            connection.setRequestMethod("GET");
+
+            // Leer la respuesta de la API
+            StringBuilder respuesta = new StringBuilder();
+
+            try (BufferedReader entrada = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                String lineaLeer;
+                while ((lineaLeer = entrada.readLine()) != null) {
+                    respuesta.append(lineaLeer);
+                }
+
+            }
+
+            consumidor = sacarInformacionIndividual(respuesta.toString());
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return consumidor;
     }
 
     public ArrayList<ConsumidorModel> recibirInformacionGet() {
@@ -159,5 +182,22 @@ public class TransformadorConsumidor {
         return listaConsumidor;
     }
 
+    private ConsumidorModel sacarInformacionIndividual(String datos) {
+        ConsumidorModel consumidor = null;
+
+        //Lo convertimos en un objeto individual para capturar sus valores
+        JSONObject datosJSON = new JSONObject(datos);
+
+        int id_consumidor = datosJSON.getInt("id_consumidor");
+        String nombreConsumidor = datosJSON.getString("nombreConsumidor");
+        String primerApellidoConsumidor = datosJSON.getString("primerApellidoConsumidor");
+        String segundoApellidoConsumidor = datosJSON.getString("segundoApellidoConsumidor");
+        String contrasenia = datosJSON.getString("contrasenia");
+        String email_consumidor = datosJSON.getString("email_consumidor");
+
+        consumidor = new ConsumidorModel(id_consumidor, nombreConsumidor, primerApellidoConsumidor, segundoApellidoConsumidor, contrasenia, email_consumidor);
+
+        return consumidor;
+    }
 
 }

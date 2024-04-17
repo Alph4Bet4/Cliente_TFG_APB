@@ -129,7 +129,7 @@ public class TransformadorActividad {
         ActividadModel actividad = null;
 
         try {
-            HttpURLConnection connection = (HttpURLConnection) new URL(this.urlAConectarse+ "/" + id).openConnection();
+            HttpURLConnection connection = (HttpURLConnection) new URL(this.urlAConectarse + "/" + id).openConnection();
             connection.setRequestMethod("GET");
 
             // Leer la respuesta de la API

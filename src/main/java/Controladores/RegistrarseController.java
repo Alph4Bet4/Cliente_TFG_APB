@@ -32,7 +32,7 @@ public class RegistrarseController {
 
     @FXML
     void iniciarSesion(ActionEvent event) {
-
+        //TODO renombrar
     }
 
     @FXML

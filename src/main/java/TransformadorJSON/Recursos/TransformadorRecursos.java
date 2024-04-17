@@ -95,8 +95,32 @@ public class TransformadorRecursos {
     /**
      * Metodo que recibe un recurso en especifico
      */
-    public void recibirRecurso() {
-        //TODO
+    public RecursosModel recibirRecursoPorId(int id) {
+        RecursosModel recurso = null;
+
+        try {
+            HttpURLConnection connection = (HttpURLConnection) new URL(this.urlAConectarse + "/" + id).openConnection();
+            connection.setRequestMethod("GET");
+
+            // Leer la respuesta de la API
+            StringBuilder respuesta = new StringBuilder();
+
+            try (BufferedReader entrada = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                String lineaLeer;
+                while ((lineaLeer = entrada.readLine()) != null) {
+                    respuesta.append(lineaLeer);
+                }
+
+            }
+
+            recurso = sacarInformacionIndividual(respuesta.toString());
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+
+        return recurso;
     }
 
     public ArrayList<RecursosModel> recibirInformacionGet() {
@@ -161,4 +185,30 @@ public class TransformadorRecursos {
         return listaRecursos;
     }
 
+    private RecursosModel sacarInformacionIndividual(String datos) {
+        RecursosModel recurso = null;
+
+        JSONObject datosJSON = new JSONObject(datos);
+
+        int id_recurso = datosJSON.getInt("id_recurso");
+
+        //Convertimos las actividades en un objeto
+        JSONObject datosActividadesJSON = datosJSON.getJSONObject("actividad");
+        //Sacamos el id de la actividad
+        int id_actividad = datosActividadesJSON.getInt("id_actividad");
+        //La pasamos para que nos busque por el id
+
+        //Capturamos el valor
+        ActividadModel actividadDelRecurso = new TransformadorActividad().recibirActividadPorId(id_actividad);
+
+        String nombre_recurso = datosJSON.getString("nombre_recurso");
+        String descripcion = datosJSON.getString("descripcion");
+        int cantidad = datosJSON.getInt("cantidad");
+        boolean is_ofertada_por_ofertante = datosJSON.getBoolean("is_ofertada_por_ofertante");
+
+        recurso = new RecursosModel(id_recurso, actividadDelRecurso, nombre_recurso, descripcion, cantidad, is_ofertada_por_ofertante);
+
+
+        return recurso;
+    }
 }
