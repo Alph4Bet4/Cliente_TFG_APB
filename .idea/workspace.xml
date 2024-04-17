@@ -4,16 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="Eliminado esqueleto en constructor.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Modelos/ParticipacionModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Participacion/TransformadorParticipacion.java" afterDir="false" />
+    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="Creado get Id para los transformadores.">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Vistas/VistaPrincipal.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/RegistrarseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/RegistrarseController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Actividad/TransformadorActividad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Actividad/TransformadorActividad.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Consumidor/TransformadorConsumidor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Consumidor/TransformadorConsumidor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Ofertante/TransformadorOfertante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Ofertante/TransformadorOfertante.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Participacion/TransformadorParticipacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Participacion/TransformadorParticipacion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Recursos/TransformadorRecursos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Recursos/TransformadorRecursos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/TransformadorOfertante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Ofertante/TransformadorOfertante.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Sugerencia/TransformadorSugerencia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Sugerencia/TransformadorSugerencia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Vistas/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Vistas/Login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Vistas/Registro.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Vistas/Registro.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +32,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="8305d35018685bca244802130a95c462ac710cf7" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MavenImportPreferences">
@@ -208,7 +216,31 @@
       <option name="project" value="LOCAL" />
       <updated>1713349880361</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Creado Transformador de participacion;">
+      <option name="closed" value="true" />
+      <created>1713352059181</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1713352059181</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Creado get Id para los transformadores.">
+      <option name="closed" value="true" />
+      <created>1713352090147</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1713352090147</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Creado get Id para los transformadores.">
+      <option name="closed" value="true" />
+      <created>1713352097453</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1713352097453</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -236,6 +268,9 @@
     <MESSAGE value="Creado el esqueleto para los Recursos." />
     <MESSAGE value="Creado el get por id en las actividades." />
     <MESSAGE value="Eliminado esqueleto en constructor." />
-    <option name="LAST_COMMIT_MESSAGE" value="Eliminado esqueleto en constructor." />
+    <MESSAGE value="Creado Transformador de participacion;" />
+    <MESSAGE value="Creado get Id para los transformadores." />
+    <MESSAGE value="Creado Transformador Sugerencia." />
+    <option name="LAST_COMMIT_MESSAGE" value="Creado Transformador Sugerencia." />
   </component>
 </project>

@@ -17,14 +17,14 @@
    <children>
       <Pane id="PanelContenedor" layoutX="65.0" layoutY="40.0" prefHeight="460.0" prefWidth="670.0" style="-fx-background-radius: 10; -fx-background-color: White;">
          <children>
-            <PasswordField fx:id="lblContrasenia" layoutX="438.0" layoutY="230.0" prefHeight="25.0" prefWidth="182.0" promptText="Contraseña*" />
-            <TextField fx:id="lblCorreoElectronico" layoutX="438.0" layoutY="196.0" prefHeight="25.0" prefWidth="182.0" promptText="Correo electrónico*" />
+            <PasswordField fx:id="textFieldContrasenia" layoutX="438.0" layoutY="230.0" prefHeight="25.0" prefWidth="182.0" promptText="Contraseña*" />
+            <TextField fx:id="textFieldCorreoElectronico" layoutX="438.0" layoutY="196.0" prefHeight="25.0" prefWidth="182.0" promptText="Correo electrónico*" />
             <Label layoutX="288.0" layoutY="26.0" text="Registro">
                <font>
                   <Font size="26.0" />
                </font>
             </Label>
-            <Button fx:id="btnRegistro" layoutX="434.0" layoutY="301.0" mnemonicParsing="false" onAction="#iniciarSesion" prefHeight="25.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="Registrarse">
+            <Button fx:id="btnRegistro" layoutX="434.0" layoutY="301.0" mnemonicParsing="false" onAction="#registrarse" prefHeight="25.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="Registrarse">
                <font>
                   <Font size="13.0" />
                </font>
@@ -36,20 +36,21 @@
                   <Image url="@../Imagenes/iconoAplicacionTFG.png" />
                </image>
             </ImageView>
-            <TextField fx:id="lblNombre" layoutX="437.0" layoutY="96.0" prefHeight="25.0" prefWidth="182.0" promptText="Nombre*" />
-            <TextField fx:id="lblPrimerApellido" layoutX="438.0" layoutY="128.0" prefHeight="25.0" prefWidth="182.0" promptText="Primer Apellido" />
-            <TextField fx:id="lblSegundoApellido" layoutX="437.0" layoutY="162.0" prefHeight="25.0" prefWidth="182.0" promptText="Segundo Apellido" />
+            <TextField fx:id="textFieldNombre" layoutX="437.0" layoutY="96.0" prefHeight="25.0" prefWidth="182.0" promptText="Nombre*" />
+            <TextField fx:id="textFieldPrimerApellido" layoutX="438.0" layoutY="128.0" prefHeight="25.0" prefWidth="182.0" promptText="Primer Apellido" />
+            <TextField fx:id="textFieldSegundoApellido" layoutX="437.0" layoutY="162.0" prefHeight="25.0" prefWidth="182.0" promptText="Segundo Apellido" />
             <Pane layoutX="90.0" layoutY="259.0" prefHeight="112.0" prefWidth="217.0">
                <children>
-                  <RadioButton fx:id="rBOfertante" layoutX="8.0" layoutY="44.0" mnemonicParsing="false" onAction="#comprobarUsuario" text="Ofertante">
+                  <RadioButton fx:id="rbOfertante" layoutX="8.0" layoutY="44.0" mnemonicParsing="false" onAction="#comprobarUsuario" text="Ofertante">
                      <toggleGroup>
                         <ToggleGroup fx:id="tipoUsuario" />
                      </toggleGroup></RadioButton>
-                  <RadioButton fx:id="rbConsumidor" layoutX="8.0" layoutY="81.0" mnemonicParsing="false" onAction="#comprobarUsuario" prefHeight="17.0" prefWidth="95.0" text="Consumidor" toggleGroup="$tipoUsuario" />
+                  <RadioButton fx:id="rbConsumidor" layoutX="8.0" layoutY="81.0" mnemonicParsing="false" onAction="#comprobarUsuario" prefHeight="17.0" prefWidth="95.0" selected="true" text="Consumidor" toggleGroup="$tipoUsuario" />
                   <Label layoutX="8.0" layoutY="6.0" text="¿Cómo quiere usar la aplicacion?" />
                </children>
             </Pane>
-            <TextField fx:id="lblNombreEmpresa" disable="true" layoutX="438.0" layoutY="266.0" prefHeight="25.0" prefWidth="182.0" promptText="Nombre empresa" />
+            <TextField fx:id="textFieldNombreEmpresa" disable="true" layoutX="438.0" layoutY="266.0" prefHeight="25.0" prefWidth="182.0" promptText="Nombre empresa" />
+            <Label fx:id="lblCambiar" alignment="CENTER_RIGHT" layoutX="400.0" layoutY="389.0" prefHeight="17.0" prefWidth="217.0" text="Esto es un texto cambiante" visible="false" />
          </children>
       </Pane>
    </children>
