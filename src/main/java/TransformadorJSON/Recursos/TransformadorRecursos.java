@@ -37,13 +37,12 @@ public class TransformadorRecursos {
             "}";
     private final String urlAConectarse = "http://localhost:8080/recurso";
 
-    public TransformadorRecursos(int actividad, String nombre_recurso, String descripcion, int cantidad, boolean is_ofertada_por_ofertante, String esqueletoRecurso) {
+    public TransformadorRecursos(int actividad, String nombre_recurso, String descripcion, int cantidad, boolean is_ofertada_por_ofertante) {
         this.actividad = actividad;
         this.nombre_recurso = nombre_recurso;
         this.descripcion = descripcion;
         this.cantidad = cantidad;
         this.is_ofertada_por_ofertante = is_ofertada_por_ofertante;
-        this.esqueletoRecurso = esqueletoRecurso;
     }
 
     public TransformadorRecursos() {
