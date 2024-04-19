@@ -2,6 +2,7 @@ module org.tfg_apb.tfg_apb_cliente {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
+    requires java.desktop;
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;

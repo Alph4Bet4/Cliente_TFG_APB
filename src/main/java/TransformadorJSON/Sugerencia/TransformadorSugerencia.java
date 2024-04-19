@@ -23,26 +23,27 @@ public class TransformadorSugerencia {
 
     private int id_actividad;
 
-    private String esqueletoSugerencia = "{\n" +
-            "    \"consumidor\": {\n" +
-            "        \"id_consumidor\":" + "\"" + id_consumidor + "\"" + "\n" +
-            "    },\n" +
-            "    \"actividad\": {\n" +
-            "        \"id_actividad\":" + "\"" + id_actividad + "\"" + "\n" +
-            "    }\n" +
-            "}";
+    private String esqueletoSugerencia;
 
     private final String urlAConectarse = "http://localhost:8080/sugerencia";
 
     public TransformadorSugerencia(int id_consumidor, int id_actividad) {
         this.id_consumidor = id_consumidor;
         this.id_actividad = id_actividad;
+        this.esqueletoSugerencia = "{\n" +
+                "    \"consumidor\": {\n" +
+                "        \"id_consumidor\":" + "\"" + id_consumidor + "\"" + "\n" +
+                "    },\n" +
+                "    \"actividad\": {\n" +
+                "        \"id_actividad\":" + "\"" + id_actividad + "\"" + "\n" +
+                "    }\n" +
+                "}";
     }
 
     public TransformadorSugerencia() {
     }
 
-    public void enviarInformacionPost() {
+    public boolean enviarInformacionPost() {
         HttpURLConnection conexion = null;
 
         try {
@@ -61,17 +62,27 @@ public class TransformadorSugerencia {
 
             }
 
+            String respuesta;
             // Leer la respuesta de la API
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(conexion.getInputStream(), StandardCharsets.UTF_16))) {
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(conexion.getInputStream(), StandardCharsets.UTF_8))) {
                 StringBuilder response = new StringBuilder();
                 String responseLine;
                 while ((responseLine = br.readLine()) != null) {
                     response.append(responseLine.trim());
                 }
                 System.out.println("Respuesta de la API: " + response.toString());
+                respuesta = response.toString();
             }
 
-
+            if (conexion.getResponseCode() == 200 && (!respuesta.isEmpty() || !respuesta.isBlank())) {
+                //Devuelve 200 si esta correcto
+                return true;
+            } else if (conexion.getResponseCode() == 401) {
+                //Devuelve 401 si hay algun error
+                return false;
+            } else {
+                return false;
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
@@ -90,13 +101,13 @@ public class TransformadorSugerencia {
         ArrayList<SugerenciaActividadModel> listaSugerencias = new ArrayList<>();
 
         try {
-            HttpURLConnection connection = (HttpURLConnection) new URL(this.urlAConectarse).openConnection();
-            connection.setRequestMethod("GET");
+            HttpURLConnection conexion = (HttpURLConnection) new URL(this.urlAConectarse).openConnection();
+            conexion.setRequestMethod("GET");
 
             // Leer la respuesta de la API
             StringBuilder respuesta = new StringBuilder();
 
-            try (BufferedReader entrada = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+            try (BufferedReader entrada = new BufferedReader(new InputStreamReader(conexion.getInputStream()))) {
                 String lineaLeer;
                 while ((lineaLeer = entrada.readLine()) != null) {
                     respuesta.append(lineaLeer);
@@ -124,13 +135,13 @@ public class TransformadorSugerencia {
         SugerenciaActividadModel sugerencia = null;
 
         try {
-            HttpURLConnection connection = (HttpURLConnection) new URL(this.urlAConectarse + "/" + id).openConnection();
-            connection.setRequestMethod("GET");
+            HttpURLConnection conexion = (HttpURLConnection) new URL(this.urlAConectarse + "/" + id).openConnection();
+            conexion.setRequestMethod("GET");
 
             // Leer la respuesta de la API
             StringBuilder respuesta = new StringBuilder();
 
-            try (BufferedReader entrada = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+            try (BufferedReader entrada = new BufferedReader(new InputStreamReader(conexion.getInputStream()))) {
                 String lineaLeer;
                 while ((lineaLeer = entrada.readLine()) != null) {
                     respuesta.append(lineaLeer);

@@ -26,15 +26,7 @@ public class TransformadorRecursos {
     private int cantidad;
     private boolean is_ofertada_por_ofertante;
 
-    private String esqueletoRecurso = "{\n" +
-            "    \"actividad\": {\n" +
-            "        \"id_actividad\":" + "\"" + actividad + "\"" + "\n" +
-            "    },\n" +
-            "    \"nombre_recurso\":" + "\"" + nombre_recurso + "\"" + ",\n" +
-            "    \"descripcion\":" + "\"" + descripcion + "\"" + ",\n" +
-            "    \"cantidad\":" + "\"" + cantidad + "\"" + ",\n" +
-            "    \"is_ofertada_por_ofertante\":" + "\"" + is_ofertada_por_ofertante + "\"" + "\n" +
-            "}";
+    private String esqueletoRecurso;
     private final String urlAConectarse = "http://localhost:8080/recurso";
 
     public TransformadorRecursos(int actividad, String nombre_recurso, String descripcion, int cantidad, boolean is_ofertada_por_ofertante) {
@@ -43,12 +35,21 @@ public class TransformadorRecursos {
         this.descripcion = descripcion;
         this.cantidad = cantidad;
         this.is_ofertada_por_ofertante = is_ofertada_por_ofertante;
+        this.esqueletoRecurso = "{\n" +
+                "    \"actividad\": {\n" +
+                "        \"id_actividad\":" + "\"" + actividad + "\"" + "\n" +
+                "    },\n" +
+                "    \"nombre_recurso\":" + "\"" + nombre_recurso + "\"" + ",\n" +
+                "    \"descripcion\":" + "\"" + descripcion + "\"" + ",\n" +
+                "    \"cantidad\":" + "\"" + cantidad + "\"" + ",\n" +
+                "    \"is_ofertada_por_ofertante\":" + "\"" + is_ofertada_por_ofertante + "\"" + "\n" +
+                "}";
     }
 
     public TransformadorRecursos() {
     }
 
-    public void enviarInformacionPost() {
+    public boolean enviarInformacionPost() {
         HttpURLConnection conexion = null;
 
         try {
@@ -67,17 +68,27 @@ public class TransformadorRecursos {
 
             }
 
+            String respuesta;
             // Leer la respuesta de la API
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(conexion.getInputStream(), StandardCharsets.UTF_16))) {
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(conexion.getInputStream(), StandardCharsets.UTF_8))) {
                 StringBuilder response = new StringBuilder();
                 String responseLine;
                 while ((responseLine = br.readLine()) != null) {
                     response.append(responseLine.trim());
                 }
                 System.out.println("Respuesta de la API: " + response.toString());
+                respuesta = response.toString();
             }
 
-
+            if (conexion.getResponseCode() == 200 && (!respuesta.isEmpty() || !respuesta.isBlank())) {
+                //Devuelve 200 si esta correcto
+                return true;
+            } else if (conexion.getResponseCode() == 401) {
+                //Devuelve 401 si hay algun error
+                return false;
+            } else {
+                return false;
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
@@ -99,13 +110,13 @@ public class TransformadorRecursos {
         RecursosModel recurso = null;
 
         try {
-            HttpURLConnection connection = (HttpURLConnection) new URL(this.urlAConectarse + "/" + id).openConnection();
-            connection.setRequestMethod("GET");
+            HttpURLConnection conexion = (HttpURLConnection) new URL(this.urlAConectarse + "/" + id).openConnection();
+            conexion.setRequestMethod("GET");
 
             // Leer la respuesta de la API
             StringBuilder respuesta = new StringBuilder();
 
-            try (BufferedReader entrada = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+            try (BufferedReader entrada = new BufferedReader(new InputStreamReader(conexion.getInputStream()))) {
                 String lineaLeer;
                 while ((lineaLeer = entrada.readLine()) != null) {
                     respuesta.append(lineaLeer);
@@ -127,13 +138,13 @@ public class TransformadorRecursos {
         ArrayList<RecursosModel> listaRecursos = new ArrayList<>();
 
         try {
-            HttpURLConnection connection = (HttpURLConnection) new URL(this.urlAConectarse).openConnection();
-            connection.setRequestMethod("GET");
+            HttpURLConnection conexion = (HttpURLConnection) new URL(this.urlAConectarse).openConnection();
+            conexion.setRequestMethod("GET");
 
             // Leer la respuesta de la API
             StringBuilder respuesta = new StringBuilder();
 
-            try (BufferedReader entrada = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+            try (BufferedReader entrada = new BufferedReader(new InputStreamReader(conexion.getInputStream()))) {
                 String lineaLeer;
                 while ((lineaLeer = entrada.readLine()) != null) {
                     respuesta.append(lineaLeer);

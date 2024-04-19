@@ -218,12 +218,16 @@ public class TransformadorActividad {
             ActividadModel.tipoEstado estado = datosJSON.getEnum(ActividadModel.tipoEstado.class, "estadoActividad");
 
             OfertanteModel Creador_ofertante = null;
+            JSONObject datosOfertanteJSON = null;
 
-            //Convertimos al ofertante en un objeto individual para capturar sus valores
-            JSONObject datosOfertanteJSON = datosJSON.getJSONObject("creador_ofertante");
+            //Comprobamos que el valor que vamos a capturar no sea null
+            if (!datosJSON.isNull("creador_ofertante")) {
+                //Convertimos al ofertante en un objeto individual para capturar sus valores
+                datosOfertanteJSON = datosJSON.getJSONObject("creador_ofertante");
+            }
 
             //Si esta no esta vacio recogemos los datos
-            if (!datosOfertanteJSON.isEmpty()) {
+            if (datosOfertanteJSON != null && !datosOfertanteJSON.isEmpty()) {
                 int id_ofertante = datosOfertanteJSON.getInt("id_ofertante");
                 String nombreOfertante = datosOfertanteJSON.getString("nombreOfertante");
                 String primerApellidoOfertante = datosOfertanteJSON.getString("primerApellidoOfertante");
@@ -263,11 +267,16 @@ public class TransformadorActividad {
 
         OfertanteModel Creador_ofertante = null;
 
-        //Convertimos al ofertante en un objeto individual para capturar sus valores
-        JSONObject datosOfertanteJSON = datosJSON.getJSONObject("creador_ofertante");
+        JSONObject datosOfertanteJSON = null;
+
+        //Comprobamos que el valor que vamos a capturar no sea null
+        if (!datosJSON.isNull("creador_ofertante")) {
+            //Convertimos al ofertante en un objeto individual para capturar sus valores
+            datosOfertanteJSON = datosJSON.getJSONObject("creador_ofertante");
+        }
 
         //Si esta no esta vacio recogemos los datos
-        if (datosOfertanteJSON.isEmpty() == false) {
+        if (datosOfertanteJSON != null && !datosOfertanteJSON.isEmpty()) {
             int id_ofertante = datosOfertanteJSON.getInt("id_ofertante");
             String nombreOfertante = datosOfertanteJSON.getString("nombreOfertante");
             String primerApellidoOfertante = datosOfertanteJSON.getString("primerApellidoOfertante");
