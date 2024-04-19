@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="box" prefHeight="230.0" prefWidth="910.0" style="-fx-border-color: #76abff; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.SugerenciaIndividualController">
+   <children>
+      <Pane fx:id="panelAbrirAct" onMouseClicked="#abrirActividad" prefHeight="200.0" prefWidth="490.0">
+         <children>
+            <Pane layoutX="14.0" layoutY="14.0" prefHeight="60.0" prefWidth="181.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="6.0" text="Tipo actividad:" textFill="#76abff">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblTipoAct" layoutX="14.0" layoutY="30.0" text="TipoActividadTxtCambiar" />
+               </children>
+            </Pane>
+            <Pane layoutX="14.0" layoutY="70.0" prefHeight="60.0" prefWidth="455.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="6.0" text="Descripcion:" textFill="#76abff">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblDescripcion" alignment="TOP_LEFT" layoutX="95.0" layoutY="8.0" prefHeight="49.0" prefWidth="345.0" text="DescripcionACambiar" wrapText="true" />
+               </children>
+            </Pane>
+            <Pane layoutX="195.0" layoutY="14.0" prefHeight="60.0" prefWidth="275.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="6.0" text="Fecha:" textFill="#76abff">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblFecha" layoutX="14.0" layoutY="30.0" text="01/01/2024" />
+                  <Label layoutX="124.0" layoutY="6.0" text="Inicio:" textFill="#76abff">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblHoraInicio" layoutX="124.0" layoutY="30.0" text="00:00" />
+                  <Label layoutX="206.0" layoutY="6.0" text="Fin:" textFill="#76abff">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblHoraFin" layoutX="206.0" layoutY="30.0" text="00:00" />
+               </children>
+            </Pane>
+            <Pane layoutX="14.0" layoutY="130.0" prefHeight="60.0" prefWidth="455.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="6.0" text="Cantidad personas actualmente:" textFill="#76abff">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblCantidadPersonasAct" layoutX="221.0" layoutY="8.0" text="0" />
+                  <Label layoutX="14.0" layoutY="29.0" text="Cantidad personas maximo:" textFill="#76abff">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblCantidadPersonasMax" layoutX="221.0" layoutY="31.0" text="0" />
+                  <Label layoutX="292.0" layoutY="7.0" prefHeight="20.0" prefWidth="150.0" text="Localizacion:" textFill="#76abff">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblLocalizacion" layoutX="292.0" layoutY="29.0" prefHeight="17.0" prefWidth="150.0" text="Calle Localizacion n10" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <Pane prefHeight="200.0" prefWidth="210.0">
+         <children>
+            <Label layoutX="74.0" layoutY="14.0" text="Creado por:" textFill="#76abff" />
+            <Label alignment="TOP_LEFT" contentDisplay="TEXT_ONLY" layoutX="8.0" layoutY="70.0" prefHeight="60.0" prefWidth="198.0" text="Esta actividad ha sido sugerida pero no ha sido creada aún. ¡Sé el primero!" textFill="#ff7d7d" wrapText="true" />
+         </children>
+      </Pane>
+      <Pane prefHeight="200.0" prefWidth="150.0">
+         <children>
+            <Pane layoutX="9.0" layoutY="14.0" prefHeight="49.0" prefWidth="132.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="6.0" text="Estado:" textFill="#76abff">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblEstado" layoutX="14.0" layoutY="30.0" text="EstadoCambiar" />
+               </children>
+            </Pane>
+            <Button fx:id="btnCrear" layoutX="27.0" layoutY="100.0" mnemonicParsing="false" onAction="#crearActividad" text="Crear Actividad" />
+         </children>
+      </Pane>
+   </children>
+</HBox>
