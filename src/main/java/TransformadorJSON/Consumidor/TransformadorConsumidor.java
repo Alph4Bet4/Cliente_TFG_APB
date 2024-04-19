@@ -21,13 +21,7 @@ public class TransformadorConsumidor {
     private String contrasenia;
     private String email_consumidor;
 
-    private final String esqueletoConsumidor = "{\n" +
-            "    \"nombreConsumidor\": " + "\"" + nombreConsumidor + "\"" + ",\n" +
-            "    \"primerApellidoConsumidor\": " + "\"" + primerApellidoConsumidor + "\"" + ",\n" +
-            "    \"segundoApellidoConsumidor\": " + "\"" + segundoApellidoConsumidor + "\"" + ",\n" +
-            "    \"contrasenia\": " + "\"" + contrasenia + "\"" + ",\n" +
-            "    \"email_consumidor\": " + "\"" + email_consumidor + "\"" + ",\n" +
-            "}";
+    private String esqueletoConsumidor;
 
     private final String urlAConectarse = "http://localhost:8080/consumidor";
 
@@ -46,6 +40,13 @@ public class TransformadorConsumidor {
         this.segundoApellidoConsumidor = segundoApellidoConsumidor;
         this.contrasenia = contrasenia;
         this.email_consumidor = email_consumidor;
+        this.esqueletoConsumidor = "{\n" +
+                "    \"nombreConsumidor\": " + "\"" + nombreConsumidor + "\"" + ",\n" +
+                "    \"primerApellidoConsumidor\": " + "\"" + primerApellidoConsumidor + "\"" + ",\n" +
+                "    \"segundoApellidoConsumidor\": " + "\"" + segundoApellidoConsumidor + "\"" + ",\n" +
+                "    \"contrasenia\": " + "\"" + contrasenia + "\"" + ",\n" +
+                "    \"email_consumidor\": " + "\"" + email_consumidor + "\"" + "\n" +
+                "}";
     }
 
     /**
@@ -55,7 +56,11 @@ public class TransformadorConsumidor {
 
     }
 
-    public void enviarInformacionPost() {
+    public void rellenarEsqueleto() {
+
+    }
+
+    public boolean enviarInformacionPost() {
         HttpURLConnection conexion = null;
 
         try {
@@ -74,17 +79,29 @@ public class TransformadorConsumidor {
 
             }
 
+            System.out.println("Esqueleto: " + esqueletoConsumidor);
+
+            String respuesta;
             // Leer la respuesta de la API
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(conexion.getInputStream(), StandardCharsets.UTF_16))) {
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(conexion.getInputStream(), StandardCharsets.UTF_8))) {
                 StringBuilder response = new StringBuilder();
                 String responseLine;
                 while ((responseLine = br.readLine()) != null) {
                     response.append(responseLine.trim());
                 }
                 System.out.println("Respuesta de la API: " + response.toString());
+                respuesta = response.toString();
             }
 
-
+            if (conexion.getResponseCode() == 200 && (!respuesta.isEmpty() || !respuesta.isBlank())) {
+                //Devuelve 200 si esta correcto
+                return true;
+            } else if (conexion.getResponseCode() == 401) {
+                //Devuelve 401 si hay algun error
+                return false;
+            } else {
+                return false;
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
@@ -106,13 +123,13 @@ public class TransformadorConsumidor {
         ConsumidorModel consumidor = null;
 
         try {
-            HttpURLConnection connection = (HttpURLConnection) new URL(this.urlAConectarse + "/" + id).openConnection();
-            connection.setRequestMethod("GET");
+            HttpURLConnection conexion = (HttpURLConnection) new URL(this.urlAConectarse + "/" + id).openConnection();
+            conexion.setRequestMethod("GET");
 
             // Leer la respuesta de la API
             StringBuilder respuesta = new StringBuilder();
 
-            try (BufferedReader entrada = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+            try (BufferedReader entrada = new BufferedReader(new InputStreamReader(conexion.getInputStream()))) {
                 String lineaLeer;
                 while ((lineaLeer = entrada.readLine()) != null) {
                     respuesta.append(lineaLeer);
@@ -129,17 +146,75 @@ public class TransformadorConsumidor {
         return consumidor;
     }
 
+    public ConsumidorModel recibirConsumidorPorDatos() {
+        HttpURLConnection conexion = null;
+        ConsumidorModel consumidor = null;
+
+        try {
+            // Abrir conexión
+            conexion = (HttpURLConnection) new URL(this.urlAConectarse + "/login").openConnection();
+
+            // Configurar la conexión para una solicitud POST
+            conexion.setRequestMethod("POST");
+            conexion.setRequestProperty("Content-Type", "application/json");
+            conexion.setDoOutput(true);
+
+            // Escribir los datos en el cuerpo de la solicitud
+            try (OutputStream escritor = conexion.getOutputStream()) {
+                byte[] datosPost = esqueletoConsumidor.getBytes(StandardCharsets.UTF_16);
+                escritor.write(datosPost, 0, datosPost.length);
+
+            }
+
+            String respuesta;
+            // Leer la respuesta de la API
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(conexion.getInputStream(), StandardCharsets.UTF_8))) {
+                StringBuilder response = new StringBuilder();
+                String responseLine;
+                while ((responseLine = br.readLine()) != null) {
+                    response.append(responseLine.trim());
+                }
+                System.out.println("Respuesta de la API: " + response.toString());
+                respuesta = response.toString();
+            }
+
+            if (conexion.getResponseCode() == 200 && (!respuesta.isEmpty() || !respuesta.isBlank())) {
+                //Devuelve 200 si esta correcto
+                consumidor = sacarInformacionIndividual(respuesta);
+            } else if (conexion.getResponseCode() == 401) {
+                //Devuelve 401 si hay algun error
+                return null;
+            } else {
+                return null;
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                // Cerrar la conexión
+                if (conexion != null) {
+                    conexion.disconnect();
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        return consumidor;
+    }
+
     public ArrayList<ConsumidorModel> recibirInformacionGet() {
         ArrayList<ConsumidorModel> listaConsumidor = new ArrayList<>();
 
         try {
-            HttpURLConnection connection = (HttpURLConnection) new URL(this.urlAConectarse).openConnection();
-            connection.setRequestMethod("GET");
+            HttpURLConnection conexion = (HttpURLConnection) new URL(this.urlAConectarse).openConnection();
+            conexion.setRequestMethod("GET");
 
             // Leer la respuesta de la API
             StringBuilder respuesta = new StringBuilder();
 
-            try (BufferedReader entrada = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+            try (BufferedReader entrada = new BufferedReader(new InputStreamReader(conexion.getInputStream()))) {
                 String lineaLeer;
                 while ((lineaLeer = entrada.readLine()) != null) {
                     respuesta.append(lineaLeer);

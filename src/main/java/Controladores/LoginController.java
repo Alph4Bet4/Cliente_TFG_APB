@@ -1,23 +1,33 @@
 package Controladores;
 
-import Modelos.*;
-import TransformadorJSON.Actividad.TransformadorActividad;
+import Modelos.ConsumidorModel;
+import Modelos.OfertanteModel;
 import TransformadorJSON.Consumidor.TransformadorConsumidor;
 import TransformadorJSON.Ofertante.TransformadorOfertante;
-import TransformadorJSON.Participacion.TransformadorParticipacion;
-import TransformadorJSON.Recursos.TransformadorRecursos;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.paint.Paint;
 import org.tfg_apb.tfg_apb_cliente.Main;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class LoginController {
+    @FXML
+    private RadioButton rbConsumidor;
+
+    @FXML
+    private ToggleGroup rbEleccion;
+
+    @FXML
+    private RadioButton rbOfertante;
 
     @FXML
     private Button btnInicioSesion;
@@ -26,62 +36,66 @@ public class LoginController {
     private Hyperlink hyperLink;
 
     @FXML
-    private PasswordField lblContrasenia;
+    private Label lblCambiar;
 
     @FXML
-    private TextField lblCorreoElectronico;
+    private PasswordField txtFieldContrasenia;
+
+    @FXML
+    private TextField txtFieldCorreoElectronico;
+
+    @FXML
+    private TextField txtFieldUsuario;
 
     @FXML
     void iniciarSesion(ActionEvent event) {
-        /*
-        Thread hiloListarOfertantes = new Thread(() -> {
-            ArrayList<OfertanteModel> listaOfertantes = new TransformadorOfertante().recibirInformacionGet();
+        String nombreUsuario = txtFieldUsuario.getText();
+        String emailUsuario = txtFieldCorreoElectronico.getText();
+        String pass = txtFieldContrasenia.getText();
 
-            for (OfertanteModel ofertante : listaOfertantes ) {
-                System.out.println(ofertante);
+        if (comprobarCamposObligatorios(nombreUsuario, emailUsuario, pass)) {
+            login(nombreUsuario, pass, emailUsuario);
+        }
+
+    }
+
+    private void login(String nombreUsuario, String pass, String emailUsuario) {
+        //Si esta seleccionado el consumidor inicia sesion como uno
+        if (rbConsumidor.isSelected()) {
+            TransformadorConsumidor transformador = new TransformadorConsumidor(nombreUsuario, "", "", pass, emailUsuario);
+            ConsumidorModel consumidor = transformador.recibirConsumidorPorDatos();
+            if (consumidor != null) {
+                //Metemos los valores en el contenedor
+                Main.iniciarSesionUsuario(consumidor);
+
+                //Cambiamos de ventana
+                cambiarPestania();
+
+            } else {
+                //Mostramos el lbl
+                lblCambiar.setVisible(true);
+                //Cambiamos con el error
+                lblCambiar.setTextFill(Paint.valueOf("#ff0000"));
+                lblCambiar.setText("Ha ocurrido algun error");
             }
-        });
-        hiloListarOfertantes.start();
+        } else if (rbOfertante.isSelected()) {
+            TransformadorOfertante transformador = new TransformadorOfertante(nombreUsuario, "", "", pass, "", emailUsuario);
+            OfertanteModel ofertante = transformador.recibirOfertantePorDatos();
+            if (ofertante != null) {
+                //Metemos los valores en el contenedor
+                Main.iniciarSesionUsuario(ofertante);
 
-        Thread hiloListarConsumidores = new Thread(() -> {
-            ArrayList<ConsumidorModel> listaConsumidores = new TransformadorConsumidor().recibirInformacionGet();
+                //Cambiamos de ventana
+                cambiarPestania();
 
-            for (ConsumidorModel consumidor : listaConsumidores) {
-                System.out.println(consumidor);
+            } else {
+                //Mostramos el lbl
+                lblCambiar.setVisible(true);
+                //Cambiamos con el error
+                lblCambiar.setTextFill(Paint.valueOf("#ff0000"));
+                lblCambiar.setText("Ha ocurrido algun error");
             }
-        });
-        hiloListarConsumidores.start();
-
-        Thread hiloListarActividades = new Thread(() -> {
-           ArrayList<ActividadModel> listaActividades = new TransformadorActividad().recibirInformacionGet();
-
-           for (ActividadModel actividad : listaActividades) {
-               System.out.println(actividad);
-           }
-        });
-        hiloListarActividades.start();
-
-        Thread hiloListarRecursos = new Thread(() -> {
-            ArrayList<RecursosModel> listaRecursos = new TransformadorRecursos().recibirInformacionGet();
-
-
-            for (RecursosModel recurso : listaRecursos) {
-                System.out.println(recurso);
-            }
-
-        });
-        hiloListarRecursos.start();
-
-         */
-
-        Thread hiloListaParticipacion = new Thread(() -> {
-            ArrayList<ParticipacionModel> listaParticipacion = new TransformadorParticipacion().recibirInformacionGet();
-
-            for (ParticipacionModel participacion : listaParticipacion) {
-                System.out.println(participacion);
-            }
-        });
-        hiloListaParticipacion.start();
+        }
     }
 
     @FXML
@@ -93,4 +107,53 @@ public class LoginController {
         }
     }
 
+    void cambiarPestania() {
+        try {
+            Main.setRaiz("VistaPrincipal");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Metodo que hace las comprobaciones necesarias para poder iniciar sesion
+     *
+     * @param nombreUsuario
+     * @param emailUsuario
+     * @param pass
+     */
+    private boolean comprobarCamposObligatorios(String nombreUsuario, String emailUsuario, String pass) {
+        //Comprobamos el nombre de usuario
+        if ((!nombreUsuario.isBlank() || !nombreUsuario.isEmpty()) && nombreUsuario.length() <= 45) {
+            //Comprobamos el email
+            if ((!emailUsuario.isBlank() || !emailUsuario.isEmpty()) && emailUsuario.length() <= 100) {
+                //Comprobamos la pass
+                if ((!pass.isBlank() || !pass.isEmpty()) && pass.length() <= 45) {
+                    //Devolvemos verdadero si esta correcto
+                    return true;
+                } else {
+                    //Mostramos el lbl
+                    lblCambiar.setVisible(true);
+                    //Cambiamos con el error
+                    lblCambiar.setTextFill(Paint.valueOf("#ff0000"));
+                    lblCambiar.setText("La contraseña está vacia o es muy larga");
+                    return false;
+                }
+            } else {
+                //Mostramos el lbl
+                lblCambiar.setVisible(true);
+                //Cambiamos con el error
+                lblCambiar.setTextFill(Paint.valueOf("#ff0000"));
+                lblCambiar.setText("El email está vacio o es muy largo");
+                return false;
+            }
+        } else {
+            //Mostramos el lbl
+            lblCambiar.setVisible(true);
+            //Cambiamos con el error
+            lblCambiar.setTextFill(Paint.valueOf("#ff0000"));
+            lblCambiar.setText("El nombre está vacio o es muy largo");
+            return false;
+        }
+    }
 }
