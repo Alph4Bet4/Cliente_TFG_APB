@@ -58,6 +58,16 @@ public class Main extends Application {
         return fxmlLoader.load();
     }
 
+    /**
+     * Metodo que cambia el tamaño a la ventana
+     * @param anchura
+     * @param altura
+     */
+    public static void cambiarTamVentana(double anchura, double altura) {
+        escena.getWindow().setHeight(altura);
+        escena.getWindow().setWidth(anchura);
+    }
+
 
 
 }
