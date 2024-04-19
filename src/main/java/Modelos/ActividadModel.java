@@ -16,9 +16,14 @@ public class ActividadModel {
     private Time hora_fin;
     private int cantidad_max_personas;
     private int cantidad_actual_personas;
+    private tipoEstado estado;
     private OfertanteModel Creador_ofertante;
 
-    public ActividadModel(int id_actividad, String tipoActividad, String descripcionActividad, String direccion, Date fecha, Time hora_inicio, Time hora_fin, int cantidad_max_personas, int cantidad_actual_personas, OfertanteModel creador_ofertante) {
+    public enum tipoEstado {
+        Disponible, Finalizado, Completo, Cancelado
+    }
+
+    public ActividadModel(int id_actividad, String tipoActividad, String descripcionActividad, String direccion, Date fecha, Time hora_inicio, Time hora_fin, int cantidad_max_personas, int cantidad_actual_personas, tipoEstado estado, OfertanteModel creador_ofertante) {
         this.id_actividad = id_actividad;
         this.tipoActividad = tipoActividad;
         this.descripcionActividad = descripcionActividad;
@@ -28,6 +33,7 @@ public class ActividadModel {
         this.hora_fin = hora_fin;
         this.cantidad_max_personas = cantidad_max_personas;
         this.cantidad_actual_personas = cantidad_actual_personas;
+        this.estado = estado;
         Creador_ofertante = creador_ofertante;
     }
 
@@ -111,6 +117,14 @@ public class ActividadModel {
         Creador_ofertante = creador_ofertante;
     }
 
+    public tipoEstado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(tipoEstado estado) {
+        this.estado = estado;
+    }
+
     @Override
     public String toString() {
         return "ActividadModel{" +
@@ -123,6 +137,7 @@ public class ActividadModel {
                 ", hora_fin=" + hora_fin +
                 ", cantidad_max_personas=" + cantidad_max_personas +
                 ", cantidad_actual_personas=" + cantidad_actual_personas +
+                ", estado=" + estado +
                 ", Creador_ofertante=" + Creador_ofertante +
                 '}';
     }

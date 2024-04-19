@@ -4,20 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="Creado Transformador Sugerencia.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Contenedor/ContenedorDatos.java" afterDir="false" />
+    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="Acabado inicio de sesion.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controladores/ActividadIndividualController.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/Controladores/VistaPrincipalController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Vistas/ActividadIndividual.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Vistas/LoginPrueba.fxml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/resources/Vistas/VistaPrincipal.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Modelos/ActividadModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modelos/ActividadModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Actividad/TransformadorActividad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Actividad/TransformadorActividad.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Consumidor/TransformadorConsumidor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Consumidor/TransformadorConsumidor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Ofertante/TransformadorOfertante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Ofertante/TransformadorOfertante.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Participacion/TransformadorParticipacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Participacion/TransformadorParticipacion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Recursos/TransformadorRecursos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Recursos/TransformadorRecursos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Sugerencia/TransformadorSugerencia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Sugerencia/TransformadorSugerencia.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/tfg_apb/tfg_apb_cliente/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tfg_apb/tfg_apb_cliente/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Vistas/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Vistas/Login.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,11 +68,14 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Adri/Documents/ProyectoFinGradoAPB/TFG_APB_Servidor",
+    "last_opened_file_path": "C:/Users/Adri/Documents/ProyectoFinGradoAPB/TFG_APB_Cliente/src/main/resources/Vistas",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Adri\Documents\ProyectoFinGradoAPB\TFG_APB_Cliente\src\main\resources\Vistas" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Adri\Documents\ProyectoFinGradoAPB\TFG_APB_Cliente\src\main\resources\Vistas" />
       <recent name="C:\Users\Adri\Documents\ProyectoFinGradoAPB\TFG_APB_Cliente\src\main\resources\org\tfg_apb\tfg_apb_cliente" />
@@ -249,7 +251,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713385809061</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Acabado inicio de sesion.">
+      <option name="closed" value="true" />
+      <created>1713522611027</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1713522611027</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -281,6 +291,7 @@
     <MESSAGE value="Creado get Id para los transformadores." />
     <MESSAGE value="Finalizado Registro." />
     <MESSAGE value="Creado Transformador Sugerencia." />
-    <option name="LAST_COMMIT_MESSAGE" value="Creado Transformador Sugerencia." />
+    <MESSAGE value="Acabado inicio de sesion." />
+    <option name="LAST_COMMIT_MESSAGE" value="Acabado inicio de sesion." />
   </component>
 </project>

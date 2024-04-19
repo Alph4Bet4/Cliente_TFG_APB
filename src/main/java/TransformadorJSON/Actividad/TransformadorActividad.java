@@ -27,20 +27,9 @@ public class TransformadorActividad {
     private int cantidad_max_personas;
     private int cantidad_actual_personas;
     private int id_creador_ofertante;
+    private ActividadModel.tipoEstado estado;
 
-    private final String esqueletoActividad = "{\n" +
-            "    \"tipoActividad\":" + "\"" + tipoActividad + "\"" + ",\n" +
-            "    \"descripcionActividad\":" + "\"" + descripcionActividad + "\"" + ",\n" +
-            "    \"direccion\":" + "\"" + direccion + "\"" + ",\n" +
-            "    \"fecha\":" + "\"" + fecha + "\"" + ",\n" +
-            "    \"hora_inicio\":" + "\"" + hora_fin + "\"" + ",\n" +
-            "    \"hora_fin\":" + "\"" + hora_fin + "\"" + ",\n" +
-            "    \"cantidad_max_personas\":" + "\"" + cantidad_max_personas + "\"" + ",\n" +
-            "    \"cantidad_actual_personas\":" + "\"" + cantidad_actual_personas + "\"" + ",\n" +
-            "    \"creador_ofertante\": {\n" +
-            "            \"id_ofertante\":" + "\"" + id_creador_ofertante + "\"" +
-            "        }\n" +
-            "}";
+    private String esqueletoActividad;
 
     private final String urlAConectarse = "http://localhost:8080/actividad";
 
@@ -56,8 +45,9 @@ public class TransformadorActividad {
      * @param cantidad_max_personas
      * @param cantidad_actual_personas
      * @param id_creador_ofertante
+     * @param estado
      */
-    public TransformadorActividad(String tipoActividad, String descripcionActividad, String direccion, Date fecha, Time hora_inicio, Time hora_fin, int cantidad_max_personas, int cantidad_actual_personas, int id_creador_ofertante) {
+    public TransformadorActividad(String tipoActividad, String descripcionActividad, String direccion, Date fecha, Time hora_inicio, Time hora_fin, int cantidad_max_personas, int cantidad_actual_personas, int id_creador_ofertante, ActividadModel.tipoEstado estado) {
         this.tipoActividad = tipoActividad;
         this.descripcionActividad = descripcionActividad;
         this.direccion = direccion;
@@ -67,6 +57,21 @@ public class TransformadorActividad {
         this.cantidad_max_personas = cantidad_max_personas;
         this.cantidad_actual_personas = cantidad_actual_personas;
         this.id_creador_ofertante = id_creador_ofertante;
+        this.estado = estado;
+        this.esqueletoActividad  = "{\n" +
+                "    \"tipoActividad\":" + "\"" + tipoActividad + "\"" + ",\n" +
+                "    \"descripcionActividad\":" + "\"" + descripcionActividad + "\"" + ",\n" +
+                "    \"direccion\":" + "\"" + direccion + "\"" + ",\n" +
+                "    \"fecha\":" + "\"" + fecha + "\"" + ",\n" +
+                "    \"hora_inicio\":" + "\"" + hora_fin + "\"" + ",\n" +
+                "    \"hora_fin\":" + "\"" + hora_fin + "\"" + ",\n" +
+                "    \"cantidad_max_personas\":" + "\"" + cantidad_max_personas + "\"" + ",\n" +
+                "    \"cantidad_actual_personas\":" + "\"" + cantidad_actual_personas + "\"" + ",\n" +
+                "    \"estadoActividad\":" + "\"" + estado + "\"" + ",\n" +
+                "    \"creador_ofertante\": {\n" +
+                "            \"id_ofertante\":" + "\"" + id_creador_ofertante + "\"" +
+                "        }\n" +
+                "}";
     }
 
     /**
@@ -76,7 +81,7 @@ public class TransformadorActividad {
 
     }
 
-    public void enviarInformacionPost() {
+    public boolean enviarInformacionPost() {
         HttpURLConnection conexion = null;
 
         try {
@@ -95,17 +100,27 @@ public class TransformadorActividad {
 
             }
 
+            String respuesta;
             // Leer la respuesta de la API
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(conexion.getInputStream(), StandardCharsets.UTF_16))) {
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(conexion.getInputStream(), StandardCharsets.UTF_8))) {
                 StringBuilder response = new StringBuilder();
                 String responseLine;
                 while ((responseLine = br.readLine()) != null) {
                     response.append(responseLine.trim());
                 }
                 System.out.println("Respuesta de la API: " + response.toString());
+                respuesta = response.toString();
             }
 
-
+            if (conexion.getResponseCode() == 200 && (!respuesta.isEmpty() || !respuesta.isBlank())) {
+                //Devuelve 200 si esta correcto
+                return true;
+            } else if (conexion.getResponseCode() == 401) {
+                //Devuelve 401 si hay algun error
+                return false;
+            } else {
+                return false;
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
@@ -129,13 +144,13 @@ public class TransformadorActividad {
         ActividadModel actividad = null;
 
         try {
-            HttpURLConnection connection = (HttpURLConnection) new URL(this.urlAConectarse + "/" + id).openConnection();
-            connection.setRequestMethod("GET");
+            HttpURLConnection conexion = (HttpURLConnection) new URL(this.urlAConectarse + "/" + id).openConnection();
+            conexion.setRequestMethod("GET");
 
             // Leer la respuesta de la API
             StringBuilder respuesta = new StringBuilder();
 
-            try (BufferedReader entrada = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+            try (BufferedReader entrada = new BufferedReader(new InputStreamReader(conexion.getInputStream()))) {
                 String lineaLeer;
                 while ((lineaLeer = entrada.readLine()) != null) {
                     respuesta.append(lineaLeer);
@@ -156,13 +171,13 @@ public class TransformadorActividad {
         ArrayList<ActividadModel> listaActividades = new ArrayList<>();
 
         try {
-            HttpURLConnection connection = (HttpURLConnection) new URL(this.urlAConectarse).openConnection();
-            connection.setRequestMethod("GET");
+            HttpURLConnection conexion = (HttpURLConnection) new URL(this.urlAConectarse).openConnection();
+            conexion.setRequestMethod("GET");
 
             // Leer la respuesta de la API
             StringBuilder respuesta = new StringBuilder();
 
-            try (BufferedReader entrada = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+            try (BufferedReader entrada = new BufferedReader(new InputStreamReader(conexion.getInputStream()))) {
                 String lineaLeer;
                 while ((lineaLeer = entrada.readLine()) != null) {
                     respuesta.append(lineaLeer);
@@ -200,13 +215,15 @@ public class TransformadorActividad {
             Time hora_fin = Time.valueOf(datosJSON.getString("hora_fin"));
             int cantidad_max_personas = datosJSON.getInt("cantidad_max_personas");
             int cantidad_actual_personas = datosJSON.getInt("cantidad_actual_personas");
+            ActividadModel.tipoEstado estado = datosJSON.getEnum(ActividadModel.tipoEstado.class, "estadoActividad");
+
             OfertanteModel Creador_ofertante = null;
 
             //Convertimos al ofertante en un objeto individual para capturar sus valores
             JSONObject datosOfertanteJSON = datosJSON.getJSONObject("creador_ofertante");
 
             //Si esta no esta vacio recogemos los datos
-            if (datosOfertanteJSON.isEmpty() == false) {
+            if (!datosOfertanteJSON.isEmpty()) {
                 int id_ofertante = datosOfertanteJSON.getInt("id_ofertante");
                 String nombreOfertante = datosOfertanteJSON.getString("nombreOfertante");
                 String primerApellidoOfertante = datosOfertanteJSON.getString("primerApellidoOfertante");
@@ -219,7 +236,7 @@ public class TransformadorActividad {
                 Creador_ofertante = new OfertanteModel(id_ofertante, nombreOfertante, primerApellidoOfertante, segundoApellidoOfertante, contrasenia, nombreEmpresa, email_ofertante, is_administrador);
             }
 
-            ActividadModel actividad = new ActividadModel(id_actividad, tipoActividad, descripcionActividad, direccion, fecha, hora_inicio, hora_fin, cantidad_max_personas, cantidad_actual_personas, Creador_ofertante);
+            ActividadModel actividad = new ActividadModel(id_actividad, tipoActividad, descripcionActividad, direccion, fecha, hora_inicio, hora_fin, cantidad_max_personas, cantidad_actual_personas, estado, Creador_ofertante);
 
             listaActividades.add(actividad);
         }
@@ -242,6 +259,8 @@ public class TransformadorActividad {
         Time hora_fin = Time.valueOf(datosJSON.getString("hora_fin"));
         int cantidad_max_personas = datosJSON.getInt("cantidad_max_personas");
         int cantidad_actual_personas = datosJSON.getInt("cantidad_actual_personas");
+        ActividadModel.tipoEstado estado = datosJSON.getEnum(ActividadModel.tipoEstado.class, "estadoActividad");
+
         OfertanteModel Creador_ofertante = null;
 
         //Convertimos al ofertante en un objeto individual para capturar sus valores
@@ -261,7 +280,7 @@ public class TransformadorActividad {
             Creador_ofertante = new OfertanteModel(id_ofertante, nombreOfertante, primerApellidoOfertante, segundoApellidoOfertante, contrasenia, nombreEmpresa, email_ofertante, is_administrador);
         }
 
-        actividad = new ActividadModel(id_actividad, tipoActividad, descripcionActividad, direccion, fecha, hora_inicio, hora_fin, cantidad_max_personas, cantidad_actual_personas, Creador_ofertante);
+        actividad = new ActividadModel(id_actividad, tipoActividad, descripcionActividad, direccion, fecha, hora_inicio, hora_fin, cantidad_max_personas, cantidad_actual_personas, estado, Creador_ofertante);
 
         return actividad;
     }
