@@ -157,6 +157,74 @@ public class TransformadorParticipacion {
         return participacion;
     }
 
+    /**
+     * Metodo que envia al body un id de actividad para filtrar por ella misma
+     * @param actividadModel
+     * @return
+     */
+    public ArrayList<ParticipacionModel> recibirListaParticipantesPorIdActividad(ActividadModel actividadModel) {
+        HttpURLConnection conexion = null;
+        ArrayList<ParticipacionModel> listaParticipacion = null;
+
+        try {
+            // Abrir conexión
+            conexion = (HttpURLConnection) new URL(this.urlAConectarse + "/porIdActividad").openConnection();
+
+            // Configurar la conexión para una solicitud POST
+            conexion.setRequestMethod("POST");
+            conexion.setRequestProperty("Content-Type", "application/json");
+            conexion.setDoOutput(true);
+
+            //Creamos un esqueleto de la actividad provisional
+            String esqueletoProvisionalActividad = "{\n" +
+                    "    \"id_actividad\":" + "\"" + actividadModel.getId_actividad() + "\"" + "\n" +
+                    "}";
+
+            // Escribir los datos en el cuerpo de la solicitud
+            try (OutputStream escritor = conexion.getOutputStream()) {
+                byte[] datosPost = esqueletoProvisionalActividad.getBytes(StandardCharsets.UTF_16);
+                escritor.write(datosPost, 0, datosPost.length);
+
+            }
+
+            String respuesta;
+            // Leer la respuesta de la API
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(conexion.getInputStream(), StandardCharsets.UTF_8))) {
+                StringBuilder response = new StringBuilder();
+                String responseLine;
+                while ((responseLine = br.readLine()) != null) {
+                    response.append(responseLine.trim());
+                }
+                System.out.println("Respuesta de la API: " + response.toString());
+                respuesta = response.toString();
+            }
+
+            if (conexion.getResponseCode() == 200 && (!respuesta.isEmpty() || !respuesta.isBlank())) {
+                //Devuelve 200 si esta correcto
+                listaParticipacion = sacarInformacionLista(respuesta);
+            } else if (conexion.getResponseCode() == 401) {
+                //Devuelve 401 si hay algun error
+                return null;
+            } else {
+                return null;
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                // Cerrar la conexión
+                if (conexion != null) {
+                    conexion.disconnect();
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        return listaParticipacion;
+    }
+
     private ArrayList<ParticipacionModel> sacarInformacionLista(String datos) {
         ArrayList<ParticipacionModel> listaParticipacion = new ArrayList<>();
 
