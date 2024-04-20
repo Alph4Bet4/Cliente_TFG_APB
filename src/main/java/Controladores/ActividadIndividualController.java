@@ -81,6 +81,7 @@ public class ActividadIndividualController {
 
     @FXML
     synchronized void inscribirseActividad(ActionEvent event) {
+        //FIXME luego no se cambia cuando te registras / no hay actualizacion de datos
         //Comprobamos la cantidad de personas actuales
         if (Integer.parseInt(lblCantidadPersonasAct.getText()) < Integer.parseInt(lblCantidadPersonasMax.getText())) {
             //Nos aseguramos de que sea un consumidor y no un ofertante
@@ -151,7 +152,8 @@ public class ActividadIndividualController {
             //Cambiamos con los datos del usuario
             lblNombreUsuario.setText(actividad.getCreador_ofertante().getNombreOfertante());
             lblEmailUsuario.setText(actividad.getCreador_ofertante().getEmail_ofertante());
-            if (actividad.getCreador_ofertante().getNombreEmpresa() != null || !actividad.getCreador_ofertante().getNombreEmpresa().isBlank()) {
+            if (!actividad.getCreador_ofertante().getNombreEmpresa().equals("null") || actividad.getCreador_ofertante().getNombreEmpresa() != null) {
+                lblNombreEmpresa.setVisible(true);
                 lblNombreEmpresa.setText(actividad.getCreador_ofertante().getNombreEmpresa());
             }
 

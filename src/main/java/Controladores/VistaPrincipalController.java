@@ -67,6 +67,9 @@ public class VistaPrincipalController implements Initializable {
         sugerenciaLayout.getChildren().clear();
         actividadLayout.getChildren().clear();
 
+        listaSugerencias = llenarListaSugerencias();
+        listaActividades = llenarListaActividades();
+
         try {
 
             //Rellenamos la lista de actividades

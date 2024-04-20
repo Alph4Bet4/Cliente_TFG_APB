@@ -4,20 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="Creados metodos para recibir listas segun el id de la actividad.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controladores/ActividadController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controladores/ParticipacionIndividualController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controladores/RecursoIndividualController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Vistas/ParticipacionIndividual.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Vistas/RecursoIndividual.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Vistas/VistaActividad.fxml" afterDir="false" />
+    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="Creada vista actividad modificar/ver.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Contenedor/ContenedorDatos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Contenedor/ContenedorDatos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/ActividadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/ActividadController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/ActividadIndividualController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/ActividadIndividualController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/SugerenciaIndividualController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/SugerenciaIndividualController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/VistaPrincipalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/VistaPrincipalController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tfg_apb/tfg_apb_cliente/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tfg_apb/tfg_apb_cliente/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Vistas/VistaPrincipal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Vistas/VistaPrincipal.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -324,7 +315,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713638871118</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Creada vista actividad modificar/ver.">
+      <option name="closed" value="true" />
+      <created>1713641266598</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1713641266598</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -364,6 +363,7 @@
     <MESSAGE value="Añadido &quot;EnCurso&quot; al enum de Actividades." />
     <MESSAGE value="Arreglado error direccion." />
     <MESSAGE value="Creados metodos para recibir listas segun el id de la actividad." />
-    <option name="LAST_COMMIT_MESSAGE" value="Creados metodos para recibir listas segun el id de la actividad." />
+    <MESSAGE value="Creada vista actividad modificar/ver." />
+    <option name="LAST_COMMIT_MESSAGE" value="Creada vista actividad modificar/ver." />
   </component>
 </project>

@@ -219,7 +219,9 @@ public class ActividadController implements Initializable {
 
         if (actividadActual.getCreador_ofertante() != null) {
             lblNombreUsuario.setText(actividadActual.getCreador_ofertante().getNombreOfertante());
-            if (actividadActual.getCreador_ofertante().getNombreEmpresa() != null || !actividadActual.getCreador_ofertante().getNombreEmpresa().isBlank()) {
+            if (!actividadActual.getCreador_ofertante().getNombreEmpresa().equals("null") || actividadActual.getCreador_ofertante().getNombreEmpresa() != null) {
+                System.out.println("Entro");
+                System.out.println(actividadActual.getCreador_ofertante().getNombreEmpresa());
                 lblNombreEmpresa.setText(actividadActual.getCreador_ofertante().getNombreEmpresa());
                 lblNombreEmpresa.setVisible(true);
             }
