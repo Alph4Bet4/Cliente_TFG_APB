@@ -209,7 +209,7 @@ public class TransformadorActividad {
             int id_actividad = datosJSON.getInt("id_actividad");
             String tipoActividad = datosJSON.getString("tipoActividad");
             String descripcionActividad = datosJSON.getString("descripcionActividad");
-            String direccion = datosJSON.getString("tipoActividad");
+            String direccion = datosJSON.getString("direccion");
             Date fecha = Date.valueOf(datosJSON.getString("fecha"));
             Time hora_inicio = Time.valueOf(datosJSON.getString("hora_inicio"));
             Time hora_fin = Time.valueOf(datosJSON.getString("hora_fin"));
@@ -257,7 +257,7 @@ public class TransformadorActividad {
         int id_actividad = datosJSON.getInt("id_actividad");
         String tipoActividad = datosJSON.getString("tipoActividad");
         String descripcionActividad = datosJSON.getString("descripcionActividad");
-        String direccion = datosJSON.getString("tipoActividad");
+        String direccion = datosJSON.getString("direccion");
         Date fecha = Date.valueOf(datosJSON.getString("fecha"));
         Time hora_inicio = Time.valueOf(datosJSON.getString("hora_inicio"));
         Time hora_fin = Time.valueOf(datosJSON.getString("hora_fin"));

@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="">
+    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="Añadido &quot;EnCurso&quot; al enum de Actividades.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Modelos/ActividadModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modelos/ActividadModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/ActividadIndividualController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/ActividadIndividualController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/SugerenciaIndividualController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/SugerenciaIndividualController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/VistaPrincipalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/VistaPrincipalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Actividad/TransformadorActividad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Actividad/TransformadorActividad.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Vistas/VistaPrincipal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Vistas/VistaPrincipal.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -281,7 +285,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713558644626</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Añadido &quot;EnCurso&quot; al enum de Actividades.">
+      <option name="closed" value="true" />
+      <created>1713606825602</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1713606825602</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -318,6 +330,7 @@
     <MESSAGE value="Arreglado errores con transformadores." />
     <MESSAGE value="Mejorada la vista principal y su controlador junto con las creaciones de las cartas de las actividades y sugerencias." />
     <MESSAGE value="Añadido varios metodos extras." />
-    <option name="LAST_COMMIT_MESSAGE" value="Añadido varios metodos extras." />
+    <MESSAGE value="Añadido &quot;EnCurso&quot; al enum de Actividades." />
+    <option name="LAST_COMMIT_MESSAGE" value="Añadido &quot;EnCurso&quot; al enum de Actividades." />
   </component>
 </project>
