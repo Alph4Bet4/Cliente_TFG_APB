@@ -20,7 +20,7 @@ public class ActividadModel {
     private OfertanteModel Creador_ofertante;
 
     public enum tipoEstado {
-        Disponible, Finalizado, Completo, Cancelado
+        Disponible, Finalizado, Completo, Cancelado, EnCurso,
     }
 
     public ActividadModel(int id_actividad, String tipoActividad, String descripcionActividad, String direccion, Date fecha, Time hora_inicio, Time hora_fin, int cantidad_max_personas, int cantidad_actual_personas, tipoEstado estado, OfertanteModel creador_ofertante) {

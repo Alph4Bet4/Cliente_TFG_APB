@@ -4,23 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="Añadido estado actividad.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controladores/ActividadIndividualController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controladores/SugerenciaIndividualController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controladores/VistaPrincipalController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Imagenes/filtrar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Imagenes/recarga.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Vistas/ActividadIndividual.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Vistas/LoginPrueba.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Vistas/SugerenciaIndividual.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Vistas/VistaPrincipal.fxml" afterDir="false" />
+    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Actividad/TransformadorActividad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Actividad/TransformadorActividad.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Participacion/TransformadorParticipacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Participacion/TransformadorParticipacion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Recursos/TransformadorRecursos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Recursos/TransformadorRecursos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Sugerencia/TransformadorSugerencia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Sugerencia/TransformadorSugerencia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tfg_apb/tfg_apb_cliente/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tfg_apb/tfg_apb_cliente/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Modelos/ActividadModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modelos/ActividadModel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -271,7 +257,31 @@
       <option name="project" value="LOCAL" />
       <updated>1713529490459</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Arreglado errores con transformadores.">
+      <option name="closed" value="true" />
+      <created>1713558537076</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1713558537076</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Mejorada la vista principal y su controlador junto con las creaciones de las cartas de las actividades y sugerencias.">
+      <option name="closed" value="true" />
+      <created>1713558585444</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1713558585444</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Añadido varios metodos extras.">
+      <option name="closed" value="true" />
+      <created>1713558644626</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1713558644626</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -305,6 +315,9 @@
     <MESSAGE value="Creado Transformador Sugerencia." />
     <MESSAGE value="Acabado inicio de sesion." />
     <MESSAGE value="Añadido estado actividad." />
-    <option name="LAST_COMMIT_MESSAGE" value="Añadido estado actividad." />
+    <MESSAGE value="Arreglado errores con transformadores." />
+    <MESSAGE value="Mejorada la vista principal y su controlador junto con las creaciones de las cartas de las actividades y sugerencias." />
+    <MESSAGE value="Añadido varios metodos extras." />
+    <option name="LAST_COMMIT_MESSAGE" value="Añadido varios metodos extras." />
   </component>
 </project>
