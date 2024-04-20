@@ -43,7 +43,6 @@
                </image>
             </ImageView>
             <Button layoutX="746.0" layoutY="15.0" mnemonicParsing="false" onAction="#cambiarVistaActividad" text="Crear/Sugerir Actividad" />
-            <Button fx:id="btnEliminar" disable="true" layoutX="625.0" layoutY="15.0" mnemonicParsing="false" onAction="#eliminarActividad" text="Eliminar actividad" textFill="RED" visible="false" />
          </children>
       </Pane>
       <Label fx:id="lblNombre" alignment="CENTER_RIGHT" layoutX="812.0" layoutY="24.0" onMouseClicked="#verAjustesCuenta" prefHeight="27.0" prefWidth="318.0" text="Bienvenido, ">

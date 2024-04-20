@@ -27,9 +27,6 @@ import java.util.ResourceBundle;
 public class VistaPrincipalController implements Initializable {
 
     @FXML
-    private Button btnEliminar;
-
-    @FXML
     private VBox actividadLayout;
 
     @FXML
@@ -49,11 +46,6 @@ public class VistaPrincipalController implements Initializable {
 
     @FXML
     void cambiarVistaActividad(ActionEvent event) {
-        //TODO
-    }
-
-    @FXML
-    synchronized void eliminarActividad(ActionEvent event) {
         //TODO
     }
 
@@ -112,14 +104,6 @@ public class VistaPrincipalController implements Initializable {
 
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
-
-        //Comprobamos si es un administrador
-        if (Main.recibirDatosUsuario() instanceof OfertanteModel) {
-            if (((OfertanteModel) Main.recibirDatosUsuario()).isIs_administrador()) {
-                btnEliminar.setVisible(true);
-                btnEliminar.setDisable(false);
-            }
         }
 
     }

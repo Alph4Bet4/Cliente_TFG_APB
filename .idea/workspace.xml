@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="Creada vista actividad modificar/ver.">
+    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="Eliminado metodo innecesario.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/ActividadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/ActividadController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/ActividadIndividualController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/ActividadIndividualController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/VistaPrincipalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/VistaPrincipalController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -323,7 +320,23 @@
       <option name="project" value="LOCAL" />
       <updated>1713641266598</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Arreglada vistas, se veían los nombre de las empresas cuando no se debia.">
+      <option name="closed" value="true" />
+      <created>1713643969214</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1713643969214</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Eliminado metodo innecesario.">
+      <option name="closed" value="true" />
+      <created>1713644188293</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1713644188293</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -339,8 +352,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Creacion de Proyecto para el Cliente" />
-    <MESSAGE value="Creado el cambio entre pestañas del login y registro." />
     <MESSAGE value="Empezado el transformador para el ofertante." />
     <MESSAGE value="Añadido una dependencia para JSON." />
     <MESSAGE value="Creado el modelo de ofertante." />
@@ -364,6 +375,8 @@
     <MESSAGE value="Arreglado error direccion." />
     <MESSAGE value="Creados metodos para recibir listas segun el id de la actividad." />
     <MESSAGE value="Creada vista actividad modificar/ver." />
-    <option name="LAST_COMMIT_MESSAGE" value="Creada vista actividad modificar/ver." />
+    <MESSAGE value="Arreglada vistas, se veían los nombre de las empresas cuando no se debia." />
+    <MESSAGE value="Eliminado metodo innecesario." />
+    <option name="LAST_COMMIT_MESSAGE" value="Eliminado metodo innecesario." />
   </component>
 </project>
