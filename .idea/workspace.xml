@@ -4,18 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="Arreglado error direccion.">
+    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="Creados metodos para recibir listas segun el id de la actividad.">
       <change afterPath="$PROJECT_DIR$/src/main/java/Controladores/ActividadController.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/Controladores/ParticipacionIndividualController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controladores/RecursoIndividualController.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/resources/Vistas/ParticipacionIndividual.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Vistas/RecursoIndividual.fxml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/resources/Vistas/VistaActividad.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Contenedor/ContenedorDatos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Contenedor/ContenedorDatos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/ActividadIndividualController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/ActividadIndividualController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/SugerenciaIndividualController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/SugerenciaIndividualController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/VistaPrincipalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/VistaPrincipalController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Participacion/TransformadorParticipacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Participacion/TransformadorParticipacion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Recursos/TransformadorRecursos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Recursos/TransformadorRecursos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/tfg_apb/tfg_apb_cliente/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tfg_apb/tfg_apb_cliente/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Vistas/VistaPrincipal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Vistas/VistaPrincipal.fxml" afterDir="false" />
     </list>
@@ -308,7 +308,23 @@
       <option name="project" value="LOCAL" />
       <updated>1713615307859</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Creados metodos para recibir listas segun el id de la actividad.">
+      <option name="closed" value="true" />
+      <created>1713638865120</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1713638865120</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Creados metodos para recibir listas segun el id de la actividad.">
+      <option name="closed" value="true" />
+      <created>1713638871118</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1713638871118</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -347,6 +363,7 @@
     <MESSAGE value="Añadido varios metodos extras." />
     <MESSAGE value="Añadido &quot;EnCurso&quot; al enum de Actividades." />
     <MESSAGE value="Arreglado error direccion." />
-    <option name="LAST_COMMIT_MESSAGE" value="Arreglado error direccion." />
+    <MESSAGE value="Creados metodos para recibir listas segun el id de la actividad." />
+    <option name="LAST_COMMIT_MESSAGE" value="Creados metodos para recibir listas segun el id de la actividad." />
   </component>
 </project>

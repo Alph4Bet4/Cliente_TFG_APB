@@ -1,6 +1,7 @@
 package org.tfg_apb.tfg_apb_cliente;
 
 import Contenedor.ContenedorDatos;
+import Modelos.ActividadModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,7 +26,6 @@ public class Main extends Application {
     }
 
 
-
     public static void main(String[] args) throws IOException {
         launch();
     }
@@ -40,12 +40,32 @@ public class Main extends Application {
     }
 
     /**
+     * Metodo que almacena en los datos la actividad abierta que se esté viendo
+     *
+     * @param actividad
+     */
+    public static void enviarrActividad(ActividadModel actividad) {
+        datos.setActividadAbierta(actividad);
+    }
+
+    /**
      * Metodo que devuelve los datos del usuario
+     *
      * @return
      */
     public static Object recibirDatosUsuario() {
         Object usuario = datos.getUsuario();
         return usuario;
+    }
+
+    /**
+     * Metodo que devuelve los datos de la actividad abierta
+     *
+     * @return
+     */
+    public static ActividadModel recibirDatosActividad() {
+        ActividadModel actividad = datos.getActividadAbierta();
+        return actividad;
     }
 
     public static void setRaiz(String fxml) throws IOException {
@@ -60,6 +80,7 @@ public class Main extends Application {
 
     /**
      * Metodo que cambia el tamaño a la ventana
+     *
      * @param anchura
      * @param altura
      */
@@ -67,7 +88,6 @@ public class Main extends Application {
         escena.getWindow().setHeight(altura);
         escena.getWindow().setWidth(anchura);
     }
-
 
 
 }

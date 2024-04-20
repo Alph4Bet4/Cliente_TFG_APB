@@ -1,5 +1,6 @@
 package Contenedor;
 
+import Modelos.ActividadModel;
 import Modelos.ConsumidorModel;
 import Modelos.OfertanteModel;
 
@@ -9,8 +10,17 @@ import Modelos.OfertanteModel;
 public class ContenedorDatos {
 
     Object usuario;
+    ActividadModel actividadAbierta;
 
     public ContenedorDatos() {
+    }
+
+    public ActividadModel getActividadAbierta() {
+        return actividadAbierta;
+    }
+
+    public void setActividadAbierta(ActividadModel actividadAbierta) {
+        this.actividadAbierta = actividadAbierta;
     }
 
     public Object getUsuario() {
@@ -29,6 +39,7 @@ public class ContenedorDatos {
     public String toString() {
         return "ContenedorDatos{" +
                 "usuario=" + usuario +
+                ", actividadAbierta=" + actividadAbierta +
                 '}';
     }
 }

@@ -1,5 +1,6 @@
 package Controladores;
 
+import Modelos.ConsumidorModel;
 import Modelos.SugerenciaActividadModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,8 +9,12 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import org.tfg_apb.tfg_apb_cliente.Main;
 
 public class SugerenciaIndividualController {
+
+    int idSugerencia;
+    int idActividadSugerida;
 
     @FXML
     private HBox box;
@@ -49,7 +54,7 @@ public class SugerenciaIndividualController {
 
     @FXML
     void abrirActividad(MouseEvent event) {
-
+        //TODO
     }
 
     @FXML
@@ -65,6 +70,10 @@ public class SugerenciaIndividualController {
     public void rellenarDatos(SugerenciaActividadModel sugerencia) {
         //Primero comprobamos si lo ha creado algun ofertante, si lo ha hecho no se rellena, si nadie lo ha hecho lo rellenamos
         if (sugerencia.getActividad().getCreador_ofertante() == null) {
+
+            this.idSugerencia = sugerencia.getId_sugerencia();
+            this.idActividadSugerida = sugerencia.getActividad().getId_actividad();
+
             //Rellenamos con el tipo de la actividad
             lblTipoAct.setText(sugerencia.getActividad().getTipoActividad());
 
@@ -88,6 +97,10 @@ public class SugerenciaIndividualController {
             //Rellenamos el estado
             lblEstado.setText(sugerencia.getActividad().getEstado().name());
 
+            //Comprobamos para que si es un consumidor no pueda crear la actividad
+            if (Main.recibirDatosUsuario() instanceof ConsumidorModel) {
+                btnCrear.setDisable(true);
+            }
         } else {
             //Lo hace invisible
             //box.setVisible(false);

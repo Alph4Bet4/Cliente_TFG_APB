@@ -1,14 +1,15 @@
 package Controladores;
 
-import Modelos.SugerenciaActividadModel;
+import Modelos.*;
+import TransformadorJSON.Participacion.TransformadorParticipacion;
 import javafx.event.ActionEvent;
-import Modelos.ActividadModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.HBox;
+import org.tfg_apb.tfg_apb_cliente.Main;
 
 import java.awt.Desktop;
 import java.io.IOException;
@@ -17,6 +18,8 @@ import java.net.URISyntaxException;
 
 
 public class ActividadIndividualController {
+
+    ActividadModel actividad;
 
     @FXML
     private HBox box;
@@ -68,12 +71,29 @@ public class ActividadIndividualController {
 
     @FXML
     void abrirActividad(MouseEvent event) {
-        //TODO
+        try {
+            Main.enviarrActividad(actividad);
+            Main.setRaiz("VistaActividad");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
     synchronized void inscribirseActividad(ActionEvent event) {
-        //TODO
+        //Comprobamos la cantidad de personas actuales
+        if (Integer.parseInt(lblCantidadPersonasAct.getText()) < Integer.parseInt(lblCantidadPersonasMax.getText())) {
+            //Nos aseguramos de que sea un consumidor y no un ofertante
+            if (Main.recibirDatosUsuario() instanceof ConsumidorModel) {
+                //Desactivamos el boton
+                btnInscripcion.setDisable(true);
+                //Enviamos los datos de la actividad y del usuario a la api para inscribirnos en la actividad
+                TransformadorParticipacion transformadorParticipacion = new TransformadorParticipacion(actividad.getId_actividad(), ((ConsumidorModel) Main.recibirDatosUsuario()).getId_consumidor());
+                transformadorParticipacion.enviarInformacionPost();
+            }
+        } else {
+            //No hacemos nada
+        }
     }
 
     @FXML
@@ -101,6 +121,7 @@ public class ActividadIndividualController {
         //Solo muestra las actividades que han sido creadas, las sugeridas no
         if (actividad.getCreador_ofertante() != null) {
 
+            this.actividad = actividad;
 
             //Cambiamos el tipo de actividad
             lblTipoAct.setText(actividad.getTipoActividad());
@@ -134,9 +155,23 @@ public class ActividadIndividualController {
                 lblNombreEmpresa.setText(actividad.getCreador_ofertante().getNombreEmpresa());
             }
 
-            if (actividad.getCantidad_actual_personas() <= 0) {
+            //Comprobamos la cantidad de personas
+            if (actividad.getCantidad_actual_personas() >= actividad.getCantidad_max_personas()) {
+                btnInscripcion.setDisable(true);
+            } else if (actividad.getCantidad_actual_personas() < actividad.getCantidad_max_personas()) {
+                btnInscripcion.setDisable(false);
+            }
+
+            //Comprobamos el estado de la actividad para bloquear el boton
+            if (actividad.getEstado().name().equals("Completo") || actividad.getEstado().name().equals("EnCurso") || actividad.getEstado().name().equals("Finalizado") || actividad.getEstado().name().equals("Cancelado")) {
                 btnInscripcion.setDisable(true);
             }
+
+            //Por encima comprobamos si el usuario es un ofertante, si lo es no se puede inscribir en las actividades
+            if (Main.recibirDatosUsuario() instanceof OfertanteModel) {
+                btnInscripcion.setDisable(true);
+            }
+
         }
     }
 

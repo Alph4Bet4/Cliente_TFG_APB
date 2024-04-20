@@ -8,6 +8,7 @@ import TransformadorJSON.Actividad.TransformadorActividad;
 import TransformadorJSON.Sugerencia.TransformadorSugerencia;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -25,6 +26,8 @@ import java.util.ResourceBundle;
 
 public class VistaPrincipalController implements Initializable {
 
+    @FXML
+    private Button btnEliminar;
 
     @FXML
     private VBox actividadLayout;
@@ -108,6 +111,13 @@ public class VistaPrincipalController implements Initializable {
             throw new RuntimeException(e);
         }
 
+        //Comprobamos si es un administrador
+        if (Main.recibirDatosUsuario() instanceof OfertanteModel) {
+            if (((OfertanteModel) Main.recibirDatosUsuario()).isIs_administrador()) {
+                btnEliminar.setVisible(true);
+                btnEliminar.setDisable(false);
+            }
+        }
 
     }
 

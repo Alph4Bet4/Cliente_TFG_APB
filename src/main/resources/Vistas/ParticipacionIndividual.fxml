@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+
+<HBox fx:id="box" prefHeight="55.0" prefWidth="300.0" style="-fx-border-color: #76abff; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.ParticipacionIndividualController">
+   <children>
+      <Pane prefHeight="84.0" prefWidth="293.0">
+         <children>
+            <Label layoutX="14.0" layoutY="17.0" text="Usuario Inscrito:" textFill="#76abff" />
+            <Label fx:id="lblUsuario" alignment="CENTER" layoutX="110.0" layoutY="17.0" prefHeight="17.0" prefWidth="165.0" text="Nombre de usuario" />
+         </children>
+      </Pane>
+   </children>
+</HBox>
