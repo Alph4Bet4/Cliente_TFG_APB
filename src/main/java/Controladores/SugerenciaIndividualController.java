@@ -1,7 +1,10 @@
 package Controladores;
 
+import Modelos.ActividadModel;
 import Modelos.ConsumidorModel;
+import Modelos.OfertanteModel;
 import Modelos.SugerenciaActividadModel;
+import TransformadorJSON.Actividad.TransformadorActividad;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,10 +14,15 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import org.tfg_apb.tfg_apb_cliente.Main;
 
+import java.io.IOException;
+
 public class SugerenciaIndividualController {
 
     int idSugerencia;
     int idActividadSugerida;
+
+    ActividadModel actividadSugerida;
+
 
     @FXML
     private HBox box;
@@ -54,12 +62,28 @@ public class SugerenciaIndividualController {
 
     @FXML
     void abrirActividad(MouseEvent event) {
-        //TODO
+        //Te deja entrar si eres un ofertante, sino no
+        if (Main.recibirDatosUsuario() instanceof OfertanteModel) {
+            try {
+                Main.enviarrActividad(actividadSugerida);
+                Main.setRaiz("VistaCrearActividad");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     @FXML
-    synchronized void crearActividad(ActionEvent event) {
-        //TODO
+    void crearActividad(ActionEvent event) {
+        //Te deja entrar si eres un ofertante, sino no
+        if (Main.recibirDatosUsuario() instanceof OfertanteModel) {
+            try {
+                Main.enviarrActividad(actividadSugerida);
+                Main.setRaiz("VistaCrearActividad");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     /**
@@ -73,6 +97,9 @@ public class SugerenciaIndividualController {
 
             this.idSugerencia = sugerencia.getId_sugerencia();
             this.idActividadSugerida = sugerencia.getActividad().getId_actividad();
+            //Cogemos los datos de la actividad sugerida
+            TransformadorActividad transformadorActividad = new TransformadorActividad();
+            actividadSugerida = transformadorActividad.recibirActividadPorId(idActividadSugerida);
 
             //Rellenamos con el tipo de la actividad
             lblTipoAct.setText(sugerencia.getActividad().getTipoActividad());
@@ -102,8 +129,7 @@ public class SugerenciaIndividualController {
                 btnCrear.setDisable(true);
             }
         } else {
-            //Lo hace invisible
-            //box.setVisible(false);
+            //No hace nada
         }
 
     }
