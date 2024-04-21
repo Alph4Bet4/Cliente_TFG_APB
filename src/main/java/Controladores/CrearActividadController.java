@@ -43,6 +43,9 @@ public class CrearActividadController implements Initializable {
     private Button btnCrearActividad;
 
     @FXML
+    private Button btnEliminarActividad;
+
+    @FXML
     private DatePicker datePicker;
 
     @FXML
@@ -81,16 +84,74 @@ public class CrearActividadController implements Initializable {
     }
 
     @FXML
+    void eliminarActividadActual(ActionEvent event) {
+        //TODO
+    }
+
+    @FXML
     void crearActividad(ActionEvent event) {
         //Comprobamos todos los campos
         if (comprobacionesCampos()) {
-            //Nos aseguramos que el usuario que sea un ofertante para capturar su id, sino no lo hacemos y lo convertimos a una actividad sugerida
-            if (Main.recibirDatosUsuario() instanceof OfertanteModel) {
-                enviarActividad();
-            } else if (Main.recibirDatosUsuario() instanceof ConsumidorModel) {
-                enviarActividad();
+            //Si la actividad sugerida es null significa que la actividad es nueva por lo tanto entramos
+            if (this.actividadSugerida == null) {
+                //Nos aseguramos que el usuario que sea un ofertante para capturar su id, sino no lo hacemos y lo convertimos a una actividad sugerida
+                if (Main.recibirDatosUsuario() instanceof OfertanteModel) {
+                    enviarActividad();
+                } else if (Main.recibirDatosUsuario() instanceof ConsumidorModel) {
+                    enviarActividad();
+                }
+            } else {
+                //Si entra aqui significa que la actividad es sugerida y por lo tanto vamos a actualizar los datos
+                //Forzamos que sea un ofertante
+                if (Main.recibirDatosUsuario() instanceof OfertanteModel) {
+                    actualizarYEnviarActividad();
+                }
             }
+
         }
+    }
+
+    /**
+     * Metodo que envia la actividad anteriormente sugerida siendo solo capaz de acceder este metodo si eres un ofertante
+     */
+    private void actualizarYEnviarActividad() {
+        //Capturamos los valores
+        String tipoActividad = txtFieldTipoAct.getText();
+        String descripcion = txtAreaDescripcionCambiar.getText();
+        String localizacion = txtFieldLocalizacion.getText();
+        int cantidadPersonas = Integer.parseInt(txtCantidadPersonas.getText());
+        //Creamos el transformador
+        TransformadorActividad transformadorActividad = new TransformadorActividad(tipoActividad, descripcion, localizacion, Date.valueOf(this.fechaCorrecta), Time.valueOf(this.horaInicio), Time.valueOf(this.horaFin), cantidadPersonas, ((OfertanteModel) Main.recibirDatosUsuario()).getId_ofertante());
+
+        //Enviamos la actualizacion y capturamos los valores de la actividad
+        ActividadModel actividad = transformadorActividad.enviarInformacionPut(actividadSugerida.getId_actividad());
+
+        if (actividad != null) {
+            //Cuando la lista de recursos no esta vacia entra
+            if (!listaRecursos.isEmpty()) {
+                boolean isRecursosAdd = isRecursosAdd(actividad);
+                //Si se han añadido los recursos junto a la actividad mostramos un mensaje personalizado
+                if (isRecursosAdd) {
+                    lblMensajeError.setVisible(true);
+                    lblMensajeError.setTextFill(Paint.valueOf("#00bb22"));
+                    lblMensajeError.setText("Se ha creado la actividad junto con los recursos");
+                } else {
+                    lblMensajeError.setVisible(true);
+                    lblMensajeError.setTextFill(Paint.valueOf("#00bb22"));
+                    lblMensajeError.setText("Se ha creado la actividad");
+                }
+            } else {
+                lblMensajeError.setVisible(true);
+                lblMensajeError.setTextFill(Paint.valueOf("#00bb22"));
+                lblMensajeError.setText("Se ha creado la actividad");
+            }
+        } else {
+            //Mostramos un error generico
+            lblMensajeError.setVisible(true);
+            lblMensajeError.setTextFill(Paint.valueOf("#ff0000"));
+            lblMensajeError.setText("Ha ocurrido un error");
+        }
+
     }
 
     /**
@@ -315,9 +376,13 @@ public class CrearActividadController implements Initializable {
             txtAreaDescripcionCambiar.setText(actividadSugerida.getDescripcionActividad());
             txtFieldLocalizacion.setText(actividadSugerida.getDireccion());
             datePicker.setValue(actividadSugerida.getFecha().toLocalDate());
-            txtFieldHoraInicio.setText(actividadSugerida.getHora_inicio().toString());
-            txtFieldHoraFin.setText(actividadSugerida.getHora_fin().toString());
+            txtFieldHoraInicio.setText(actividadSugerida.getHora_inicio().toString().substring(0, 5));
+            txtFieldHoraFin.setText(actividadSugerida.getHora_fin().toString().substring(0, 5));
             txtCantidadPersonas.setText(String.valueOf(actividadSugerida.getCantidad_max_personas()));
+            //Si eres un administrador podrás borrar la actividad
+            if (((OfertanteModel) Main.recibirDatosUsuario()).isIs_administrador()) {
+                btnEliminarActividad.setDisable(false);
+            }
             //No rellenamos los recursos porque no se pueden sugerir
         }
     }

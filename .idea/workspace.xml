@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="Cambiado metodo PUT, para que devuelva una actividad.">
+    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="Avanzado CrearActividadController.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/CrearActividadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/CrearActividadController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Actividad/TransformadorActividad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Actividad/TransformadorActividad.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Vistas/VistaCrearActividad.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Vistas/VistaCrearActividad.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -387,7 +384,23 @@
       <option name="project" value="LOCAL" />
       <updated>1713704296537</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Cambiado metodo PUT, para que devuelva una actividad.">
+      <option name="closed" value="true" />
+      <created>1713704608697</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1713704608697</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Avanzado CrearActividadController.">
+      <option name="closed" value="true" />
+      <created>1713704816696</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1713704816696</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -403,7 +416,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Creado el esqueleto para el Consumidor." />
     <MESSAGE value="Creado el esqueleto para las Actividades." />
     <MESSAGE value="Creado el esqueleto para los Recursos." />
     <MESSAGE value="Creado el get por id en las actividades." />
@@ -428,6 +440,7 @@
     <MESSAGE value="Comienzo para crear Actividad." />
     <MESSAGE value="Eliminado apunte." />
     <MESSAGE value="Cambiado metodo PUT, para que devuelva una actividad." />
-    <option name="LAST_COMMIT_MESSAGE" value="Cambiado metodo PUT, para que devuelva una actividad." />
+    <MESSAGE value="Avanzado CrearActividadController." />
+    <option name="LAST_COMMIT_MESSAGE" value="Avanzado CrearActividadController." />
   </component>
 </project>

@@ -82,6 +82,7 @@
             <Button fx:id="btnCrearActividad" layoutX="27.0" layoutY="416.0" mnemonicParsing="false" onAction="#crearActividad" text="Crear actividad" />
             <Button fx:id="btnAniadirRecurso" layoutX="563.0" layoutY="416.0" mnemonicParsing="false" onAction="#addRecursoNuevo" text="Añadir recurso" />
             <Label fx:id="lblMensajeError" layoutX="24.0" layoutY="385.0" prefHeight="17.0" prefWidth="632.0" text="Este es un mensaje que ira cambiando" visible="false" wrapText="true" />
+            <Button fx:id="btnEliminarActividad" disable="true" layoutX="142.0" layoutY="415.0" mnemonicParsing="false" onAction="#eliminarActividadActual" style="-fx-border-color: red;" text="Eliminar actividad" textFill="RED" />
          </children>
       </Pane>
       <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#volverAtras" prefHeight="21.0" prefWidth="50.0" text="Atras" />
