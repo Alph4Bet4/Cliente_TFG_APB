@@ -16,7 +16,7 @@
          <children>
             <ScrollPane layoutX="60.0" layoutY="49.0" prefHeight="240.0" prefWidth="933.0" style="-fx-background-color: white;">
                <content>
-                  <VBox fx:id="actividadLayout" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="516.0" prefWidth="918.0" style="-fx-background-color: white;" />
+                  <VBox fx:id="actividadLayout" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="773.0" prefWidth="918.0" style="-fx-background-color: white;" />
                </content></ScrollPane>
             <Label layoutX="61.0" layoutY="14.0" text="Actividades">
                <font>
@@ -25,7 +25,7 @@
             </Label>
             <ScrollPane layoutX="60.0" layoutY="324.0" prefHeight="240.0" prefWidth="933.0" style="-fx-background-color: white;">
                <content>
-                  <VBox fx:id="sugerenciaLayout" prefHeight="438.0" prefWidth="918.0" style="-fx-background-color: white;" />
+                  <VBox fx:id="sugerenciaLayout" prefHeight="503.0" prefWidth="918.0" style="-fx-background-color: white;" />
                </content>
             </ScrollPane>
             <Label layoutX="60.0" layoutY="289.0" text="Actividades Sugeridas">

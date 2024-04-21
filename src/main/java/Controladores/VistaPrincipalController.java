@@ -46,7 +46,11 @@ public class VistaPrincipalController implements Initializable {
 
     @FXML
     void cambiarVistaActividad(ActionEvent event) {
-        //TODO
+        try {
+            Main.setRaiz("VistaCrearActividad");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
