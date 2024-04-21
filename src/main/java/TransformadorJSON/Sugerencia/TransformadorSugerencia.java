@@ -2,6 +2,7 @@ package TransformadorJSON.Sugerencia;
 
 import Modelos.ActividadModel;
 import Modelos.ConsumidorModel;
+import Modelos.RecursosModel;
 import Modelos.SugerenciaActividadModel;
 import TransformadorJSON.Actividad.TransformadorActividad;
 import TransformadorJSON.Consumidor.TransformadorConsumidor;
@@ -122,6 +123,127 @@ public class TransformadorSugerencia {
         }
 
         return listaSugerencias;
+    }
+
+    /**
+     * Metodo que borra una sugerencia por el metodo DELETE
+     *
+     * @param idSugerencia
+     * @return
+     */
+    public boolean borrarPorId(int idSugerencia) {
+        HttpURLConnection conexion = null;
+
+        try {
+            // Abrir conexión
+            conexion = (HttpURLConnection) new URL(this.urlAConectarse + "/" + idSugerencia).openConnection();
+
+            // Configurar la conexión para una solicitud POST
+            conexion.setRequestMethod("DELETE");
+            conexion.setRequestProperty("Content-Type", "application/json");
+            conexion.setDoOutput(true);
+
+            String respuesta;
+            // Leer la respuesta de la API
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(conexion.getInputStream(), StandardCharsets.UTF_8))) {
+                StringBuilder response = new StringBuilder();
+                String responseLine;
+                while ((responseLine = br.readLine()) != null) {
+                    response.append(responseLine.trim());
+                }
+                System.out.println("Respuesta de la API: " + response.toString());
+                respuesta = response.toString();
+            }
+
+            if (conexion.getResponseCode() == 200 && (!respuesta.isEmpty() || !respuesta.isBlank())) {
+                //Devuelve 200 si esta correcto
+                return true;
+            } else if (conexion.getResponseCode() == 401) {
+                //Devuelve 401 si hay algun error
+                return false;
+            } else {
+                return false;
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                // Cerrar la conexión
+                if (conexion != null) {
+                    conexion.disconnect();
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    /**
+     * Metodo que devuelve una sugerencia por el id de la actividad
+     * @param id_actividad
+     * @return
+     */
+    public SugerenciaActividadModel recibirSugerenciaPorIdActividad(int id_actividad) {
+        HttpURLConnection conexion = null;
+        SugerenciaActividadModel sugerencia = null;
+
+        try {
+            // Abrir conexión
+            conexion = (HttpURLConnection) new URL(this.urlAConectarse + "/obtenerPorId").openConnection();
+
+            // Configurar la conexión para una solicitud POST
+            conexion.setRequestMethod("POST");
+            conexion.setRequestProperty("Content-Type", "application/json");
+            conexion.setDoOutput(true);
+
+            //Creamos un esqueleto de la actividad provisional
+            String esqueletoProvisionalActividad = "{\n" +
+                    "    \"id_actividad\":" + "\"" + id_actividad + "\"" + "\n" +
+                    "}";
+
+            // Escribir los datos en el cuerpo de la solicitud
+            try (OutputStream escritor = conexion.getOutputStream()) {
+                byte[] datosPost = esqueletoProvisionalActividad.getBytes(StandardCharsets.UTF_16);
+                escritor.write(datosPost, 0, datosPost.length);
+
+            }
+
+            String respuesta;
+            // Leer la respuesta de la API
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(conexion.getInputStream(), StandardCharsets.UTF_8))) {
+                StringBuilder response = new StringBuilder();
+                String responseLine;
+                while ((responseLine = br.readLine()) != null) {
+                    response.append(responseLine.trim());
+                }
+                System.out.println("Respuesta de la API: " + response.toString());
+                respuesta = response.toString();
+            }
+
+            if (conexion.getResponseCode() == 200 && (!respuesta.isEmpty() || !respuesta.isBlank())) {
+                //Devuelve 200 si esta correcto
+                sugerencia = sacarInformacionIndividual(respuesta);
+            } else if (conexion.getResponseCode() == 401) {
+                //Devuelve 401 si hay algun error
+                return null;
+            } else {
+                return null;
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                // Cerrar la conexión
+                if (conexion != null) {
+                    conexion.disconnect();
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        return sugerencia;
     }
 
 
