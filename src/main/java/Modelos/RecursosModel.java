@@ -23,6 +23,20 @@ public class RecursosModel {
         this.is_ofertada_por_ofertante = is_ofertada_por_ofertante;
     }
 
+    /**
+     * Constructor que se usa para la lista de recursos
+     * @param nombre_recurso
+     * @param descripcion
+     * @param cantidad
+     * @param is_ofertada_por_ofertante
+     */
+    public RecursosModel(String nombre_recurso, String descripcion, int cantidad, boolean is_ofertada_por_ofertante) {
+        this.nombre_recurso = nombre_recurso;
+        this.descripcion = descripcion;
+        this.cantidad = cantidad;
+        this.is_ofertada_por_ofertante = is_ofertada_por_ofertante;
+    }
+
     public int getId_recurso() {
         return id_recurso;
     }

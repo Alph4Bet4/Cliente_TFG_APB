@@ -80,8 +80,7 @@ public class ActividadIndividualController {
     }
 
     @FXML
-    synchronized void inscribirseActividad(ActionEvent event) {
-        //FIXME luego no se cambia cuando te registras / no hay actualizacion de datos
+    void inscribirseActividad(ActionEvent event) {
         //Comprobamos la cantidad de personas actuales
         if (Integer.parseInt(lblCantidadPersonasAct.getText()) < Integer.parseInt(lblCantidadPersonasMax.getText())) {
             //Nos aseguramos de que sea un consumidor y no un ofertante
@@ -91,6 +90,13 @@ public class ActividadIndividualController {
                 //Enviamos los datos de la actividad y del usuario a la api para inscribirnos en la actividad
                 TransformadorParticipacion transformadorParticipacion = new TransformadorParticipacion(actividad.getId_actividad(), ((ConsumidorModel) Main.recibirDatosUsuario()).getId_consumidor());
                 transformadorParticipacion.enviarInformacionPost();
+                //Abrimos la actividad a la cual nos hemos inscrito
+                try {
+                    Main.enviarrActividad(actividad);
+                    Main.setRaiz("VistaActividad");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         } else {
             //No hacemos nada
@@ -132,7 +138,6 @@ public class ActividadIndividualController {
 
             //Cambiamos la fecha de la actividad
             lblFecha.setText(actividad.getFecha().toString());
-            //TODO hacer controlaciones de tiempo y fecha
             //Cambiamos la hora de inicio y de finalizacion
             lblHoraInicio.setText(actividad.getHora_inicio().toString());
             lblHoraFin.setText(actividad.getHora_fin().toString());

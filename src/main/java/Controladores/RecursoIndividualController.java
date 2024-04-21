@@ -2,6 +2,7 @@ package Controladores;
 
 import Modelos.OfertanteModel;
 import Modelos.RecursosModel;
+import TransformadorJSON.Recursos.TransformadorRecursos;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -30,7 +31,15 @@ public class RecursoIndividualController {
 
     @FXML
     void eliminarRecurso(ActionEvent event) {
-        //TODO solo si eres administrador o el creador
+        //Comprobamos si es el administrador o el creador
+        if (Main.recibirDatosUsuario() instanceof OfertanteModel) {
+            if (((OfertanteModel) Main.recibirDatosUsuario()).isIs_administrador() || ((OfertanteModel) Main.recibirDatosUsuario()).getId_ofertante() == this.recursosModel.getActividad().getId_actividad()) {
+                TransformadorRecursos transformadorRecursos = new TransformadorRecursos();
+                if (transformadorRecursos.borrarPorId(recursosModel.getId_recurso())) {
+                    btnEliminar.setDisable(true);
+                }
+            }
+        }
     }
 
     /**
@@ -44,10 +53,12 @@ public class RecursoIndividualController {
 
         //Comprobamos si el usuario es un administrador o el creador de la actividad
         if (Main.recibirDatosUsuario() instanceof OfertanteModel) {
-            if (((OfertanteModel) Main.recibirDatosUsuario()).isIs_administrador() || ((OfertanteModel) Main.recibirDatosUsuario()).getId_ofertante() == recurso.getActividad().getId_actividad()) {
-                //Activamos el boton
-                btnEliminar.setDisable(false);
-                btnEliminar.setVisible(true);
+            if (recurso.getActividad() != null) {
+                if (((OfertanteModel) Main.recibirDatosUsuario()).isIs_administrador() || ((OfertanteModel) Main.recibirDatosUsuario()).getId_ofertante() == recurso.getActividad().getId_actividad()) {
+                    //Activamos el boton
+                    btnEliminar.setDisable(false);
+                    btnEliminar.setVisible(true);
+                }
             }
         }
 
