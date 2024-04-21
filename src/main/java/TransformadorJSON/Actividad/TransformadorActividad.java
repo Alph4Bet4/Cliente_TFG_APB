@@ -58,12 +58,12 @@ public class TransformadorActividad {
         this.cantidad_actual_personas = cantidad_actual_personas;
         this.id_creador_ofertante = id_creador_ofertante;
         this.estado = estado;
-        this.esqueletoActividad  = "{\n" +
+        this.esqueletoActividad = "{\n" +
                 "    \"tipoActividad\":" + "\"" + tipoActividad + "\"" + ",\n" +
                 "    \"descripcionActividad\":" + "\"" + descripcionActividad + "\"" + ",\n" +
                 "    \"direccion\":" + "\"" + direccion + "\"" + ",\n" +
                 "    \"fecha\":" + "\"" + fecha + "\"" + ",\n" +
-                "    \"hora_inicio\":" + "\"" + hora_fin + "\"" + ",\n" +
+                "    \"hora_inicio\":" + "\"" + hora_inicio + "\"" + ",\n" +
                 "    \"hora_fin\":" + "\"" + hora_fin + "\"" + ",\n" +
                 "    \"cantidad_max_personas\":" + "\"" + cantidad_max_personas + "\"" + ",\n" +
                 "    \"cantidad_actual_personas\":" + "\"" + cantidad_actual_personas + "\"" + ",\n" +
@@ -71,6 +71,73 @@ public class TransformadorActividad {
                 "    \"creador_ofertante\": {\n" +
                 "            \"id_ofertante\":" + "\"" + id_creador_ofertante + "\"" +
                 "        }\n" +
+                "}";
+    }
+
+    /**
+     * Constructor sin estado ni cantidad actual de personas para crear actividades siendo ofertante
+     *
+     * @param tipoActividad
+     * @param descripcionActividad
+     * @param direccion
+     * @param fecha
+     * @param hora_inicio
+     * @param hora_fin
+     * @param cantidad_max_personas
+     * @param id_creador_ofertante
+     */
+    public TransformadorActividad(String tipoActividad, String descripcionActividad, String direccion, Date fecha, Time hora_inicio, Time hora_fin, int cantidad_max_personas, int id_creador_ofertante) {
+        this.tipoActividad = tipoActividad;
+        this.descripcionActividad = descripcionActividad;
+        this.direccion = direccion;
+        this.fecha = fecha;
+        this.hora_inicio = hora_inicio;
+        this.hora_fin = hora_fin;
+        this.cantidad_max_personas = cantidad_max_personas;
+        this.id_creador_ofertante = id_creador_ofertante;
+        this.esqueletoActividad = "{\n" +
+                "    \"tipoActividad\":" + "\"" + tipoActividad + "\"" + ",\n" +
+                "    \"descripcionActividad\":" + "\"" + descripcionActividad + "\"" + ",\n" +
+                "    \"direccion\":" + "\"" + direccion + "\"" + ",\n" +
+                "    \"fecha\":" + "\"" + fecha + "\"" + ",\n" +
+                "    \"hora_inicio\":" + "\"" + hora_inicio + "\"" + ",\n" +
+                "    \"hora_fin\":" + "\"" + hora_fin + "\"" + ",\n" +
+                "    \"cantidad_max_personas\":" + "\"" + cantidad_max_personas + "\"" + ",\n" +
+                "    \"estadoActividad\":" + "\"" + ActividadModel.tipoEstado.Disponible + "\"" + ",\n" +
+                "    \"creador_ofertante\": {\n" +
+                "            \"id_ofertante\":" + "\"" + id_creador_ofertante + "\"" +
+                "        }\n" +
+                "}";
+    }
+
+    /**
+     * Constructor sin estado ni cantidad actual de personas para crear actividades siendo consumidor
+     *
+     * @param tipoActividad
+     * @param descripcionActividad
+     * @param direccion
+     * @param fecha
+     * @param hora_inicio
+     * @param hora_fin
+     * @param cantidad_max_personas
+     */
+    public TransformadorActividad(String tipoActividad, String descripcionActividad, String direccion, Date fecha, Time hora_inicio, Time hora_fin, int cantidad_max_personas) {
+        this.tipoActividad = tipoActividad;
+        this.descripcionActividad = descripcionActividad;
+        this.direccion = direccion;
+        this.fecha = fecha;
+        this.hora_inicio = hora_inicio;
+        this.hora_fin = hora_fin;
+        this.cantidad_max_personas = cantidad_max_personas;
+        this.esqueletoActividad = "{\n" +
+                "    \"tipoActividad\":" + "\"" + tipoActividad + "\"" + ",\n" +
+                "    \"descripcionActividad\":" + "\"" + descripcionActividad + "\"" + ",\n" +
+                "    \"direccion\":" + "\"" + direccion + "\"" + ",\n" +
+                "    \"fecha\":" + "\"" + fecha + "\"" + ",\n" +
+                "    \"hora_inicio\":" + "\"" + hora_inicio + "\"" + ",\n" +
+                "    \"hora_fin\":" + "\"" + hora_fin + "\"" + ",\n" +
+                "    \"cantidad_max_personas\":" + "\"" + cantidad_max_personas + "\"" + ",\n" +
+                "    \"estadoActividad\":" + "\"" + ActividadModel.tipoEstado.Disponible + "\"" + "\n" +
                 "}";
     }
 
@@ -120,6 +187,120 @@ public class TransformadorActividad {
                 return false;
             } else {
                 return false;
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                // Cerrar la conexión
+                if (conexion != null) {
+                    conexion.disconnect();
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public boolean enviarInformacionPut() {
+        HttpURLConnection conexion = null;
+
+        try {
+            // Abrir conexión
+            conexion = (HttpURLConnection) new URL(this.urlAConectarse).openConnection();
+
+            // Configurar la conexión para una solicitud POST
+            conexion.setRequestMethod("PUT");
+            conexion.setRequestProperty("Content-Type", "application/json");
+            conexion.setDoOutput(true);
+
+            // Escribir los datos en el cuerpo de la solicitud
+            try (OutputStream escritor = conexion.getOutputStream()) {
+                byte[] datosPost = esqueletoActividad.getBytes(StandardCharsets.UTF_16);
+                escritor.write(datosPost, 0, datosPost.length);
+
+            }
+
+            String respuesta;
+            // Leer la respuesta de la API
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(conexion.getInputStream(), StandardCharsets.UTF_8))) {
+                StringBuilder response = new StringBuilder();
+                String responseLine;
+                while ((responseLine = br.readLine()) != null) {
+                    response.append(responseLine.trim());
+                }
+                System.out.println("Respuesta de la API: " + response.toString());
+                respuesta = response.toString();
+            }
+
+            if (conexion.getResponseCode() == 200 && (!respuesta.isEmpty() || !respuesta.isBlank())) {
+                //Devuelve 200 si esta correcto
+                return true;
+            } else if (conexion.getResponseCode() == 401) {
+                //Devuelve 401 si hay algun error
+                return false;
+            } else {
+                return false;
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                // Cerrar la conexión
+                if (conexion != null) {
+                    conexion.disconnect();
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    /**
+     * Metodo que crea una actividad y devuelve los datos para posteriormente poder añadirle recursos
+     *
+     * @return
+     */
+    public ActividadModel enviarInformacionPostYRecibirDatos() {
+        HttpURLConnection conexion = null;
+        ActividadModel actividad = null;
+        try {
+            // Abrir conexión
+            conexion = (HttpURLConnection) new URL(this.urlAConectarse).openConnection();
+
+            // Configurar la conexión para una solicitud POST
+            conexion.setRequestMethod("POST");
+            conexion.setRequestProperty("Content-Type", "application/json");
+            conexion.setDoOutput(true);
+
+            // Escribir los datos en el cuerpo de la solicitud
+            try (OutputStream escritor = conexion.getOutputStream()) {
+                byte[] datosPost = esqueletoActividad.getBytes(StandardCharsets.UTF_16);
+                escritor.write(datosPost, 0, datosPost.length);
+
+            }
+
+            String respuesta;
+            // Leer la respuesta de la API
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(conexion.getInputStream(), StandardCharsets.UTF_8))) {
+                StringBuilder response = new StringBuilder();
+                String responseLine;
+                while ((responseLine = br.readLine()) != null) {
+                    response.append(responseLine.trim());
+                }
+                System.out.println("Respuesta de la API: " + response.toString());
+                respuesta = response.toString();
+            }
+
+            if (conexion.getResponseCode() == 200 && (!respuesta.isEmpty() || !respuesta.isBlank())) {
+                //Devuelve 200 si esta correcto
+                actividad = sacarInformacionIndividual(respuesta);
+                return actividad;
+            } else if (conexion.getResponseCode() == 401) {
+                //Devuelve 401 si hay algun error
+                return actividad;
+            } else {
+                return actividad;
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -278,13 +459,35 @@ public class TransformadorActividad {
         //Si esta no esta vacio recogemos los datos
         if (datosOfertanteJSON != null && !datosOfertanteJSON.isEmpty()) {
             int id_ofertante = datosOfertanteJSON.getInt("id_ofertante");
-            String nombreOfertante = datosOfertanteJSON.getString("nombreOfertante");
-            String primerApellidoOfertante = datosOfertanteJSON.getString("primerApellidoOfertante");
-            String segundoApellidoOfertante = datosOfertanteJSON.getString("segundoApellidoOfertante");
-            String contrasenia = datosOfertanteJSON.getString("contrasenia");
-            String nombreEmpresa = String.valueOf(datosOfertanteJSON.get("nombreEmpresa"));
-            String email_ofertante = datosOfertanteJSON.getString("email_ofertante");
-            boolean is_administrador = datosOfertanteJSON.getBoolean("is_administrador");
+            String nombreOfertante = null;
+            String primerApellidoOfertante = null;
+            String segundoApellidoOfertante = null;
+            String contrasenia = null;
+            String nombreEmpresa = null;
+            String email_ofertante = null;
+            boolean is_administrador = false;
+            if (!datosJSON.isNull("nombreOfertante")) {
+                nombreOfertante = datosOfertanteJSON.getString("nombreOfertante");
+            }
+            if (!datosJSON.isNull("primerApellidoOfertante")) {
+                primerApellidoOfertante = datosOfertanteJSON.getString("primerApellidoOfertante");
+            }
+            if (!datosJSON.isNull("segundoApellidoOfertante")) {
+                segundoApellidoOfertante = datosOfertanteJSON.getString("segundoApellidoOfertante");
+            }
+            if (!datosJSON.isNull("contrasenia")) {
+                contrasenia = datosOfertanteJSON.getString("contrasenia");
+            }
+            if (!datosJSON.isNull("nombreEmpresa")) {
+                nombreEmpresa = String.valueOf(datosOfertanteJSON.get("nombreEmpresa"));
+            }
+            if (!datosJSON.isNull("email_ofertante")) {
+                email_ofertante = datosOfertanteJSON.getString("email_ofertante");
+            }
+            if (!datosJSON.isNull("is_administrador")) {
+                is_administrador = datosOfertanteJSON.getBoolean("is_administrador");
+            }
+
 
             Creador_ofertante = new OfertanteModel(id_ofertante, nombreOfertante, primerApellidoOfertante, segundoApellidoOfertante, contrasenia, nombreEmpresa, email_ofertante, is_administrador);
         }
