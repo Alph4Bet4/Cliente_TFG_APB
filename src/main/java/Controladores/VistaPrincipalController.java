@@ -129,8 +129,6 @@ public class VistaPrincipalController implements Initializable {
                     HBox hbox = fxmlLoader.load();
                     SugerenciaIndividualController sugerenciaIndividualController = fxmlLoader.getController();
                     sugerenciaIndividualController.rellenarDatos((SugerenciaActividadModel) objeto);
-                    //Cambiamos su tamaño
-                    layoutRellenar.setPrefHeight(layoutRellenar.getHeight() + 238);
                     //Lo añadimos
                     layoutRellenar.getChildren().add(hbox);
                 }
@@ -142,8 +140,6 @@ public class VistaPrincipalController implements Initializable {
                     HBox hbox = fxmlLoader.load();
                     ActividadIndividualController actividadIndividualController = fxmlLoader.getController();
                     actividadIndividualController.introducirDatos((ActividadModel) objeto);
-                    //Cambiamos su tamaño
-                    layoutRellenar.setPrefHeight(layoutRellenar.getHeight() + 238);
                     //Lo añadimos
                     layoutRellenar.getChildren().add(hbox);
                 }

@@ -1,12 +1,15 @@
 package Controladores;
 
 import Modelos.*;
+import TransformadorJSON.Actividad.TransformadorActividad;
 import TransformadorJSON.Participacion.TransformadorParticipacion;
 import TransformadorJSON.Recursos.TransformadorRecursos;
+import TransformadorJSON.Sugerencia.TransformadorSugerencia;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -14,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import org.tfg_apb.tfg_apb_cliente.Main;
@@ -23,6 +27,10 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -35,6 +43,24 @@ public class ActividadController implements Initializable {
 
     @FXML
     private Button btnAniadirRecurso;
+
+    @FXML
+    private ToggleGroup grupoDadaPorOfertante;
+
+    @FXML
+    private RadioButton rbNo;
+
+    @FXML
+    private RadioButton rbSi;
+
+    @FXML
+    private TextArea txtADescripcionRecurso;
+
+    @FXML
+    private TextField txtFNombreRecurso;
+
+    @FXML
+    private TextField txtFCantidadRecurso;
 
     @FXML
     private Button btnEditar;
@@ -73,6 +99,9 @@ public class ActividadController implements Initializable {
     private Label lblNombreUsuario;
 
     @FXML
+    private Label lblMensajeError;
+
+    @FXML
     private VBox participantesLayout;
 
     @FXML
@@ -92,27 +121,139 @@ public class ActividadController implements Initializable {
     WebEngine webEngine;
 
     @FXML
-    synchronized void addRecursoNuevo(ActionEvent event) {
-        //TODO solo si eres el creador
+    void addRecursoNuevo(ActionEvent event) {
+        //Comprobamos que sea un ofertante
+        if (Main.recibirDatosUsuario() instanceof OfertanteModel) {
+            //Comprobamos que sea el creador o un administrador
+            if (((OfertanteModel) Main.recibirDatosUsuario()).isIs_administrador() || ((OfertanteModel) Main.recibirDatosUsuario()).getId_ofertante() == actividad.getCreador_ofertante().getId_ofertante()) {
+                //Añadimos los recursos a la lista
+                aniadirRecursosLista();
+                //Lo mostramos en pantalla
+                aniadirRecurso();
+            }
+        }
     }
 
     @FXML
-    synchronized void editarActividad(ActionEvent event) {
-        //TODO solo si eres un administrador
+    void editarActividad(ActionEvent event) {
+        if (Main.recibirDatosUsuario() instanceof OfertanteModel) {
+            //Comprobamos que sea el creador o un administrador
+            if (((OfertanteModel) Main.recibirDatosUsuario()).isIs_administrador() || ((OfertanteModel) Main.recibirDatosUsuario()).getId_ofertante() == actividad.getCreador_ofertante().getId_ofertante()) {
+                //Creamos un transformador con los datos actuales y los cambiables
+
+                String tipoActividad = txtFieldTipoAct.getText();
+                String descripcion = txtAreaDescripcionCambiar.getText();
+                String direccion = txtFieldLocalizacion.getText();
+
+                //Si validan los 3 continuamos
+                if (validarString(tipoActividad, 45) && validarString(descripcion, 255) && validarString(direccion, 45)) {
+                    LocalDate fecha = LocalDate.parse(lblFecha.getText());
+                    LocalTime horaInicio = LocalTime.parse(lblHoraInicio.getText());
+                    LocalTime horaFin = LocalTime.parse(lblHoraFin.getText());
+
+                    //Actualizamos la actividad
+                    TransformadorActividad transformadorActividad = new TransformadorActividad(tipoActividad, descripcion, direccion, Date.valueOf(fecha), Time.valueOf(horaInicio), Time.valueOf(horaFin), Integer.parseInt(lblCantidadPersonasAct.getText()), Integer.parseInt(lblCantidadPersonasMax.getText()), actividad.getCreador_ofertante().getId_ofertante());
+                    transformadorActividad.enviarInformacionPut(actividad.getId_actividad());
+
+                    //Actualizamos los recursos si no esta vacio
+                    if (!listaRecursos.isEmpty()) {
+                        boolean isRecursosAdd = isRecursosAdd(actividad);
+                        //Si se han añadido los recursos junto a la actividad mostramos un mensaje personalizado
+                        if (isRecursosAdd) {
+                            lblMensajeError.setVisible(true);
+                            lblMensajeError.setTextFill(Paint.valueOf("#00bb22"));
+                            lblMensajeError.setText("Se ha actualizado la actividad junto con los recursos");
+                        } else {
+                            lblMensajeError.setVisible(true);
+                            lblMensajeError.setTextFill(Paint.valueOf("#00bb22"));
+                            lblMensajeError.setText("Se ha actualizado la actividad");
+                        }
+                    } else {
+                        lblMensajeError.setVisible(true);
+                        lblMensajeError.setTextFill(Paint.valueOf("#00bb22"));
+                        lblMensajeError.setText("Se ha actualizado la actividad");
+                    }
+                } else {
+                    //Mostramos un error generico
+                    lblMensajeError.setVisible(true);
+                    lblMensajeError.setTextFill(Paint.valueOf("#ff0000"));
+                    lblMensajeError.setText("Ha ocurrido un error");
+                }
+
+            }
+        }
     }
 
     @FXML
-    synchronized void eliminarActividadActual(ActionEvent event) {
-        //TODO solo si eres un administrador o el creador
+    void eliminarActividadActual(ActionEvent event) {
+        //Comprobamos si es una actividad anteriormente sugerida
+        if (actividad != null) {
+            //Comprobamos que sea un ofertante
+            if (Main.recibirDatosUsuario() instanceof OfertanteModel) {
+                //Comprobamos que ese ofertante sea un administrador
+                if (((OfertanteModel) Main.recibirDatosUsuario()).isIs_administrador()) {
+                    //Nos traemos los valores de la sugerencia
+                    TransformadorSugerencia transformadorSugerencia = new TransformadorSugerencia();
+                    //Si se consigue borrar entra
+
+                    SugerenciaActividadModel sugerencia = transformadorSugerencia.recibirSugerenciaPorIdActividad(Main.recibirDatosActividad().getId_actividad());
+                    //Comprobamos que no sea null
+                    if (sugerencia != null) {
+                        if (transformadorSugerencia.borrarPorId(sugerencia.getId_sugerencia())) {
+                            //Comprobamos que si tiene algun recurso
+                            TransformadorRecursos transformadorRecursos = new TransformadorRecursos();
+                            ArrayList<RecursosModel> listaRecursos = transformadorRecursos.recibirListaRecursosPorIdActividad(Main.recibirDatosActividad());
+                            //Si la lista no esta vacia borramos los recursos
+                            if (!listaRecursos.isEmpty()) {
+                                for (RecursosModel recurso : listaRecursos) {
+                                    transformadorRecursos.borrarPorId(recurso.getId_recurso());
+                                }
+                            }
+                            //Borramos luego la actividad
+                            TransformadorActividad transformadorActividad = new TransformadorActividad();
+                            if (transformadorActividad.borrarPorId(actividad.getId_actividad())) {
+                                //Volvemos a la pagina principal
+                                try {
+                                    Main.enviarrActividad(null);
+                                    Main.setRaiz("VistaPrincipal");
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @FXML
-    synchronized void eliminarseDeLaLista(ActionEvent event) {
-        //TODO si está en la lista
+    void eliminarseDeLaLista(ActionEvent event) {
+        //Comprobamos si el usuario es un consumidor
+        if (Main.recibirDatosUsuario() instanceof ConsumidorModel) {
+            for (ParticipacionModel participacion : listaParticipantes) {
+                ConsumidorModel consumidorParticipante = participacion.getConsumidor();
+                if (consumidorParticipante.getId_consumidor() == ((ConsumidorModel) Main.recibirDatosUsuario()).getId_consumidor()) {
+                    TransformadorParticipacion transformadorParticipacion = new TransformadorParticipacion();
+                    //Si lo borra actualiza la vista
+                    if (transformadorParticipacion.borrarPorId(participacion.getId_participacion_actividades())) {
+                        lblMensajeError.setVisible(true);
+                        lblMensajeError.setTextFill(Paint.valueOf("#00bb22"));
+                        lblMensajeError.setText("Te has eliminado de la lista satisfactoriamente");
+                    } else {
+                        //Mostramos un error generico
+                        lblMensajeError.setVisible(true);
+                        lblMensajeError.setTextFill(Paint.valueOf("#ff0000"));
+                        lblMensajeError.setText("Ha ocurrido un error borrandote de la lista");
+                    }
+                }
+
+            }
+        }
     }
 
     @FXML
-    synchronized void inscribirseActividad(ActionEvent event) {
+    void inscribirseActividad(ActionEvent event) {
         //Comprobamos la cantidad de personas actuales
         if (Integer.parseInt(lblCantidadPersonasAct.getText()) < Integer.parseInt(lblCantidadPersonasMax.getText())) {
             //Nos aseguramos de que sea un consumidor y no un ofertante
@@ -202,6 +343,14 @@ public class ActividadController implements Initializable {
                 btnEditar.setDisable(false);
                 btnEliminarActividad.setDisable(false);
                 btnAniadirRecurso.setDisable(false);
+
+                //Activamos para los recursos
+                txtFieldTipoAct.setEditable(true);
+                txtADescripcionRecurso.setEditable(true);
+                txtFCantidadRecurso.setEditable(true);
+                rbNo.setDisable(false);
+                rbSi.setDisable(false);
+
             }
         }
 
@@ -250,10 +399,31 @@ public class ActividadController implements Initializable {
             btnInscribir.setDisable(true);
             btnQuitarse.setDisable(true);
         }
+
+        if (Main.recibirDatosUsuario() instanceof OfertanteModel) {
+            //Comprobamos el estado de la actividad, si está finalizado todos los botones se bloquean solo si no eres administrador
+            if (actividadActual.getEstado().name().equals("Finalizado") && !((OfertanteModel) Main.recibirDatosUsuario()).isIs_administrador()) {
+                btnQuitarse.setDisable(true);
+                btnInscribir.setDisable(true);
+                btnEditar.setDisable(true);
+                btnAniadirRecurso.setDisable(true);
+                btnEliminarActividad.setDisable(true);
+
+                txtFCantidadRecurso.setEditable(false);
+                txtADescripcionRecurso.setEditable(false);
+                txtFieldTipoAct.setEditable(false);
+                txtFieldLocalizacion.setEditable(false);
+                txtFNombreRecurso.setEditable(false);
+                txtAreaDescripcionCambiar.setEditable(false);
+
+            }
+        }
+
+
     }
 
     public void cambiarTamScene() {
-        Main.cambiarTamVentana(760, 840);
+        Main.cambiarTamVentana(1050, 840);
     }
 
     public ArrayList<ParticipacionModel> llenarListaParticipacion() {
@@ -293,5 +463,132 @@ public class ActividadController implements Initializable {
                 layoutRellenar.getChildren().add(hbox);
             }
         }
+    }
+
+    /**
+     * Metodo que añade a la lista de los recursos los recursos individualmente
+     */
+    public void aniadirRecursosLista() {
+        String nombreRecurso = txtFNombreRecurso.getText();
+        String descripcion = txtADescripcionRecurso.getText();
+        int cantidadRecursos = Integer.parseInt(txtFCantidadRecurso.getText());
+        boolean isProporcionada = false; //Por defecto, no
+        //Capturamos los posibles valores
+        if (rbSi.isSelected()) {
+            isProporcionada = true;
+        } else if (rbNo.isSelected()) {
+            isProporcionada = false;
+        }
+
+        RecursosModel recurso = new RecursosModel(nombreRecurso, descripcion, cantidadRecursos, isProporcionada);
+
+        listaRecursos.add(recurso);
+    }
+
+    /**
+     * Metodo que limpia la vista de los recursos y actualiza con nuevos
+     */
+    public void aniadirRecurso() {
+        recursosLayout.getChildren().clear();
+        try {
+            for (RecursosModel recurso : listaRecursos) {
+                //Cargamos la vista
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Vistas/RecursoIndividual.fxml"));
+                //Actualizamos el panel
+                HBox hbox = fxmlLoader.load();
+                RecursoIndividualController recursoIndividualController = fxmlLoader.getController();
+                recursoIndividualController.introducirDatos(recurso);
+                //Lo añadimos
+                recursosLayout.getChildren().add(hbox);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //Borramos los datos de los recursos para poder luego añadir mas
+        txtFNombreRecurso.clear();
+        txtADescripcionRecurso.clear();
+        txtFCantidadRecurso.clear();
+        rbSi.setSelected(true);
+
+    }
+
+    /**
+     * Metodo que comprueba todos los datos del recurso antes de añadirlo
+     *
+     * @return
+     */
+    public boolean comprobarDatosRecurso() {
+        //Capturamos el valor de nombre
+        String nombreRecurso = txtFNombreRecurso.getText();
+        if (!validarString(nombreRecurso, 100)) {
+            //Si no cumple los requisitos devuelve falso
+            lblMensajeError.setVisible(true);
+            lblMensajeError.setTextFill(javafx.scene.paint.Paint.valueOf("#ff0000"));
+            lblMensajeError.setText("Ha ocurrido un error con el nombre del recurso o es muy largo");
+            return false;
+        }
+        //Capturamos el valor de la descripcion
+        String descripcion = txtADescripcionRecurso.getText();
+        if (!validarString(descripcion, 200)) {
+            //Si no cumple los requisitos devuelve falso
+            lblMensajeError.setVisible(true);
+            lblMensajeError.setTextFill(javafx.scene.paint.Paint.valueOf("#ff0000"));
+            lblMensajeError.setText("Ha ocurrido un error la descripcion del recurso o es muy largo");
+            return false;
+        }
+        //Capturamos el valor de la cantidad de recursos
+        try {
+            int cantidadRecursos = Integer.parseInt(txtFCantidadRecurso.getText());
+            if (cantidadRecursos <= 0) {
+                throw new RuntimeException();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            //Si no cumple los requisitos devuelve falso
+            lblMensajeError.setVisible(true);
+            lblMensajeError.setTextFill(Paint.valueOf("#ff0000"));
+            lblMensajeError.setText("La cantidad de recurso insertadas no es un numero o es un valor incorrecto");
+            return false;
+        }
+
+        //Controlamos que alguno de los dos botones está selecionado, por si acaso
+        if (!rbNo.isSelected() && !rbSi.isSelected()) {
+            return false;
+        }
+
+        //Devuelve true si ha pasado por el resto de comprobaciones y no hay ningun problema
+        return true;
+    }
+
+    /**
+     * Metodo que valida las cadenas segun su longitud y que no estén vacias
+     *
+     * @param cadena
+     * @param longitud
+     * @return devuelve verdadero si no esta vacia la cadena y no supera su longitud
+     */
+    public boolean validarString(String cadena, int longitud) {
+        return !cadena.isBlank() && !cadena.isEmpty() && cadena.length() <= longitud;
+    }
+
+    /**
+     * Metodo que envia las peticiones POST y añade los recursos a la actividad
+     *
+     * @param actividad
+     * @return
+     */
+    private boolean isRecursosAdd(ActividadModel actividad) {
+        boolean isRecursosAdd = false;
+        //Añadimos los recursos
+        for (RecursosModel recurso : listaRecursos) {
+            TransformadorRecursos transformadorRecursos = new TransformadorRecursos(actividad.getId_actividad(), recurso.getNombre_recurso(), recurso.getDescripcion(), recurso.getCantidad(), recurso.isIs_ofertada_por_ofertante());
+            if (transformadorRecursos.enviarInformacionPost()) {
+                isRecursosAdd = true;
+            } else {
+                isRecursosAdd = false;
+            }
+        }
+        return isRecursosAdd;
     }
 }

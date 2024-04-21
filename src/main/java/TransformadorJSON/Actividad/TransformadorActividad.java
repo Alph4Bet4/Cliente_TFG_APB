@@ -111,6 +111,44 @@ public class TransformadorActividad {
     }
 
     /**
+     * Constructor sin estado para actualizar actividades siendo ofertante
+     *
+     * @param tipoActividad
+     * @param descripcionActividad
+     * @param direccion
+     * @param fecha
+     * @param hora_inicio
+     * @param hora_fin
+     * @param cantidad_max_personas
+     * @param id_creador_ofertante
+     */
+    public TransformadorActividad(String tipoActividad, String descripcionActividad, String direccion, Date fecha, Time hora_inicio, Time hora_fin, int cantidad_actual_personas, int cantidad_max_personas, int id_creador_ofertante) {
+        this.tipoActividad = tipoActividad;
+        this.descripcionActividad = descripcionActividad;
+        this.direccion = direccion;
+        this.fecha = fecha;
+        this.hora_inicio = hora_inicio;
+        this.hora_fin = hora_fin;
+        this.cantidad_max_personas = cantidad_max_personas;
+        this.cantidad_actual_personas = cantidad_actual_personas;
+        this.id_creador_ofertante = id_creador_ofertante;
+        this.esqueletoActividad = "{\n" +
+                "    \"tipoActividad\":" + "\"" + tipoActividad + "\"" + ",\n" +
+                "    \"descripcionActividad\":" + "\"" + descripcionActividad + "\"" + ",\n" +
+                "    \"direccion\":" + "\"" + direccion + "\"" + ",\n" +
+                "    \"fecha\":" + "\"" + fecha + "\"" + ",\n" +
+                "    \"hora_inicio\":" + "\"" + hora_inicio + "\"" + ",\n" +
+                "    \"hora_fin\":" + "\"" + hora_fin + "\"" + ",\n" +
+                "    \"cantidad_max_personas\":" + "\"" + cantidad_max_personas + "\"" + ",\n" +
+                "    \"cantidad_actual_personas\":" + "\"" + cantidad_actual_personas + "\"" + ",\n" +
+                "    \"estadoActividad\":" + "\"" + ActividadModel.tipoEstado.Disponible + "\"" + ",\n" +
+                "    \"creador_ofertante\": {\n" +
+                "            \"id_ofertante\":" + "\"" + id_creador_ofertante + "\"" +
+                "        }\n" +
+                "}";
+    }
+
+    /**
      * Constructor sin estado ni cantidad actual de personas para crear actividades siendo consumidor
      *
      * @param tipoActividad

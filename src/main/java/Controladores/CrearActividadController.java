@@ -1,16 +1,15 @@
 package Controladores;
 
-import Modelos.ActividadModel;
-import Modelos.ConsumidorModel;
-import Modelos.OfertanteModel;
-import Modelos.RecursosModel;
+import Modelos.*;
 import TransformadorJSON.Actividad.TransformadorActividad;
 import TransformadorJSON.Recursos.TransformadorRecursos;
 import TransformadorJSON.Sugerencia.TransformadorSugerencia;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.util.StringConverter;
@@ -25,8 +24,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.ResourceBundle;
+
+import javafx.scene.control.ToggleGroup;
 
 public class CrearActividadController implements Initializable {
 
@@ -35,6 +35,7 @@ public class CrearActividadController implements Initializable {
     LocalTime horaFin;
     ArrayList<RecursosModel> listaRecursos = new ArrayList<>();
     ActividadModel actividadSugerida;
+    private int id_sugerencia;
 
     @FXML
     private Button btnAniadirRecurso;
@@ -76,16 +77,78 @@ public class CrearActividadController implements Initializable {
     private TextField txtFieldLocalizacion;
 
     @FXML
+    private ToggleGroup grupoDadaPorOfertante;
+
+    @FXML
     private TextField txtFieldTipoAct;
 
     @FXML
+    private RadioButton rbNo;
+
+    @FXML
+    private RadioButton rbSi;
+
+    @FXML
+    private TextArea txtADescripcionRecurso;
+
+    @FXML
+    private TextField txtFNombreRecurso;
+
+    @FXML
+    private TextField txtFCantidadRecurso;
+
+    @FXML
     void addRecursoNuevo(ActionEvent event) {
-        //TODO
+        if (comprobarDatosRecurso()) {
+            //Añadimos los recursos a la lista
+            aniadirRecursosLista();
+            //Lo mostramos en pantalla
+            aniadirRecurso();
+        }
     }
 
     @FXML
     void eliminarActividadActual(ActionEvent event) {
-        //TODO
+        //Comprobamos si es una actividad anteriormente sugerida
+        if (actividadSugerida != null) {
+            //Comprobamos que sea un ofertante
+            if (Main.recibirDatosUsuario() instanceof OfertanteModel) {
+                //Comprobamos que ese ofertante sea un administrador
+                if (((OfertanteModel) Main.recibirDatosUsuario()).isIs_administrador()) {
+                    //Nos traemos los valores de la sugerencia
+                    TransformadorSugerencia transformadorSugerencia = new TransformadorSugerencia();
+                    //Si se consigue borrar entra
+
+                    SugerenciaActividadModel sugerencia = transformadorSugerencia.recibirSugerenciaPorIdActividad(Main.recibirDatosActividad().getId_actividad());
+                    //Comprobamos que no sea null
+                    if (sugerencia != null) {
+                        if (transformadorSugerencia.borrarPorId(sugerencia.getId_sugerencia())) {
+                            //Comprobamos que si tiene algun recurso
+                            TransformadorRecursos transformadorRecursos = new TransformadorRecursos();
+                            ArrayList<RecursosModel> listaRecursos = transformadorRecursos.recibirListaRecursosPorIdActividad(Main.recibirDatosActividad());
+                            //Si la lista no esta vacia borramos los recursos
+                            if (!listaRecursos.isEmpty()) {
+                                for (RecursosModel recurso : listaRecursos) {
+                                    transformadorRecursos.borrarPorId(recurso.getId_recurso());
+                                }
+                            }
+                            //Borramos luego la actividad
+                            TransformadorActividad transformadorActividad = new TransformadorActividad();
+                            if (transformadorActividad.borrarPorId(actividadSugerida.getId_actividad())) {
+                                //Volvemos a la pagina principal
+                                try {
+                                    Main.enviarrActividad(null);
+                                    Main.setRaiz("VistaPrincipal");
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
     }
 
     @FXML
@@ -244,10 +307,51 @@ public class CrearActividadController implements Initializable {
     }
 
     /**
-     * Metodo que actualiza la vista de los recursos
+     * Metodo que limpia la vista de los recursos y actualiza con nuevos
      */
     public void aniadirRecurso() {
-        //TODO
+        recursosLayout.getChildren().clear();
+        try {
+            for (RecursosModel recurso : listaRecursos) {
+                //Cargamos la vista
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Vistas/RecursoIndividual.fxml"));
+                //Actualizamos el panel
+                HBox hbox = fxmlLoader.load();
+                RecursoIndividualController recursoIndividualController = fxmlLoader.getController();
+                recursoIndividualController.introducirDatos(recurso);
+                //Lo añadimos
+                recursosLayout.getChildren().add(hbox);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //Borramos los datos de los recursos para poder luego añadir mas
+        txtFNombreRecurso.clear();
+        txtADescripcionRecurso.clear();
+        txtFCantidadRecurso.clear();
+        rbSi.setSelected(true);
+
+    }
+
+    /**
+     * Metodo que añade a la lista de los recursos los recursos individualmente
+     */
+    public void aniadirRecursosLista() {
+        String nombreRecurso = txtFNombreRecurso.getText();
+        String descripcion = txtADescripcionRecurso.getText();
+        int cantidadRecursos = Integer.parseInt(txtFCantidadRecurso.getText());
+        boolean isProporcionada = false; //Por defecto, no
+        //Capturamos los posibles valores
+        if (rbSi.isSelected()) {
+            isProporcionada = true;
+        } else if (rbNo.isSelected()) {
+            isProporcionada = false;
+        }
+
+        RecursosModel recurso = new RecursosModel(nombreRecurso, descripcion, cantidadRecursos, isProporcionada);
+
+        listaRecursos.add(recurso);
     }
 
     /**
@@ -350,8 +454,13 @@ public class CrearActividadController implements Initializable {
 
         //Comprobamos que el usuario que lo esté viendo sea un ofertante
         if (Main.recibirDatosUsuario() instanceof OfertanteModel) {
-            //TODO hacer un put actualizando la informacion
             rellenarDatos();
+
+            txtFNombreRecurso.setEditable(true);
+            txtADescripcionRecurso.setEditable(true);
+            txtFCantidadRecurso.setEditable(true);
+            rbSi.setDisable(false);
+            rbNo.setDisable(false);
         } else {
             //Se pondrá la vista de sugerir actividad ocultando lo innecesario
             recursosLayout.setDisable(true);
@@ -379,6 +488,7 @@ public class CrearActividadController implements Initializable {
             txtFieldHoraInicio.setText(actividadSugerida.getHora_inicio().toString().substring(0, 5));
             txtFieldHoraFin.setText(actividadSugerida.getHora_fin().toString().substring(0, 5));
             txtCantidadPersonas.setText(String.valueOf(actividadSugerida.getCantidad_max_personas()));
+
             //Si eres un administrador podrás borrar la actividad
             if (((OfertanteModel) Main.recibirDatosUsuario()).isIs_administrador()) {
                 btnEliminarActividad.setDisable(false);
@@ -466,6 +576,55 @@ public class CrearActividadController implements Initializable {
     }
 
     public void cambiarTamScene() {
-        Main.cambiarTamVentana(760, 840);
+        Main.cambiarTamVentana(1050, 840);
     }
+
+    /**
+     * Metodo que comprueba todos los datos del recurso antes de añadirlo
+     *
+     * @return
+     */
+    public boolean comprobarDatosRecurso() {
+        //Capturamos el valor de nombre
+        String nombreRecurso = txtFNombreRecurso.getText();
+        if (!validarString(nombreRecurso, 100)) {
+            //Si no cumple los requisitos devuelve falso
+            lblMensajeError.setVisible(true);
+            lblMensajeError.setTextFill(Paint.valueOf("#ff0000"));
+            lblMensajeError.setText("Ha ocurrido un error con el nombre del recurso o es muy largo");
+            return false;
+        }
+        //Capturamos el valor de la descripcion
+        String descripcion = txtADescripcionRecurso.getText();
+        if (!validarString(descripcion, 200)) {
+            //Si no cumple los requisitos devuelve falso
+            lblMensajeError.setVisible(true);
+            lblMensajeError.setTextFill(Paint.valueOf("#ff0000"));
+            lblMensajeError.setText("Ha ocurrido un error la descripcion del recurso o es muy largo");
+            return false;
+        }
+        //Capturamos el valor de la cantidad de recursos
+        try {
+            int cantidadRecursos = Integer.parseInt(txtFCantidadRecurso.getText());
+            if (cantidadRecursos <= 0) {
+                throw new RuntimeException();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            //Si no cumple los requisitos devuelve falso
+            lblMensajeError.setVisible(true);
+            lblMensajeError.setTextFill(Paint.valueOf("#ff0000"));
+            lblMensajeError.setText("La cantidad de recurso insertadas no es un numero o es un valor incorrecto");
+            return false;
+        }
+
+        //Controlamos que alguno de los dos botones está selecionado, por si acaso
+        if (!rbNo.isSelected() && !rbSi.isSelected()) {
+            return false;
+        }
+
+        //Devuelve true si ha pasado por el resto de comprobaciones y no hay ningun problema
+        return true;
+    }
+
 }

@@ -132,6 +132,7 @@
                </toggleGroup>
             </RadioButton>
             <RadioButton fx:id="rbNo" disable="true" layoutX="766.0" layoutY="420.0" mnemonicParsing="false" text="No" toggleGroup="$grupoDadaPorOfertante" />
+            <Label fx:id="lblMensajeError" layoutX="704.0" layoutY="467.0" prefHeight="17.0" prefWidth="240.0" text="Label" visible="false" />
          </children>
       </Pane>
       <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#volverAtras" prefHeight="21.0" prefWidth="50.0" text="Atras" />
