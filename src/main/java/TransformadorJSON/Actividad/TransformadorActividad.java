@@ -202,12 +202,12 @@ public class TransformadorActividad {
         }
     }
 
-    public boolean enviarInformacionPut() {
+    public ActividadModel enviarInformacionPut(int id) {
         HttpURLConnection conexion = null;
-
+        ActividadModel actividad = null;
         try {
             // Abrir conexión
-            conexion = (HttpURLConnection) new URL(this.urlAConectarse).openConnection();
+            conexion = (HttpURLConnection) new URL(this.urlAConectarse + "/" + id).openConnection();
 
             // Configurar la conexión para una solicitud POST
             conexion.setRequestMethod("PUT");
@@ -235,12 +235,13 @@ public class TransformadorActividad {
 
             if (conexion.getResponseCode() == 200 && (!respuesta.isEmpty() || !respuesta.isBlank())) {
                 //Devuelve 200 si esta correcto
-                return true;
+                actividad = sacarInformacionIndividual(respuesta);
+                return actividad;
             } else if (conexion.getResponseCode() == 401) {
                 //Devuelve 401 si hay algun error
-                return false;
+                return actividad;
             } else {
-                return false;
+                return actividad;
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

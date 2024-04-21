@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="Eliminado metodo innecesario.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controladores/CrearActividadController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Vistas/VistaCrearActividad.fxml" afterDir="false" />
+    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="Cambiado metodo PUT, para que devuelva una actividad.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/ActividadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/ActividadController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/SugerenciaIndividualController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/SugerenciaIndividualController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/VistaPrincipalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/VistaPrincipalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/CrearActividadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/CrearActividadController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Actividad/TransformadorActividad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Actividad/TransformadorActividad.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Vistas/VistaPrincipal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Vistas/VistaPrincipal.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Vistas/VistaCrearActividad.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Vistas/VistaCrearActividad.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -351,7 +347,47 @@
       <option name="project" value="LOCAL" />
       <updated>1713690502201</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Mejorado transformador de actividad.">
+      <option name="closed" value="true" />
+      <created>1713703362894</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1713703362894</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Mejorada la sugerencia individual.">
+      <option name="closed" value="true" />
+      <created>1713703390196</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1713703390196</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Comienzo para crear Actividad.">
+      <option name="closed" value="true" />
+      <created>1713703427417</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1713703427417</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Eliminado apunte.">
+      <option name="closed" value="true" />
+      <created>1713703445441</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1713703445441</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Cambiado metodo PUT, para que devuelva una actividad.">
+      <option name="closed" value="true" />
+      <created>1713704296537</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1713704296537</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -367,11 +403,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Empezado el transformador para el ofertante." />
-    <MESSAGE value="Añadido una dependencia para JSON." />
-    <MESSAGE value="Creado el modelo de ofertante." />
-    <MESSAGE value="Arreglado el modelo de ofertante." />
-    <MESSAGE value="Añadidas nuevas funcionalidades al transformador ofertante." />
     <MESSAGE value="Creado el esqueleto para el Consumidor." />
     <MESSAGE value="Creado el esqueleto para las Actividades." />
     <MESSAGE value="Creado el esqueleto para los Recursos." />
@@ -392,6 +423,11 @@
     <MESSAGE value="Creada vista actividad modificar/ver." />
     <MESSAGE value="Arreglada vistas, se veían los nombre de las empresas cuando no se debia." />
     <MESSAGE value="Eliminado metodo innecesario." />
-    <option name="LAST_COMMIT_MESSAGE" value="Eliminado metodo innecesario." />
+    <MESSAGE value="Mejorado transformador de actividad." />
+    <MESSAGE value="Mejorada la sugerencia individual." />
+    <MESSAGE value="Comienzo para crear Actividad." />
+    <MESSAGE value="Eliminado apunte." />
+    <MESSAGE value="Cambiado metodo PUT, para que devuelva una actividad." />
+    <option name="LAST_COMMIT_MESSAGE" value="Cambiado metodo PUT, para que devuelva una actividad." />
   </component>
 </project>
