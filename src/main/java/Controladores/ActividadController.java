@@ -126,10 +126,12 @@ public class ActividadController implements Initializable {
         if (Main.recibirDatosUsuario() instanceof OfertanteModel) {
             //Comprobamos que sea el creador o un administrador
             if (((OfertanteModel) Main.recibirDatosUsuario()).isIs_administrador() || ((OfertanteModel) Main.recibirDatosUsuario()).getId_ofertante() == actividad.getCreador_ofertante().getId_ofertante()) {
-                //Añadimos los recursos a la lista
-                aniadirRecursosLista();
-                //Lo mostramos en pantalla
-                aniadirRecurso();
+                if (comprobarDatosRecurso()) {
+                    //Añadimos los recursos a la lista
+                    aniadirRecursosLista();
+                    //Lo mostramos en pantalla
+                    aniadirRecurso();
+                }
             }
         }
     }
@@ -200,49 +202,66 @@ public class ActividadController implements Initializable {
                     //Comprobamos que no sea null
                     if (sugerencia != null) {
                         if (transformadorSugerencia.borrarPorId(sugerencia.getId_sugerencia())) {
-                            //Comprobamos que si tiene algun recurso
-                            TransformadorRecursos transformadorRecursos = new TransformadorRecursos();
-                            ArrayList<RecursosModel> listaRecursos = transformadorRecursos.recibirListaRecursosPorIdActividad(Main.recibirDatosActividad());
-                            //Si la lista no esta vacia borramos los recursos
-                            if (!listaRecursos.isEmpty()) {
-                                for (RecursosModel recurso : listaRecursos) {
-                                    transformadorRecursos.borrarPorId(recurso.getId_recurso());
-                                }
-                            }
-                            //Borramos luego la actividad
-                            TransformadorActividad transformadorActividad = new TransformadorActividad();
-                            if (transformadorActividad.borrarPorId(actividad.getId_actividad())) {
-                                //Volvemos a la pagina principal
-                                try {
-                                    Main.enviarrActividad(null);
-                                    Main.setRaiz("VistaPrincipal");
-                                } catch (IOException e) {
-                                    throw new RuntimeException(e);
-                                }
-                            }
+                            borrarFinalActividad();
                         }
+                    } else {
+                        borrarFinalActividad();
                     }
                 }
             }
         }
     }
 
+    /**
+     * Metodo que se llama para borrar la actividad, tenga o no sugerencia
+     */
+    private void borrarFinalActividad() {
+        //Comprobamos que si tiene algun recurso
+        TransformadorRecursos transformadorRecursos = new TransformadorRecursos();
+        ArrayList<RecursosModel> listaRecursos = transformadorRecursos.recibirListaRecursosPorIdActividad(Main.recibirDatosActividad());
+        //Si la lista no esta vacia borramos los recursos
+        if (!listaRecursos.isEmpty()) {
+            for (RecursosModel recurso : listaRecursos) {
+                transformadorRecursos.borrarPorId(recurso.getId_recurso());
+            }
+        }
+        //Borramos luego la actividad
+        TransformadorActividad transformadorActividad = new TransformadorActividad();
+        if (transformadorActividad.borrarPorId(actividad.getId_actividad())) {
+            //Volvemos a la pagina principal
+            try {
+                Main.enviarrActividad(null);
+                Main.setRaiz("VistaPrincipal");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
     @FXML
     void eliminarseDeLaLista(ActionEvent event) {
+        //Creamos una copia de la lista para posteriormente poder limpiar a una nueva
+        ArrayList<ParticipacionModel> copiaListaParticipacion = new ArrayList<>(listaParticipantes);
+
         //Comprobamos si el usuario es un consumidor
         if (Main.recibirDatosUsuario() instanceof ConsumidorModel) {
-            for (ParticipacionModel participacion : listaParticipantes) {
+            for (ParticipacionModel participacion : copiaListaParticipacion) {
                 ConsumidorModel consumidorParticipante = participacion.getConsumidor();
                 if (consumidorParticipante.getId_consumidor() == ((ConsumidorModel) Main.recibirDatosUsuario()).getId_consumidor()) {
                     TransformadorParticipacion transformadorParticipacion = new TransformadorParticipacion();
                     //Si lo borra actualiza la vista
+                    lblMensajeError.setVisible(true);
                     if (transformadorParticipacion.borrarPorId(participacion.getId_participacion_actividades())) {
-                        lblMensajeError.setVisible(true);
                         lblMensajeError.setTextFill(Paint.valueOf("#00bb22"));
                         lblMensajeError.setText("Te has eliminado de la lista satisfactoriamente");
+                        //Cambiamos los botones
+                        btnQuitarse.setDisable(true);
+                        btnInscribir.setDisable(false);
+
+                        //Actualizamos la lista
+                        limpiarLayoutParticipacion();
                     } else {
                         //Mostramos un error generico
-                        lblMensajeError.setVisible(true);
                         lblMensajeError.setTextFill(Paint.valueOf("#ff0000"));
                         lblMensajeError.setText("Ha ocurrido un error borrandote de la lista");
                     }
@@ -260,17 +279,40 @@ public class ActividadController implements Initializable {
             if (Main.recibirDatosUsuario() instanceof ConsumidorModel) {
                 //Desactivamos el boton
                 btnInscribir.setDisable(true);
+                //Activamos para poder quitarnos
+                btnQuitarse.setDisable(false);
                 //Enviamos los datos de la actividad y del usuario a la api para inscribirnos en la actividad
                 TransformadorParticipacion transformadorParticipacion = new TransformadorParticipacion(actividad.getId_actividad(), ((ConsumidorModel) Main.recibirDatosUsuario()).getId_consumidor());
                 transformadorParticipacion.enviarInformacionPost();
+
+                //Actualizamos la lista
+                limpiarLayoutParticipacion();
             }
         } else {
             //No hacemos nada
         }
     }
 
+    private void limpiarLayoutParticipacion() {
+        //Actualizamos la lista
+        try {
+            //Limpiamos la lista de participantes
+            if (!listaParticipantes.isEmpty()) {
+                listaParticipantes.clear();
+                participantesLayout.getChildren().clear();
+            }
+            listaParticipantes = llenarListaParticipacion();
+            rellenarLayout(listaParticipantes, participantesLayout);
+        } catch (IOException e) {
+            //Mostramos un error generico
+            lblMensajeError.setVisible(true);
+            lblMensajeError.setTextFill(Paint.valueOf("#ff0000"));
+            lblMensajeError.setText("Ha ocurrido un actualizando la lista de participantes");
+        }
+    }
+
     @FXML
-    void volverAtras(ActionEvent event) {
+    void volverAtras(MouseEvent event) {
         try {
             //Volvemos la actividad que esta viendo como null
             Main.enviarrActividad(null);
@@ -332,25 +374,33 @@ public class ActividadController implements Initializable {
 
         //Comprobamos si el usuario es un administrador o es el creador de la actividad para darle permisos para cambiar ciertos campos
         if (Main.recibirDatosUsuario() instanceof OfertanteModel) {
-            //Si es administrador le damos permisos, si es el creador de la actividad tambien
-            if (((OfertanteModel) Main.recibirDatosUsuario()).isIs_administrador() || ((OfertanteModel) Main.recibirDatosUsuario()).getId_ofertante() == actividadActual.getId_actividad()) {
-                //Activamos las opciones que el resto no puede usar
-                txtFieldLocalizacion.setEditable(true);
-                txtAreaDescripcionCambiar.setEditable(true);
-                txtFieldTipoAct.setEditable(true);
+            //Nos aseguramos que exista creador
+            if (actividadActual.getCreador_ofertante() != null) {
+                //Si es administrador le damos permisos, si es el creador de la actividad tambien
+                if (((OfertanteModel) Main.recibirDatosUsuario()).isIs_administrador() || ((OfertanteModel) Main.recibirDatosUsuario()).getId_ofertante() == actividadActual.getCreador_ofertante().getId_ofertante()) {
+                    //Activamos las opciones que el resto no puede usar
+                    txtFieldLocalizacion.setEditable(true);
+                    txtAreaDescripcionCambiar.setEditable(true);
+                    txtFieldTipoAct.setEditable(true);
 
-                //Activamos los botones
-                btnEditar.setDisable(false);
-                btnEliminarActividad.setDisable(false);
-                btnAniadirRecurso.setDisable(false);
+                    //Activamos los botones
+                    btnEditar.setDisable(false);
+                    //Desactivamos eliminar actividad si no es un administrador
+                    if (!((OfertanteModel) Main.recibirDatosUsuario()).isIs_administrador()) {
+                        btnEliminarActividad.setDisable(true);
+                    } else {
+                        btnEliminarActividad.setDisable(false);
+                    }
+                    btnAniadirRecurso.setDisable(false);
 
-                //Activamos para los recursos
-                txtFieldTipoAct.setEditable(true);
-                txtADescripcionRecurso.setEditable(true);
-                txtFCantidadRecurso.setEditable(true);
-                rbNo.setDisable(false);
-                rbSi.setDisable(false);
+                    //Activamos para los recursos
+                    txtFNombreRecurso.setEditable(true);
+                    txtADescripcionRecurso.setEditable(true);
+                    txtFCantidadRecurso.setEditable(true);
+                    rbNo.setDisable(false);
+                    rbSi.setDisable(false);
 
+                }
             }
         }
 
@@ -368,7 +418,7 @@ public class ActividadController implements Initializable {
 
         if (actividadActual.getCreador_ofertante() != null) {
             lblNombreUsuario.setText(actividadActual.getCreador_ofertante().getNombreOfertante());
-            if (!actividadActual.getCreador_ofertante().getNombreEmpresa().equals("null") || actividadActual.getCreador_ofertante().getNombreEmpresa() != null) {
+            if (!actividadActual.getCreador_ofertante().getNombreEmpresa().trim().equals("null") || actividadActual.getCreador_ofertante().getNombreEmpresa() != null) {
                 lblNombreEmpresa.setText(actividadActual.getCreador_ofertante().getNombreEmpresa());
                 lblNombreEmpresa.setVisible(true);
             }
@@ -390,6 +440,7 @@ public class ActividadController implements Initializable {
                 //Hacemos la comprobacion
                 if (participante.getConsumidor().getId_consumidor() == ((ConsumidorModel) Main.recibirDatosUsuario()).getId_consumidor()) {
                     btnQuitarse.setDisable(false);
+                    btnInscribir.setDisable(true);
                 }
             }
         }
@@ -419,6 +470,11 @@ public class ActividadController implements Initializable {
             }
         }
 
+        //Bloqueamos los botones si los estados son finalizado o EnCurso
+        if (actividadActual.getEstado().name().equals("Finalizado") || actividadActual.getEstado().name().equals("EnCurso")) {
+            btnInscribir.setDisable(true);
+            btnQuitarse.setDisable(true);
+        }
 
     }
 
@@ -569,7 +625,7 @@ public class ActividadController implements Initializable {
      * @return devuelve verdadero si no esta vacia la cadena y no supera su longitud
      */
     public boolean validarString(String cadena, int longitud) {
-        return !cadena.isBlank() && !cadena.isEmpty() && cadena.length() <= longitud;
+        return !cadena.trim().isBlank() && !cadena.trim().isEmpty() && cadena.length() <= longitud;
     }
 
     /**

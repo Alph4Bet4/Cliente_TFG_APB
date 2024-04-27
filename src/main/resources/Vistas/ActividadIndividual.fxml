@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
@@ -75,12 +76,18 @@
                </children>
             </Pane>
          </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Pane>
       <Pane prefHeight="200.0" prefWidth="210.0">
          <children>
             <Label fx:id="lblCreacion" layoutX="74.0" layoutY="14.0" text="Creado por:" textFill="#76abff" />
             <Label fx:id="lblNombreUsuario" alignment="CENTER" layoutX="40.0" layoutY="45.0" prefHeight="17.0" prefWidth="132.0" text="Nombre de usuario" />
-            <Label fx:id="lblEmailUsuario" alignment="CENTER" layoutX="40.0" layoutY="70.0" onMouseClicked="#enviarCorreo" prefHeight="17.0" prefWidth="132.0" text="prueba@gmail.com" textFill="#001eff" underline="true" />
+            <Label fx:id="lblEmailUsuario" alignment="CENTER" layoutX="40.0" layoutY="70.0" onMouseClicked="#enviarCorreo" prefHeight="17.0" prefWidth="132.0" text="prueba@gmail.com" textFill="#001eff" underline="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Label>
             <Label fx:id="lblNombreEmpresa" alignment="CENTER" layoutX="40.0" layoutY="95.0" prefHeight="17.0" prefWidth="132.0" text="Empresa S.A" visible="false" />
          </children>
       </Pane>

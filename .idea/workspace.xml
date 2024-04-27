@@ -4,14 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="Acabada la vista completa sobre las actividades, falta comprobar posibles errores.&#10;&#10;Además, faltan 2 vistas mas.">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Imagenes/flechaAtras.png" afterDir="false" />
+    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="Mejorado el icono">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/RegistrarseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/RegistrarseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tfg_apb/tfg_apb_cliente/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tfg_apb/tfg_apb_cliente/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Imagenes/iconoAplicacionTFG.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Imagenes/iconoAplicacionTFG.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Vistas/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Vistas/Login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Vistas/Registro.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Vistas/Registro.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/ActividadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/ActividadController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/ActividadIndividualController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/ActividadIndividualController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/CrearActividadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/CrearActividadController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/VistaPrincipalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/VistaPrincipalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Vistas/ActividadIndividual.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Vistas/ActividadIndividual.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Vistas/SugerenciaIndividual.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Vistas/SugerenciaIndividual.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Vistas/VistaActividad.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Vistas/VistaActividad.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Vistas/VistaCrearActividad.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Vistas/VistaCrearActividad.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Vistas/VistaPrincipal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Vistas/VistaPrincipal.fxml" afterDir="false" />
@@ -449,7 +449,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713722286331</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Mejorado el icono">
+      <option name="closed" value="true" />
+      <created>1714246592034</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1714246592034</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -465,7 +473,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Eliminado esqueleto en constructor." />
     <MESSAGE value="Creado Transformador de participacion;" />
     <MESSAGE value="Creado get Id para los transformadores." />
     <MESSAGE value="Finalizado Registro." />
@@ -490,17 +497,7 @@
     <MESSAGE value="Implementados metodos para borrar." />
     <MESSAGE value="Acabados." />
     <MESSAGE value="Acabada la vista completa sobre las actividades, falta comprobar posibles errores.&#10;&#10;Además, faltan 2 vistas mas." />
-    <option name="LAST_COMMIT_MESSAGE" value="Acabada la vista completa sobre las actividades, falta comprobar posibles errores.&#10;&#10;Además, faltan 2 vistas mas." />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Controladores/ActividadController.java</url>
-          <line>521</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Mejorado el icono" />
+    <option name="LAST_COMMIT_MESSAGE" value="Mejorado el icono" />
   </component>
 </project>

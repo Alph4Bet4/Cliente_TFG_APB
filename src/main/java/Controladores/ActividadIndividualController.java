@@ -15,6 +15,7 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 
 
 public class ActividadIndividualController {
@@ -177,6 +178,22 @@ public class ActividadIndividualController {
             //Por encima comprobamos si el usuario es un ofertante, si lo es no se puede inscribir en las actividades
             if (Main.recibirDatosUsuario() instanceof OfertanteModel) {
                 btnInscripcion.setDisable(true);
+            }
+
+            //Comprobamos si el usuario ya se encuentra escrito
+
+            //Hacemos la peticion
+            TransformadorParticipacion transformadorParticipacion = new TransformadorParticipacion();
+            ArrayList<ParticipacionModel> listaParticipacion = transformadorParticipacion.recibirListaParticipantesPorIdActividad(actividad);
+
+            for (ParticipacionModel participacion : listaParticipacion) {
+                //Comprobamos que el usuario sea un consumidor
+                if (Main.recibirDatosUsuario() instanceof ConsumidorModel) {
+                    //Si el usuario se encuentra dentro bloqueamos el boton
+                    if (((ConsumidorModel) Main.recibirDatosUsuario()).getId_consumidor() == participacion.getConsumidor().getId_consumidor()) {
+                        btnInscripcion.setDisable(true);
+                    }
+                }
             }
 
         }

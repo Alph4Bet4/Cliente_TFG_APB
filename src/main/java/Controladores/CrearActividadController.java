@@ -15,6 +15,7 @@ import javafx.scene.paint.Paint;
 import javafx.util.StringConverter;
 import org.tfg_apb.tfg_apb_cliente.Main;
 
+import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -295,9 +296,8 @@ public class CrearActividadController implements Initializable {
         }
         return isRecursosAdd;
     }
-
     @FXML
-    void volverAtras(ActionEvent event) {
+    void volverAtras(MouseEvent event) {
         try {
             Main.enviarrActividad(null);
             Main.setRaiz("VistaPrincipal");
@@ -572,7 +572,7 @@ public class CrearActividadController implements Initializable {
      * @return devuelve verdadero si no esta vacia la cadena y no supera su longitud
      */
     public boolean validarString(String cadena, int longitud) {
-        return !cadena.isBlank() && !cadena.isEmpty() && cadena.length() <= longitud;
+        return !cadena.trim().isBlank() && !cadena.trim().isEmpty() && cadena.length() <= longitud;
     }
 
     public void cambiarTamScene() {

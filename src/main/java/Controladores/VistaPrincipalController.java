@@ -156,6 +156,6 @@ public class VistaPrincipalController implements Initializable {
     }
 
     public void cambiarTamScene() {
-        Main.cambiarTamVentana(1220, 780);
+        Main.cambiarTamVentana(1320, 890);
     }
 }
