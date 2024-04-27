@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,11 +21,12 @@ public class Main extends Application {
         escena = new Scene(cargarFXML("Login"));
         stage.setScene(escena);
         stage.setTitle("O&F");
+        Image imagen = new Image(Main.class.getResourceAsStream("/Imagenes/iconoAplicacionTFG.png"));
+        stage.getIcons().add(imagen);
         stage.setResizable(false);
 
         stage.show();
     }
-
 
     public static void main(String[] args) throws IOException {
         launch();

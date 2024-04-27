@@ -10,47 +10,47 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1220.0" style="-fx-background-color: #d2e1fa;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.VistaPrincipalController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="890.0" prefWidth="1320.0" style="-fx-background-color: #d2e1fa;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.VistaPrincipalController">
    <children>
-      <Pane id="PanelContenedor" layoutX="90.0" layoutY="80.0" prefHeight="620.0" prefWidth="1040.0" style="-fx-background-radius: 10; -fx-background-color: White;">
+      <Pane id="PanelContenedor" layoutX="79.0" layoutY="84.0" prefHeight="745.0" prefWidth="1163.0" style="-fx-background-radius: 10; -fx-background-color: White;">
          <children>
-            <ScrollPane layoutX="60.0" layoutY="49.0" prefHeight="240.0" prefWidth="933.0" style="-fx-background-color: white;">
+            <ScrollPane layoutX="60.0" layoutY="49.0" prefHeight="276.0" prefWidth="1073.0" style="-fx-background-color: white;">
                <content>
-                  <VBox fx:id="actividadLayout" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="3000.0" prefWidth="918.0" style="-fx-background-color: white;" />
+                  <VBox fx:id="actividadLayout" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="3000.0" prefWidth="1058.0" style="-fx-background-color: white;" />
                </content></ScrollPane>
             <Label layoutX="61.0" layoutY="14.0" text="Actividades">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <ScrollPane layoutX="60.0" layoutY="324.0" prefHeight="240.0" prefWidth="933.0" style="-fx-background-color: white;">
+            <ScrollPane layoutX="60.0" layoutY="401.0" prefHeight="276.0" prefWidth="1073.0" style="-fx-background-color: white;">
                <content>
-                  <VBox fx:id="sugerenciaLayout" prefHeight="3000.0" prefWidth="918.0" style="-fx-background-color: white;" />
+                  <VBox fx:id="sugerenciaLayout" prefHeight="3000.0" prefWidth="1058.0" style="-fx-background-color: white;" />
                </content>
             </ScrollPane>
-            <Label layoutX="60.0" layoutY="289.0" text="Actividades Sugeridas">
+            <Label layoutX="60.0" layoutY="350.0" text="Actividades Sugeridas">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <ImageView fx:id="imgFiltro" fitHeight="27.0" fitWidth="28.0" layoutX="953.0" layoutY="14.0" onMouseClicked="#filtrarActividades" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgFiltro" fitHeight="27.0" fitWidth="28.0" layoutX="1106.0" layoutY="14.0" onMouseClicked="#filtrarActividades" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Imagenes/filtrar.png" />
                </image></ImageView>
-            <ImageView fx:id="imgRecarga" fitHeight="27.0" fitWidth="28.0" layoutX="907.0" layoutY="14.0" onMouseClicked="#recargarListas" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgRecarga" fitHeight="27.0" fitWidth="28.0" layoutX="1060.0" layoutY="14.0" onMouseClicked="#recargarListas" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Imagenes/recarga.png" />
                </image>
             </ImageView>
-            <Button layoutX="746.0" layoutY="15.0" mnemonicParsing="false" onAction="#cambiarVistaActividad" text="Crear/Sugerir Actividad" />
+            <Button layoutX="899.0" layoutY="15.0" mnemonicParsing="false" onAction="#cambiarVistaActividad" text="Crear/Sugerir Actividad" />
          </children>
       </Pane>
-      <Label fx:id="lblNombre" alignment="CENTER_RIGHT" layoutX="812.0" layoutY="24.0" onMouseClicked="#verAjustesCuenta" prefHeight="27.0" prefWidth="318.0" text="Bienvenido, ">
+      <Label fx:id="lblNombre" alignment="CENTER_RIGHT" layoutX="924.0" layoutY="34.0" onMouseClicked="#verAjustesCuenta" prefHeight="27.0" prefWidth="318.0" text="Bienvenido, ">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="94.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Imagenes/iconoAplicacionTFG.png" />
          </image>

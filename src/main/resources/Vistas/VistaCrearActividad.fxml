@@ -8,6 +8,8 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -87,7 +89,6 @@
             <Button fx:id="btnEliminarActividad" disable="true" layoutX="142.0" layoutY="415.0" mnemonicParsing="false" onAction="#eliminarActividadActual" style="-fx-border-color: red;" text="Eliminar actividad" textFill="RED" />
          </children>
       </Pane>
-      <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#volverAtras" prefHeight="21.0" prefWidth="50.0" text="Atras" />
       <Pane layoutX="709.0" layoutY="55.0" prefHeight="686.0" prefWidth="6.0" style="-fx-background-color: ebebeb; -fx-background-radius: 10;" />
       <Label layoutX="732.0" layoutY="61.0" text="Nombre recurso:" textFill="#76abff">
          <font>
@@ -118,5 +119,10 @@
          </toggleGroup>
       </RadioButton>
       <RadioButton fx:id="rbNo" disable="true" layoutX="795.0" layoutY="461.0" mnemonicParsing="false" text="No" toggleGroup="$grupoDadaPorOfertante" />
+      <ImageView fitHeight="35.0" fitWidth="36.0" layoutX="10.0" layoutY="14.0" onMouseClicked="#volverAtras" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Imagenes/flechaAtras.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

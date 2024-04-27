@@ -145,9 +145,9 @@ public class RegistrarseController {
 
         } else if (rbOfertante.isSelected()) {
             //Añadimos al ofertante
-            if ((!nombreEmpresa.isBlank() || !nombreEmpresa.isEmpty()) && nombreEmpresa.length() <= 45) {
+            if ((!nombreEmpresa.trim().isBlank() || !nombreEmpresa.trim().isEmpty()) && nombreEmpresa.length() <= 45) {
                 //No hacemos nada
-            } else if (nombreEmpresa.isEmpty() || nombreEmpresa.isBlank()) {
+            } else if (nombreEmpresa.trim().isEmpty() || nombreEmpresa.trim().isBlank()) {
                 //Cambiamos a null
                 nombreEmpresa = null;
             }
