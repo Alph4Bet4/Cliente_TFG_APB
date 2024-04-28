@@ -158,9 +158,11 @@ public class ActividadIndividualController {
             //Cambiamos con los datos del usuario
             lblNombreUsuario.setText(actividad.getCreador_ofertante().getNombreOfertante());
             lblEmailUsuario.setText(actividad.getCreador_ofertante().getEmail_ofertante());
-            if (!actividad.getCreador_ofertante().getNombreEmpresa().equals("null") || actividad.getCreador_ofertante().getNombreEmpresa() != null) {
+            if (actividad.getCreador_ofertante().getNombreEmpresa() != null && !actividad.getCreador_ofertante().getNombreEmpresa().equals("null")) {
                 lblNombreEmpresa.setVisible(true);
                 lblNombreEmpresa.setText(actividad.getCreador_ofertante().getNombreEmpresa());
+            } else {
+                lblNombreEmpresa.setVisible(false);
             }
 
             //Comprobamos la cantidad de personas

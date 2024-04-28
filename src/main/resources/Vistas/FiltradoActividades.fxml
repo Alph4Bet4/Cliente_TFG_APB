@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="890.0" prefWidth="1620.0" style="-fx-background-color: #d2e1fa;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.FiltradoActividadesController">
+   <children>
+      <Pane id="PanelContenedor" layoutX="45.0" layoutY="46.0" prefHeight="798.0" prefWidth="1530.0" style="-fx-background-radius: 10; -fx-background-color: White;">
+         <children>
+            <Label layoutX="18.0" layoutY="14.0" text="Actividades disponibles">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ScrollPane layoutX="17.0" layoutY="65.0" prefHeight="276.0" prefWidth="740.0" style="-fx-background-color: white;">
+               <content>
+                  <VBox fx:id="actividadDisponibleLayout" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="3000.0" prefWidth="725.0" style="-fx-background-color: white;" />
+               </content>
+            </ScrollPane>
+            <Label layoutX="17.0" layoutY="418.0" text="Actividades finalizadas">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ScrollPane layoutX="17.0" layoutY="469.0" prefHeight="276.0" prefWidth="740.0" style="-fx-background-color: white;">
+               <content>
+                  <VBox fx:id="actividadFinalizadaLayout" prefHeight="3000.0" prefWidth="725.0" style="-fx-background-color: white;" />
+               </content>
+            </ScrollPane>
+            <ImageView fx:id="imgRecarga" fitHeight="27.0" fitWidth="28.0" layoutX="1483.0" layoutY="14.0" onMouseClicked="#recargarListas" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Imagenes/recarga.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <Label layoutX="770.0" layoutY="14.0" text="Actividades inscritas">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ScrollPane layoutX="770.0" layoutY="65.0" prefHeight="276.0" prefWidth="740.0" style="-fx-background-color: white;">
+               <content>
+                  <VBox fx:id="actividadesInscritasLayout" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="3000.0" prefWidth="725.0" style="-fx-background-color: white;" />
+               </content>
+            </ScrollPane>
+            <Label layoutX="770.0" layoutY="418.0" text="Actividades completas">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ScrollPane layoutX="770.0" layoutY="469.0" prefHeight="276.0" prefWidth="740.0" style="-fx-background-color: white;">
+               <content>
+                  <VBox fx:id="actividadesCompletasLayout" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="3000.0" prefWidth="725.0" style="-fx-background-color: white;" />
+               </content>
+            </ScrollPane>
+         </children>
+      </Pane>
+      <ImageView fitHeight="35.0" fitWidth="39.0" layoutX="8.0" layoutY="11.0" onMouseClicked="#volverAtras" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <image>
+            <Image url="@../Imagenes/flechaAtras.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

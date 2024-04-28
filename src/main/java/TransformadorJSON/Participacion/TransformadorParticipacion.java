@@ -126,6 +126,34 @@ public class TransformadorParticipacion {
         return listaParticipacion;
     }
 
+    public ArrayList<ParticipacionModel> recibirParticipacionPorIdUsuario(int id) {
+        ArrayList<ParticipacionModel> listaParticipacion = new ArrayList<>();
+
+        try {
+            HttpURLConnection conexion = (HttpURLConnection) new URL(this.urlAConectarse + "/consumidorConId_" + id).openConnection();
+            conexion.setRequestMethod("GET");
+
+            // Leer la respuesta de la API
+            StringBuilder respuesta = new StringBuilder();
+
+            try (BufferedReader entrada = new BufferedReader(new InputStreamReader(conexion.getInputStream()))) {
+                String lineaLeer;
+                while ((lineaLeer = entrada.readLine()) != null) {
+                    respuesta.append(lineaLeer);
+                }
+
+            }
+
+            listaParticipacion = sacarInformacionLista(respuesta.toString());
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+
+        return listaParticipacion;
+    }
+
     /**
      * Metodo que recibe una participacion en especifico
      */

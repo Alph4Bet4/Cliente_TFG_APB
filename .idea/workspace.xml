@@ -4,57 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="Arreglado errores varios y pulido algunas cosas.">
-      <change afterPath="$PROJECT_DIR$/bin/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Contenedor/ContenedorDatos.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Controladores/ActividadController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Controladores/ActividadIndividualController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Controladores/CrearActividadController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Controladores/LoginController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Controladores/ParticipacionIndividualController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Controladores/RecursoIndividualController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Controladores/RegistrarseController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Controladores/SugerenciaIndividualController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Controladores/VistaPrincipalController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Modelos/ActividadModel$tipoEstado.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Modelos/ActividadModel.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Modelos/ConsumidorModel.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Modelos/OfertanteModel.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Modelos/ParticipacionModel.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Modelos/RecursosModel.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Modelos/SugerenciaActividadModel.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/java/TransformadorJSON/Actividad/TransformadorActividad.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/java/TransformadorJSON/Consumidor/TransformadorConsumidor.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/java/TransformadorJSON/Ofertante/TransformadorOfertante.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/java/TransformadorJSON/Participacion/TransformadorParticipacion.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/java/TransformadorJSON/Recursos/TransformadorRecursos.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/java/TransformadorJSON/Sugerencia/TransformadorSugerencia.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/java/org/tfg_apb/tfg_apb_cliente/Main.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/resources/Imagenes/filtrar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/resources/Imagenes/flechaAtras.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/resources/Imagenes/iconoAplicacionTFG.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/resources/Imagenes/recarga.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/resources/Vistas/ActividadIndividual.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/resources/Vistas/Login.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/resources/Vistas/ParticipacionIndividual.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/resources/Vistas/RecursoIndividual.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/resources/Vistas/Registro.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/resources/Vistas/SugerenciaIndividual.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/resources/Vistas/VistaActividad.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/resources/Vistas/VistaCrearActividad.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/src/main/resources/Vistas/VistaPrincipal.fxml" afterDir="false" />
+    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controladores/FiltradoActividadesController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Vistas/FiltradoActividades.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/ActividadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/ActividadController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/ActividadIndividualController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/ActividadIndividualController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/VistaPrincipalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/VistaPrincipalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Actividad/TransformadorActividad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Actividad/TransformadorActividad.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Participacion/TransformadorParticipacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Participacion/TransformadorParticipacion.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +29,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="8305d35018685bca244802130a95c462ac710cf7" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -95,21 +52,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Application.Aplicacion.executor&quot;: &quot;Run&quot;,
-    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Adri/Documents/ProyectoFinGradoAPB/TFG_APB_Cliente/src/main/resources/Vistas&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.Aplicacion.executor": "Run",
+    "Application.HelloApplication.executor": "Run",
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Adri/Documents/ProyectoFinGradoAPB/TFG_APB_Cliente/src/main/resources/Vistas",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Adri\Documents\ProyectoFinGradoAPB\TFG_APB_Cliente\src\main\resources\Vistas" />
@@ -505,7 +462,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714252553887</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Mejorada la vista de la actividad.">
+      <option name="closed" value="true" />
+      <created>1714300306957</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1714300306957</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -521,7 +486,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Creado get Id para los transformadores." />
     <MESSAGE value="Finalizado Registro." />
     <MESSAGE value="Creado Transformador Sugerencia." />
     <MESSAGE value="Acabado inicio de sesion." />
@@ -546,6 +510,23 @@
     <MESSAGE value="Acabada la vista completa sobre las actividades, falta comprobar posibles errores.&#10;&#10;Además, faltan 2 vistas mas." />
     <MESSAGE value="Mejorado el icono" />
     <MESSAGE value="Arreglado errores varios y pulido algunas cosas." />
-    <option name="LAST_COMMIT_MESSAGE" value="Arreglado errores varios y pulido algunas cosas." />
+    <MESSAGE value="Mejorada la vista de la actividad." />
+    <option name="LAST_COMMIT_MESSAGE" value="Mejorada la vista de la actividad." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/TransformadorJSON/Actividad/TransformadorActividad.java</url>
+          <line>540</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/TransformadorJSON/Participacion/TransformadorParticipacion.java</url>
+          <line>325</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

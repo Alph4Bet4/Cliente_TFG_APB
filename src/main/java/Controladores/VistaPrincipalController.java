@@ -55,7 +55,11 @@ public class VistaPrincipalController implements Initializable {
 
     @FXML
     void filtrarActividades(MouseEvent event) {
-        //TODO
+        try {
+            Main.setRaiz("FiltradoActividades");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML

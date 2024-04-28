@@ -558,25 +558,27 @@ public class TransformadorActividad {
             String nombreEmpresa = null;
             String email_ofertante = null;
             boolean is_administrador = false;
-            if (!datosJSON.isNull("nombreOfertante")) {
+            if (!datosOfertanteJSON.isNull("nombreOfertante")) {
                 nombreOfertante = datosOfertanteJSON.getString("nombreOfertante");
             }
-            if (!datosJSON.isNull("primerApellidoOfertante")) {
+            if (!datosOfertanteJSON.isNull("primerApellidoOfertante")) {
                 primerApellidoOfertante = datosOfertanteJSON.getString("primerApellidoOfertante");
             }
-            if (!datosJSON.isNull("segundoApellidoOfertante")) {
+            if (!datosOfertanteJSON.isNull("segundoApellidoOfertante")) {
                 segundoApellidoOfertante = datosOfertanteJSON.getString("segundoApellidoOfertante");
             }
-            if (!datosJSON.isNull("contrasenia")) {
+            if (!datosOfertanteJSON.isNull("contrasenia")) {
                 contrasenia = datosOfertanteJSON.getString("contrasenia");
             }
-            if (!datosJSON.isNull("nombreEmpresa")) {
+            if (!datosOfertanteJSON.isNull("nombreEmpresa") && !datosOfertanteJSON.get("nombreEmpresa").equals("null")) {
                 nombreEmpresa = String.valueOf(datosOfertanteJSON.get("nombreEmpresa"));
+            } else {
+                nombreEmpresa = null;
             }
-            if (!datosJSON.isNull("email_ofertante")) {
+            if (!datosOfertanteJSON.isNull("email_ofertante")) {
                 email_ofertante = datosOfertanteJSON.getString("email_ofertante");
             }
-            if (!datosJSON.isNull("is_administrador")) {
+            if (!datosOfertanteJSON.isNull("is_administrador")) {
                 is_administrador = datosOfertanteJSON.getBoolean("is_administrador");
             }
 
