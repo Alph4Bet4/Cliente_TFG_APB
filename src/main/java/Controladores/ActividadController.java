@@ -260,6 +260,13 @@ public class ActividadController implements Initializable {
 
                         //Actualizamos la lista
                         limpiarLayoutParticipacion();
+
+                        //Disminuimos el contador
+                        TransformadorActividad transformadorActividad = new TransformadorActividad();
+
+                        ActividadModel actividadCambiarCantidad = transformadorActividad.recibirActividadPorId(actividad.getId_actividad());
+
+                        lblCantidadPersonasAct.setText(String.valueOf(actividadCambiarCantidad.getCantidad_actual_personas()));
                     } else {
                         //Mostramos un error generico
                         lblMensajeError.setTextFill(Paint.valueOf("#ff0000"));
@@ -273,20 +280,28 @@ public class ActividadController implements Initializable {
 
     @FXML
     void inscribirseActividad(ActionEvent event) {
-        //Comprobamos la cantidad de personas actuales
+        //Comprobamos la cantidad de personas actuales pero directamente de una nueva llamada para asegurarse que no haya problemas
         if (Integer.parseInt(lblCantidadPersonasAct.getText()) < Integer.parseInt(lblCantidadPersonasMax.getText())) {
-            //Nos aseguramos de que sea un consumidor y no un ofertante
-            if (Main.recibirDatosUsuario() instanceof ConsumidorModel) {
-                //Desactivamos el boton
-                btnInscribir.setDisable(true);
-                //Activamos para poder quitarnos
-                btnQuitarse.setDisable(false);
-                //Enviamos los datos de la actividad y del usuario a la api para inscribirnos en la actividad
-                TransformadorParticipacion transformadorParticipacion = new TransformadorParticipacion(actividad.getId_actividad(), ((ConsumidorModel) Main.recibirDatosUsuario()).getId_consumidor());
-                transformadorParticipacion.enviarInformacionPost();
+            TransformadorActividad transformadorActividad = new TransformadorActividad();
+            ActividadModel actividadNueva = transformadorActividad.recibirActividadPorId(actividad.getId_actividad());
+            if (actividadNueva.getCantidad_actual_personas() < actividadNueva.getCantidad_max_personas()) {
+                //Nos aseguramos de que sea un consumidor y no un ofertante
+                if (Main.recibirDatosUsuario() instanceof ConsumidorModel) {
+                    //Desactivamos el boton
+                    btnInscribir.setDisable(true);
+                    //Activamos para poder quitarnos
+                    btnQuitarse.setDisable(false);
+                    //Enviamos los datos de la actividad y del usuario a la api para inscribirnos en la actividad
+                    TransformadorParticipacion transformadorParticipacion = new TransformadorParticipacion(actividad.getId_actividad(), ((ConsumidorModel) Main.recibirDatosUsuario()).getId_consumidor());
+                    transformadorParticipacion.enviarInformacionPost();
 
-                //Actualizamos la lista
-                limpiarLayoutParticipacion();
+                    //Actualizamos la lista
+                    limpiarLayoutParticipacion();
+
+                    //Aumentamos la cantidad de personas
+                    actividadNueva = transformadorActividad.recibirActividadPorId(actividad.getId_actividad());
+                    lblCantidadPersonasAct.setText(String.valueOf(actividadNueva.getCantidad_actual_personas()));
+                }
             }
         } else {
             //No hacemos nada

@@ -4,17 +4,57 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="Mejorado el icono">
+    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="Arreglado errores varios y pulido algunas cosas.">
+      <change afterPath="$PROJECT_DIR$/bin/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Contenedor/ContenedorDatos.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Controladores/ActividadController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Controladores/ActividadIndividualController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Controladores/CrearActividadController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Controladores/LoginController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Controladores/ParticipacionIndividualController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Controladores/RecursoIndividualController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Controladores/RegistrarseController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Controladores/SugerenciaIndividualController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Controladores/VistaPrincipalController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Modelos/ActividadModel$tipoEstado.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Modelos/ActividadModel.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Modelos/ConsumidorModel.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Modelos/OfertanteModel.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Modelos/ParticipacionModel.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Modelos/RecursosModel.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/java/Modelos/SugerenciaActividadModel.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/java/TransformadorJSON/Actividad/TransformadorActividad.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/java/TransformadorJSON/Consumidor/TransformadorConsumidor.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/java/TransformadorJSON/Ofertante/TransformadorOfertante.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/java/TransformadorJSON/Participacion/TransformadorParticipacion.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/java/TransformadorJSON/Recursos/TransformadorRecursos.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/java/TransformadorJSON/Sugerencia/TransformadorSugerencia.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/java/org/tfg_apb/tfg_apb_cliente/Main.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/resources/Imagenes/filtrar.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/resources/Imagenes/flechaAtras.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/resources/Imagenes/iconoAplicacionTFG.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/resources/Imagenes/recarga.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/resources/Vistas/ActividadIndividual.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/resources/Vistas/Login.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/resources/Vistas/ParticipacionIndividual.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/resources/Vistas/RecursoIndividual.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/resources/Vistas/Registro.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/resources/Vistas/SugerenciaIndividual.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/resources/Vistas/VistaActividad.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/resources/Vistas/VistaCrearActividad.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/src/main/resources/Vistas/VistaPrincipal.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/ActividadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/ActividadController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/ActividadIndividualController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/ActividadIndividualController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/CrearActividadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/CrearActividadController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/VistaPrincipalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/VistaPrincipalController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Vistas/ActividadIndividual.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Vistas/ActividadIndividual.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Vistas/SugerenciaIndividual.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Vistas/SugerenciaIndividual.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Vistas/VistaActividad.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Vistas/VistaActividad.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Vistas/VistaCrearActividad.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Vistas/VistaCrearActividad.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Vistas/VistaPrincipal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Vistas/VistaPrincipal.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -457,7 +497,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714246592034</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Arreglado errores varios y pulido algunas cosas.">
+      <option name="closed" value="true" />
+      <created>1714252553887</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1714252553887</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -473,7 +521,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Creado Transformador de participacion;" />
     <MESSAGE value="Creado get Id para los transformadores." />
     <MESSAGE value="Finalizado Registro." />
     <MESSAGE value="Creado Transformador Sugerencia." />
@@ -498,6 +545,7 @@
     <MESSAGE value="Acabados." />
     <MESSAGE value="Acabada la vista completa sobre las actividades, falta comprobar posibles errores.&#10;&#10;Además, faltan 2 vistas mas." />
     <MESSAGE value="Mejorado el icono" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mejorado el icono" />
+    <MESSAGE value="Arreglado errores varios y pulido algunas cosas." />
+    <option name="LAST_COMMIT_MESSAGE" value="Arreglado errores varios y pulido algunas cosas." />
   </component>
 </project>
