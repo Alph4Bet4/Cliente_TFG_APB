@@ -60,7 +60,16 @@ public class RegistrarseController {
         String nombreEmpresa = textFieldNombreEmpresa.getText();
 
         if (comprobarCamposObligatorios(nombreUsuario, email, contrasenia)) {
-            aniadirUsuario(nombreUsuario, primerApellido, segundoApellido, contrasenia, email, nombreEmpresa);
+            //Comprobamos si el usuario ha metido un apellido superior al obligatorio
+            if (primerApellido.length() <= 45 && segundoApellido.length() <= 45) {
+                aniadirUsuario(nombreUsuario, primerApellido, segundoApellido, contrasenia, email, nombreEmpresa);
+            } else {
+                //Mostramos el lbl
+                lblCambiar.setVisible(true);
+                //Cambiamos con el error
+                lblCambiar.setTextFill(Paint.valueOf("#ff0000"));
+                lblCambiar.setText("Alguno de los apellidos supera la longitud maxima");
+            }
         }
     }
 
