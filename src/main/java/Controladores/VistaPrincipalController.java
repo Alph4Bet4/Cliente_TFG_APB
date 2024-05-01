@@ -86,7 +86,11 @@ public class VistaPrincipalController implements Initializable {
 
     @FXML
     void verAjustesCuenta(MouseEvent event) {
-        //TODO
+        try {
+            Main.setRaiz("VistaUsuario");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

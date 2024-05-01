@@ -230,6 +230,68 @@ public class TransformadorConsumidor {
         return listaConsumidor;
     }
 
+    /**
+     * Metodo que actualiza los datos mediante la id
+     * @param id
+     */
+    public ConsumidorModel actualizarDatosPorId(int id) {
+        HttpURLConnection conexion = null;
+        ConsumidorModel consumidor = null;
+
+        try {
+            // Abrir conexión
+            conexion = (HttpURLConnection) new URL(this.urlAConectarse + "/" + String.valueOf(id)).openConnection();
+
+            // Configurar la conexión para una solicitud POST
+            conexion.setRequestMethod("PUT");
+            conexion.setRequestProperty("Content-Type", "application/json");
+            conexion.setDoOutput(true);
+
+            // Escribir los datos en el cuerpo de la solicitud
+            try (OutputStream escritor = conexion.getOutputStream()) {
+                byte[] datosPost = esqueletoConsumidor.getBytes(StandardCharsets.UTF_16);
+                escritor.write(datosPost, 0, datosPost.length);
+
+            }
+
+            String respuesta;
+            // Leer la respuesta de la API
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(conexion.getInputStream(), StandardCharsets.UTF_8))) {
+                StringBuilder response = new StringBuilder();
+                String responseLine;
+                while ((responseLine = br.readLine()) != null) {
+                    response.append(responseLine.trim());
+                }
+                System.out.println("Respuesta de la API: " + response.toString());
+                respuesta = response.toString();
+            }
+
+            if (conexion.getResponseCode() == 200 && (!respuesta.isEmpty() || !respuesta.isBlank())) {
+                //Devuelve 200 si esta correcto
+                consumidor = sacarInformacionIndividual(respuesta);
+            } else if (conexion.getResponseCode() == 401) {
+                //Devuelve 401 si hay algun error
+                return null;
+            } else {
+                return null;
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                // Cerrar la conexión
+                if (conexion != null) {
+                    conexion.disconnect();
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        return consumidor;
+    }
+
 
     public ArrayList<ConsumidorModel> sacarInformacionLista(String datos) {
         ArrayList<ConsumidorModel> listaConsumidor = new ArrayList<>();
@@ -267,7 +329,10 @@ public class TransformadorConsumidor {
         String nombreConsumidor = datosJSON.getString("nombreConsumidor");
         String primerApellidoConsumidor = datosJSON.getString("primerApellidoConsumidor");
         String segundoApellidoConsumidor = datosJSON.getString("segundoApellidoConsumidor");
-        String contrasenia = datosJSON.getString("contrasenia");
+        String contrasenia = null;
+        if (!datosJSON.isNull("contrasenia")) {
+            contrasenia = datosJSON.getString("contrasenia");
+        }
         String email_consumidor = datosJSON.getString("email_consumidor");
 
         consumidor = new ConsumidorModel(id_consumidor, nombreConsumidor, primerApellidoConsumidor, segundoApellidoConsumidor, contrasenia, email_consumidor);

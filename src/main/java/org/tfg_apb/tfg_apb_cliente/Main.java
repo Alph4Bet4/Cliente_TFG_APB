@@ -37,7 +37,7 @@ public class Main extends Application {
      *
      * @param usuario
      */
-    public static void iniciarSesionUsuario(Object usuario) {
+    public static void setUsuario(Object usuario) {
         datos.setUsuario(usuario);
     }
 
@@ -68,6 +68,22 @@ public class Main extends Application {
     public static ActividadModel recibirDatosActividad() {
         ActividadModel actividad = datos.getActividadAbierta();
         return actividad;
+    }
+
+    /**
+     * Metodo que almacena los datos de la contraseña sin hashear
+     * @param pass
+     */
+    public static void guardarDatosPass(String pass) {
+        datos.setContraseniaSinHash(pass);
+    }
+
+    /**
+     * Metodo que devuelve los datos de la contrasenia sin hashear
+     * @return
+     */
+    public static String recibirDatosPass() {
+        return datos.getContraseniaSinHash();
     }
 
     public static void setRaiz(String fxml) throws IOException {

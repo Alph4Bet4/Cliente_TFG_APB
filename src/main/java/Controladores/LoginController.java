@@ -66,8 +66,8 @@ public class LoginController {
             ConsumidorModel consumidor = transformador.recibirConsumidorPorDatos();
             if (consumidor != null) {
                 //Metemos los valores en el contenedor
-                Main.iniciarSesionUsuario(consumidor);
-
+                Main.setUsuario(consumidor);
+                Main.guardarDatosPass(pass);
                 //Cambiamos de ventana
                 cambiarPestania();
 
@@ -83,8 +83,8 @@ public class LoginController {
             OfertanteModel ofertante = transformador.recibirOfertantePorDatos();
             if (ofertante != null) {
                 //Metemos los valores en el contenedor
-                Main.iniciarSesionUsuario(ofertante);
-
+                Main.setUsuario(ofertante);
+                Main.guardarDatosPass(pass);
                 //Cambiamos de ventana
                 cambiarPestania();
 

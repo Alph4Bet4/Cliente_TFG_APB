@@ -433,7 +433,7 @@ public class ActividadController implements Initializable {
 
         if (actividadActual.getCreador_ofertante() != null) {
             lblNombreUsuario.setText(actividadActual.getCreador_ofertante().getNombreOfertante());
-            if (!actividadActual.getCreador_ofertante().getNombreEmpresa().trim().equals("null") || actividadActual.getCreador_ofertante().getNombreEmpresa() != null) {
+            if (actividadActual.getCreador_ofertante().getNombreEmpresa() != null && !actividadActual.getCreador_ofertante().getNombreEmpresa().trim().equals("null")) {
                 lblNombreEmpresa.setText(actividadActual.getCreador_ofertante().getNombreEmpresa());
                 lblNombreEmpresa.setVisible(true);
             }

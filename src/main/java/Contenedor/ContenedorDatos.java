@@ -11,6 +11,7 @@ public class ContenedorDatos {
 
     Object usuario;
     ActividadModel actividadAbierta;
+    String contraseniaSinHash;
 
     public ContenedorDatos() {
     }
@@ -25,6 +26,14 @@ public class ContenedorDatos {
 
     public Object getUsuario() {
         return usuario;
+    }
+
+    public String getContraseniaSinHash() {
+        return contraseniaSinHash;
+    }
+
+    public void setContraseniaSinHash(String contraseniaSinHash) {
+        this.contraseniaSinHash = contraseniaSinHash;
     }
 
     public void setUsuario(Object usuario) {
@@ -42,4 +51,6 @@ public class ContenedorDatos {
                 ", actividadAbierta=" + actividadAbierta +
                 '}';
     }
+
+
 }

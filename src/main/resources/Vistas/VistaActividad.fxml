@@ -112,7 +112,10 @@
             <Button fx:id="btnAniadirRecurso" disable="true" layoutX="563.0" layoutY="416.0" mnemonicParsing="false" onAction="#addRecursoNuevo" text="Añadir recurso" />
             <Label fx:id="lblCreacion" layoutX="356.0" layoutY="372.0" text="Creado por:" textFill="#76abff" />
             <Label fx:id="lblNombreUsuario" layoutX="423.0" layoutY="372.0" prefHeight="17.0" prefWidth="132.0" text="Nombre de usuario" />
-            <Label fx:id="lblEmailUsuario" layoutX="356.0" layoutY="392.0" onMouseClicked="#enviarCorreo" prefHeight="17.0" prefWidth="132.0" text="prueba@gmail.com" textFill="#001eff" underline="true" />
+            <Label fx:id="lblEmailUsuario" layoutX="356.0" layoutY="392.0" onMouseClicked="#enviarCorreo" prefHeight="17.0" prefWidth="132.0" text="prueba@gmail.com" textFill="#001eff" underline="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Label>
             <Label fx:id="lblNombreEmpresa" alignment="CENTER" layoutX="550.0" layoutY="372.0" prefHeight="17.0" prefWidth="111.0" text="Empresa S.A" visible="false" />
             <Pane layoutX="680.0" layoutY="14.0" prefHeight="686.0" prefWidth="6.0" style="-fx-background-color: ebebeb; -fx-background-radius: 10;" />
             <Label layoutX="703.0" layoutY="20.0" text="Nombre recurso:" textFill="#76abff">
