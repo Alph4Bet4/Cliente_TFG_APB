@@ -1,5 +1,6 @@
 package TransformadorJSON.Actividad;
 
+import Contenedor.ContenedorDatos;
 import Modelos.ActividadModel;
 import Modelos.OfertanteModel;
 import org.json.JSONArray;
@@ -31,7 +32,7 @@ public class TransformadorActividad {
 
     private String esqueletoActividad;
 
-    private final String urlAConectarse = "http://localhost:8080/actividad";
+    private final String urlAConectarse = "http://" + ContenedorDatos.URLACONEXION + ":8080/actividad";
 
     /**
      * Metodo por defecto del transformador de actividad

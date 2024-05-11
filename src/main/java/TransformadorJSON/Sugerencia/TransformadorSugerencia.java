@@ -1,5 +1,6 @@
 package TransformadorJSON.Sugerencia;
 
+import Contenedor.ContenedorDatos;
 import Modelos.ActividadModel;
 import Modelos.ConsumidorModel;
 import Modelos.RecursosModel;
@@ -26,7 +27,7 @@ public class TransformadorSugerencia {
 
     private String esqueletoSugerencia;
 
-    private final String urlAConectarse = "http://localhost:8080/sugerencia";
+    private final String urlAConectarse = "http://" + ContenedorDatos.URLACONEXION + ":8080/sugerencia";
 
     public TransformadorSugerencia(int id_consumidor, int id_actividad) {
         this.id_consumidor = id_consumidor;

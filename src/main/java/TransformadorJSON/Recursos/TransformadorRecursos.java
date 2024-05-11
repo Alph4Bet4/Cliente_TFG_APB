@@ -1,5 +1,6 @@
 package TransformadorJSON.Recursos;
 
+import Contenedor.ContenedorDatos;
 import Modelos.ActividadModel;
 import Modelos.OfertanteModel;
 import Modelos.ParticipacionModel;
@@ -28,7 +29,7 @@ public class TransformadorRecursos {
     private boolean is_ofertada_por_ofertante;
 
     private String esqueletoRecurso;
-    private final String urlAConectarse = "http://localhost:8080/recurso";
+    private final String urlAConectarse = "http://" + ContenedorDatos.URLACONEXION + ":8080/recurso";
 
     public TransformadorRecursos(int actividad, String nombre_recurso, String descripcion, int cantidad, boolean is_ofertada_por_ofertante) {
         this.actividad = actividad;

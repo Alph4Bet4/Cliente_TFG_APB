@@ -1,5 +1,6 @@
 package TransformadorJSON.Consumidor;
 
+import Contenedor.ContenedorDatos;
 import Modelos.ConsumidorModel;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -23,7 +24,7 @@ public class TransformadorConsumidor {
 
     private String esqueletoConsumidor;
 
-    private final String urlAConectarse = "http://localhost:8080/consumidor";
+    private final String urlAConectarse = "http://" + ContenedorDatos.URLACONEXION + ":8080/consumidor";
 
     /**
      * Constructor por defecto de consumidor

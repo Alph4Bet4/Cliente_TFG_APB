@@ -1,5 +1,6 @@
 package TransformadorJSON.Participacion;
 
+import Contenedor.ContenedorDatos;
 import Modelos.ActividadModel;
 import Modelos.ConsumidorModel;
 import Modelos.ParticipacionModel;
@@ -25,7 +26,7 @@ public class TransformadorParticipacion {
 
     private String esqueletoParticipacion;
 
-    private final String urlAConectarse = "http://localhost:8080/participacion";
+    private final String urlAConectarse = "http://" + ContenedorDatos.URLACONEXION + ":8080/participacion";
 
     public TransformadorParticipacion(int id_actividad, int id_consumidor) {
         this.id_actividad = id_actividad;

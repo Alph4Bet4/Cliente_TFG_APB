@@ -4,18 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="Arreglado un posible error.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controladores/VistaUsuarioController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Vistas/VistaUsuario.fxml" afterDir="false" />
+    <list default="true" id="ee1ad3a6-6631-490a-9c2f-64bf05c02ec6" name="Changes" comment="Acabado proyecto, añadido un metodo para guardar la pass sin hashear para posteriormente usarla a la hora de actualizar los datos de los usuarios.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Contenedor/ContenedorDatos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Contenedor/ContenedorDatos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/ActividadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/ActividadController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controladores/VistaPrincipalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladores/VistaPrincipalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Actividad/TransformadorActividad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Actividad/TransformadorActividad.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Consumidor/TransformadorConsumidor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Consumidor/TransformadorConsumidor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Ofertante/TransformadorOfertante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Ofertante/TransformadorOfertante.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tfg_apb/tfg_apb_cliente/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tfg_apb/tfg_apb_cliente/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Vistas/VistaActividad.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Vistas/VistaActividad.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Participacion/TransformadorParticipacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Participacion/TransformadorParticipacion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Recursos/TransformadorRecursos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Recursos/TransformadorRecursos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Sugerencia/TransformadorSugerencia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransformadorJSON/Sugerencia/TransformadorSugerencia.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +65,13 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Adri/Documents/ProyectoFinGradoAPB/TFG_APB_Cliente/src/main/resources/Vistas&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -105,14 +108,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1711818577944</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Creado el cambio entre pestañas del login y registro.">
-      <option name="closed" value="true" />
-      <created>1711909888779</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1711909888779</updated>
+      <workItem from="1715419419622" duration="1141000" />
     </task>
     <task id="LOCAL-00003" summary="Creado el cambio entre pestañas del login y registro.">
       <option name="closed" value="true" />
@@ -498,8 +494,19 @@
       <option name="project" value="LOCAL" />
       <updated>1714559891382</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="Acabado proyecto, añadido un metodo para guardar la pass sin hashear para posteriormente usarla a la hora de actualizar los datos de los usuarios.">
+      <option name="closed" value="true" />
+      <created>1714563211810</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1714563211810</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -514,7 +521,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Acabado inicio de sesion." />
     <MESSAGE value="Añadido estado actividad." />
     <MESSAGE value="Arreglado errores con transformadores." />
     <MESSAGE value="Mejorada la vista principal y su controlador junto con las creaciones de las cartas de las actividades y sugerencias." />
@@ -539,19 +545,20 @@
     <MESSAGE value="Mejorada la vista de la actividad." />
     <MESSAGE value="Agregada nueva funcionalidad de filtrado." />
     <MESSAGE value="Arreglado un posible error." />
-    <option name="LAST_COMMIT_MESSAGE" value="Arreglado un posible error." />
+    <MESSAGE value="Acabado proyecto, añadido un metodo para guardar la pass sin hashear para posteriormente usarla a la hora de actualizar los datos de los usuarios." />
+    <option name="LAST_COMMIT_MESSAGE" value="Acabado proyecto, añadido un metodo para guardar la pass sin hashear para posteriormente usarla a la hora de actualizar los datos de los usuarios." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/TransformadorJSON/Actividad/TransformadorActividad.java</url>
-          <line>540</line>
+          <line>541</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/TransformadorJSON/Participacion/TransformadorParticipacion.java</url>
-          <line>325</line>
+          <line>326</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>

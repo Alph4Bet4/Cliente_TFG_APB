@@ -6,6 +6,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
+import Contenedor.ContenedorDatos;
 import Modelos.OfertanteModel;
 import org.json.*;
 
@@ -17,7 +18,7 @@ public class TransformadorOfertante {
     private String contrasenia;
     private String nombreEmpresa;
     private String email_ofertante;
-    private final String urlAConectarse = "http://localhost:8080/ofertante";
+    private final String urlAConectarse = "http://" + ContenedorDatos.URLACONEXION + ":8080/ofertante";
 
     private String esqueletoOfertante;
 

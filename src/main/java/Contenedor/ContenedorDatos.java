@@ -12,6 +12,7 @@ public class ContenedorDatos {
     Object usuario;
     ActividadModel actividadAbierta;
     String contraseniaSinHash;
+    public static final String URLACONEXION = "localhost";
 
     public ContenedorDatos() {
     }
