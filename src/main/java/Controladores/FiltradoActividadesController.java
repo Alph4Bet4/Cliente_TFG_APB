@@ -143,15 +143,18 @@ public class FiltradoActividadesController implements Initializable {
      */
     private void rellenarLayout(List lista, VBox layoutRellenar) throws IOException {
         for (Object objeto : lista) {
-            //Cargamos la vista
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Vistas/ActividadIndividual.fxml"));
-            //Actualizamos el panel
-            HBox hbox = fxmlLoader.load();
-            ActividadIndividualController actividadIndividualController = fxmlLoader.getController();
-            actividadIndividualController.introducirDatos((ActividadModel) objeto);
-            //Lo añadimos
-            layoutRellenar.getChildren().add(hbox);
-
+            if (objeto instanceof ActividadModel actividadModel) {
+                if (actividadModel.getCreador_ofertante() != null) {
+                    //Cargamos la vista
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Vistas/ActividadIndividual.fxml"));
+                    //Actualizamos el panel
+                    HBox hbox = fxmlLoader.load();
+                    ActividadIndividualController actividadIndividualController = fxmlLoader.getController();
+                    actividadIndividualController.introducirDatos((ActividadModel) objeto);
+                    //Lo añadimos
+                    layoutRellenar.getChildren().add(hbox);
+                }
+            }
         }
     }
 

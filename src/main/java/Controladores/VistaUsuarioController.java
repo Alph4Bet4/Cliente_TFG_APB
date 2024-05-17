@@ -1,9 +1,11 @@
 package Controladores;
 
-import Modelos.ConsumidorModel;
-import Modelos.OfertanteModel;
+import Modelos.*;
+import TransformadorJSON.Actividad.TransformadorActividad;
 import TransformadorJSON.Consumidor.TransformadorConsumidor;
 import TransformadorJSON.Ofertante.TransformadorOfertante;
+import TransformadorJSON.Participacion.TransformadorParticipacion;
+import TransformadorJSON.Sugerencia.TransformadorSugerencia;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,9 +19,15 @@ import org.tfg_apb.tfg_apb_cliente.Main;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.sql.Time;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class VistaUsuarioController implements Initializable {
+
+    @FXML
+    private Button btnBorrar;
 
     @FXML
     private Button btnActualizar;
@@ -55,7 +63,7 @@ public class VistaUsuarioController implements Initializable {
             //Comprobamos si es un consumidor o ofertante
             if (Main.recibirDatosUsuario() instanceof ConsumidorModel consumidorModel) {
                 enviarDatosConsumidor(consumidorModel);
-            } else if (Main.recibirDatosUsuario() instanceof OfertanteModel ofertanteModel){
+            } else if (Main.recibirDatosUsuario() instanceof OfertanteModel ofertanteModel) {
                 enviarDatosOfertante(ofertanteModel);
             }
         }
@@ -72,6 +80,91 @@ public class VistaUsuarioController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @FXML
+    void borrarDatos(ActionEvent event) {
+        if (borrarUsuario()) {
+            try {
+                Main.enviarrActividad(null);
+                Main.setUsuario(null);
+                Main.guardarDatosPass(null);
+                Main.cambiarTamVentana(800, 570);
+                Main.setRaiz("Login");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            lblCambiar.setVisible(true);
+            lblCambiar.setTextFill(Paint.valueOf("#ff0000"));
+            lblCambiar.setText("Ha ocurrido algun borrando la cuenta");
+        }
+    }
+
+    private boolean borrarUsuario() {
+        //Comprobamos si es un ofertante o un consumidor
+        if (Main.recibirDatosUsuario() instanceof ConsumidorModel consumidorModel) {
+            //Comprobamos todos las participaciones de un Consumidor
+            TransformadorParticipacion transformadorParticipacion = new TransformadorParticipacion();
+            //Recibimos todas las participaciones
+            ArrayList<ParticipacionModel> listaParticipacion = transformadorParticipacion.recibirParticipacionPorIdUsuario(consumidorModel.getId_consumidor());
+
+            if (!listaParticipacion.isEmpty()) {
+                //Borra todos las participaciones
+                for (ParticipacionModel participacionModel : listaParticipacion) {
+                    //Si ocurre algun error devuelve falso
+                    if (!transformadorParticipacion.borrarPorId(participacionModel.getId_participacion_actividades())) {
+                        return false;
+                    }
+                }
+            }
+
+            //Recibimos los datos de las sugerencias
+            TransformadorSugerencia transformadorSugerencia = new TransformadorSugerencia();
+            ArrayList<SugerenciaActividadModel> listaSugerencia = transformadorSugerencia.recibirInformacionGetPorIdConsumidor(consumidorModel.getId_consumidor());
+
+            if (!listaSugerencia.isEmpty()) {
+                //Borra todas las sugerencias
+                for (SugerenciaActividadModel sugerenciaActividadModel : listaSugerencia) {
+                    //Si ocurre algun error devuelve falso
+                    if (!transformadorSugerencia.borrarPorId(sugerenciaActividadModel.getId_sugerencia())) {
+                        return false;
+                    }
+                }
+            }
+
+            //Una vez borrado se borra a si mismo
+            TransformadorConsumidor transformadorConsumidor = new TransformadorConsumidor();
+            //Devuelve falso si ha ocurrido algun error
+            return transformadorConsumidor.borrarConsumidor(consumidorModel.getId_consumidor());
+        } else if (Main.recibirDatosUsuario() instanceof OfertanteModel ofertanteModel) {
+            //Capturamos todas sus actividades
+            TransformadorActividad transformadorActividad = new TransformadorActividad();
+            ArrayList<ActividadModel> listaActividades = transformadorActividad.recibirActividadPorIdOfertante(ofertanteModel.getId_ofertante());
+
+            //Si la lista no esta vacia entramos y actualizamos los datos para poner que no pertenece esa actividad a nadie
+            if (!listaActividades.isEmpty()) {
+                for (ActividadModel actividadModel : listaActividades) {
+                    String tipoActividad = actividadModel.getTipoActividad();
+                    String descripcionActividad = actividadModel.getDescripcionActividad();
+                    String direccion = actividadModel.getDireccion();
+                    Date fecha = actividadModel.getFecha();
+                    Time hora_inicio = actividadModel.getHora_inicio();
+                    Time hora_fin = actividadModel.getHora_fin();
+                    int cantidad_max_personas = actividadModel.getCantidad_max_personas();
+                    int cantidad_actual_personas = actividadModel.getCantidad_actual_personas();
+                    ActividadModel.tipoEstado estado = actividadModel.getEstado();
+
+                    TransformadorActividad transformadorActividadParaActualizar = new TransformadorActividad(tipoActividad, descripcionActividad, direccion, fecha, hora_inicio, hora_fin, cantidad_max_personas, cantidad_actual_personas, estado);
+
+                    transformadorActividadParaActualizar.enviarInformacionPut(actividadModel.getId_actividad());
+                }
+            }
+
+            return new TransformadorOfertante().borrarOfertante(ofertanteModel.getId_ofertante());
+        }
+        //Por defecto devuelve false
+        return false;
     }
 
     @Override
@@ -95,7 +188,7 @@ public class VistaUsuarioController implements Initializable {
             txtFEmail.setText(consumidor.getEmail_consumidor());
         }
 
-        //Comprobamos si es un administrador, si lo es, no puede cambiar sus datos
+        //Comprobamos si es un administrador, si lo es, no puede cambiar sus datos ni borrarlos
         if (Main.recibirDatosUsuario() instanceof OfertanteModel ofertante) {
             if (((OfertanteModel) Main.recibirDatosUsuario()).isIs_administrador()) {
                 txtFNombre.setEditable(false);
@@ -104,6 +197,7 @@ public class VistaUsuarioController implements Initializable {
                 txtFPass.setEditable(false);
                 txtFNombreEmpresa.setEditable(false);
                 btnActualizar.setDisable(true);
+                btnBorrar.setDisable(true);
             }
             //Mostramos los botones ocultos
             lblNombreEmpresa.setVisible(true);
@@ -189,7 +283,7 @@ public class VistaUsuarioController implements Initializable {
 
         //Si la contraseña es igual a la anterior tomamos un camino diferente donde no cambiamos la contraseña
         if (pass.equals(Main.recibirDatosPass())) {
-            TransformadorConsumidor transformadorConsumidor = new TransformadorConsumidor(nombre, primerApellido, segundoApellido, Main.recibirDatosPass(), consumidorAActualizar.getEmail_consumidor()) ;
+            TransformadorConsumidor transformadorConsumidor = new TransformadorConsumidor(nombre, primerApellido, segundoApellido, Main.recibirDatosPass(), consumidorAActualizar.getEmail_consumidor());
 
             //Actualizamos los datos
             ConsumidorModel consumidorActualizado = transformadorConsumidor.actualizarDatosPorId(consumidorAActualizar.getId_consumidor());
@@ -206,7 +300,7 @@ public class VistaUsuarioController implements Initializable {
                 lblCambiar.setText("Ha ocurrido un error actualizando los datos");
             }
         } else {
-            TransformadorConsumidor transformadorConsumidor = new TransformadorConsumidor(nombre, primerApellido, segundoApellido, pass, consumidorAActualizar.getEmail_consumidor()) ;
+            TransformadorConsumidor transformadorConsumidor = new TransformadorConsumidor(nombre, primerApellido, segundoApellido, pass, consumidorAActualizar.getEmail_consumidor());
 
             //Actualizamos los datos
             ConsumidorModel consumidorActualizado = transformadorConsumidor.actualizarDatosPorId(consumidorAActualizar.getId_consumidor());
@@ -224,7 +318,6 @@ public class VistaUsuarioController implements Initializable {
                 lblCambiar.setText("Ha ocurrido un error actualizando los datos");
             }
         }
-
 
 
     }

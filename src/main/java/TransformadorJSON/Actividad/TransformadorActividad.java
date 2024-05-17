@@ -150,6 +150,40 @@ public class TransformadorActividad {
     }
 
     /**
+     * Constructor sin estado para actualizar actividades sin ofertante
+     *
+     * @param tipoActividad
+     * @param descripcionActividad
+     * @param direccion
+     * @param fecha
+     * @param hora_inicio
+     * @param hora_fin
+     * @param cantidad_max_personas
+     */
+    public TransformadorActividad(String tipoActividad, String descripcionActividad, String direccion, Date fecha, Time hora_inicio, Time hora_fin, int cantidad_max_personas, int cantidad_actual_personas, ActividadModel.tipoEstado estado) {
+        this.tipoActividad = tipoActividad;
+        this.descripcionActividad = descripcionActividad;
+        this.direccion = direccion;
+        this.fecha = fecha;
+        this.hora_inicio = hora_inicio;
+        this.hora_fin = hora_fin;
+        this.cantidad_max_personas = cantidad_max_personas;
+        this.cantidad_actual_personas = cantidad_actual_personas;
+        this.estado = estado;
+        this.esqueletoActividad = "{\n" +
+                "    \"tipoActividad\":" + "\"" + tipoActividad + "\"" + ",\n" +
+                "    \"descripcionActividad\":" + "\"" + descripcionActividad + "\"" + ",\n" +
+                "    \"direccion\":" + "\"" + direccion + "\"" + ",\n" +
+                "    \"fecha\":" + "\"" + fecha + "\"" + ",\n" +
+                "    \"hora_inicio\":" + "\"" + hora_inicio + "\"" + ",\n" +
+                "    \"hora_fin\":" + "\"" + hora_fin + "\"" + ",\n" +
+                "    \"cantidad_max_personas\":" + "\"" + cantidad_max_personas + "\"" + ",\n" +
+                "    \"cantidad_actual_personas\":" + "\"" + cantidad_actual_personas + "\"" + ",\n" +
+                "    \"estadoActividad\":" + "\"" + estado + "\"" + "\n" +
+                "}";
+    }
+
+    /**
      * Constructor sin estado ni cantidad actual de personas para crear actividades siendo consumidor
      *
      * @param tipoActividad
@@ -439,6 +473,40 @@ public class TransformadorActividad {
         }
 
         return actividad;
+    }
+
+    /**
+     * Metodo que busca actividades por ID de ofertante
+     *
+     * @param idOfertante
+     * @return
+     */
+    public ArrayList<ActividadModel> recibirActividadPorIdOfertante(int idOfertante) {
+        ArrayList<ActividadModel> listaActividades = new ArrayList<>();
+
+        try {
+            HttpURLConnection conexion = (HttpURLConnection) new URL(this.urlAConectarse + "/porIdOfertante_" + idOfertante).openConnection();
+            conexion.setRequestMethod("GET");
+
+            // Leer la respuesta de la API
+            StringBuilder respuesta = new StringBuilder();
+
+            try (BufferedReader entrada = new BufferedReader(new InputStreamReader(conexion.getInputStream()))) {
+                String lineaLeer;
+                while ((lineaLeer = entrada.readLine()) != null) {
+                    respuesta.append(lineaLeer);
+                }
+
+            }
+
+            listaActividades = sacarInformacionLista(respuesta.toString());
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+
+        return listaActividades;
     }
 
     public ArrayList<ActividadModel> recibirInformacionGet() {

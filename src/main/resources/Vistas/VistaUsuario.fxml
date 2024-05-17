@@ -58,7 +58,12 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnActualizar" layoutX="190.0" layoutY="611.0" mnemonicParsing="false" onAction="#actualizarDatos" prefHeight="25.0" prefWidth="140.0" style="-fx-background-color: white; -fx-border-color: green; -fx-background-radius: 20; -fx-border-radius: 20;" text="Actualizar datos" textFill="#007a27">
+                  <Button fx:id="btnActualizar" layoutX="90.0" layoutY="611.0" mnemonicParsing="false" onAction="#actualizarDatos" prefHeight="25.0" prefWidth="140.0" style="-fx-background-color: white; -fx-border-color: green; -fx-background-radius: 20; -fx-border-radius: 20;" text="Actualizar datos" textFill="#007a27">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="btnBorrar" layoutX="300.0" layoutY="611.0" mnemonicParsing="false" onAction="#borrarDatos" prefHeight="25.0" prefWidth="140.0" style="-fx-background-color: white; -fx-border-color: #e10000; -fx-background-radius: 20; -fx-border-radius: 20;" text="Borrar cuenta" textFill="#e10000">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>

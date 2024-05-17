@@ -293,6 +293,58 @@ public class TransformadorConsumidor {
         return consumidor;
     }
 
+    /**
+     * Método que borra al consumidor por el ID
+     * @param idConsumidor
+     * @return
+     */
+    public boolean borrarConsumidor(int idConsumidor) {
+        HttpURLConnection conexion = null;
+
+        try {
+            // Abrir conexión
+            conexion = (HttpURLConnection) new URL(this.urlAConectarse + "/" + idConsumidor).openConnection();
+
+            // Configurar la conexión para una solicitud DELETE
+            conexion.setRequestMethod("DELETE");
+            conexion.setRequestProperty("Content-Type", "application/json");
+            conexion.setDoOutput(true);
+
+            String respuesta;
+            // Leer la respuesta de la API
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(conexion.getInputStream(), StandardCharsets.UTF_8))) {
+                StringBuilder response = new StringBuilder();
+                String responseLine;
+                while ((responseLine = br.readLine()) != null) {
+                    response.append(responseLine.trim());
+                }
+                System.out.println("Respuesta de la API: " + response.toString());
+                respuesta = response.toString();
+            }
+
+            if (conexion.getResponseCode() == 200 && (!respuesta.isEmpty() || !respuesta.isBlank())) {
+                //Devuelve 200 si esta correcto
+                return true;
+            } else if (conexion.getResponseCode() == 401) {
+                //Devuelve 401 si hay algun error
+                return false;
+            } else {
+                return false;
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                // Cerrar la conexión
+                if (conexion != null) {
+                    conexion.disconnect();
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
 
     public ArrayList<ConsumidorModel> sacarInformacionLista(String datos) {
         ArrayList<ConsumidorModel> listaConsumidor = new ArrayList<>();
@@ -340,5 +392,6 @@ public class TransformadorConsumidor {
 
         return consumidor;
     }
+
 
 }

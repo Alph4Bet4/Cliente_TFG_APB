@@ -126,6 +126,33 @@ public class TransformadorSugerencia {
         return listaSugerencias;
     }
 
+    public ArrayList<SugerenciaActividadModel> recibirInformacionGetPorIdConsumidor(int idConsumidor) {
+        ArrayList<SugerenciaActividadModel> listaSugerencias = new ArrayList<>();
+
+        try {
+            HttpURLConnection conexion = (HttpURLConnection) new URL(this.urlAConectarse + "/obtenerPorIdConsumidor_" + idConsumidor).openConnection();
+            conexion.setRequestMethod("GET");
+
+            // Leer la respuesta de la API
+            StringBuilder respuesta = new StringBuilder();
+
+            try (BufferedReader entrada = new BufferedReader(new InputStreamReader(conexion.getInputStream()))) {
+                String lineaLeer;
+                while ((lineaLeer = entrada.readLine()) != null) {
+                    respuesta.append(lineaLeer);
+                }
+
+            }
+
+            listaSugerencias = sacarInformacionLista(respuesta.toString());
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return listaSugerencias;
+    }
+
     /**
      * Metodo que borra una sugerencia por el metodo DELETE
      *
